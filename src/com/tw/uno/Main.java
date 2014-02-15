@@ -1,7 +1,10 @@
 package com.tw.uno;
 
+import com.tw.uno.view.Screen;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        Screen screen = new Screen();
+        screen.setVisible(true);
     }
 }
