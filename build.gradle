@@ -10,7 +10,8 @@ mainClassName="com.prateekj.Main" // Change it to your main class
 repositories { mavenCentral() }
 
 dependencies {
-    testCompile 'junit:junit:4.10'
+    testCompile 'junit:junit:4.10',
+            'jgoodies:forms:1.0.5'
 }
 
 sourceSets {
