@@ -45,5 +45,4 @@ public class Screen extends JFrame {
         add(log, c);
 
     }
-
 }
