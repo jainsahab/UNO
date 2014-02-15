@@ -1,7 +1,7 @@
-package com.tw.uno.com.tw.view_soumya;
+package com.tw.uno.view;
 
+import javax.swing.*;
 import java.awt.*;
-import javax.swing.JPanel;
 
 public class LoadingPanel extends JPanel {
     LoadingPanel()
@@ -19,7 +19,7 @@ public class LoadingPanel extends JPanel {
 
         G.setColor(Color.RED);
         G.setFont(new Font(Font.SANS_SERIF ,Font.BOLD,20));
-        G.drawString("Loading the Game.",xCoordinate , yCoordinate);
+        G.drawString("Loading the Game...",xCoordinate , yCoordinate);
 
         G.drawString("Please wait...", xCoordinate, yCoordinate+20);
     }

@@ -1,9 +1,9 @@
-package com.tw.uno.com.tw.view_soumya;
+package com.tw.uno.view;
 
 import javax.swing.JFrame;
 
 public class Loading extends JFrame {
-    Loading() {
+    public Loading() {
         setTitle("UNO");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(380, 330);
