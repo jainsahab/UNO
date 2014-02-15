@@ -2,16 +2,15 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'idea'
 
-group = "com.prateekj"
+group = "com.tw.uno"
 version = "0.1"
 
-mainClassName="com.prateekj.Main" // Change it to your main class
+mainClassName = "com.tw.uno.Main" // Change it to your main class
 
 repositories { mavenCentral() }
 
 dependencies {
-    testCompile 'junit:junit:4.10',
-            'jgoodies:forms:1.0.5'
+    testCompile 'junit:junit:4.10', 'jgoodies:forms:1.0.5'
 }
 
 sourceSets {
