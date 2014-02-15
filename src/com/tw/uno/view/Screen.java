@@ -10,4 +10,9 @@ public class Screen extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
+    public void addUserCards(){
+        JFrame userCards = new JFrame();
+        Card card = new Card("RED","1");
+        userCards.add(card);
+    }
 }
