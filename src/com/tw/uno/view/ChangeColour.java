@@ -6,11 +6,8 @@ import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JToggleButton;
 import javax.swing.border.Border;
 
@@ -40,9 +37,5 @@ public class ChangeColour {
         frame.add(panel, BorderLayout.CENTER);
         frame.setSize(300, 200);
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        new ChangeColour();
     }
 }
