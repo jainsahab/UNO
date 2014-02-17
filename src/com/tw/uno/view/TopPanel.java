@@ -9,6 +9,7 @@ public class TopPanel extends JPanel {
         this.setLayout(new FlowLayout());
         this.setVisible(true);
         this.setBackground(Color.BLUE);
+
     }
     public void addPlayer(Player player){
         this.add(player);

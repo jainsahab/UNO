@@ -30,11 +30,11 @@ public class Screen extends JFrame {
         add(deck, BorderLayout.CENTER);
 
         BottomPanel bottomPanel = new BottomPanel(400,400);
-        bottomPanel.add(new Card("RED", "1"));
-        bottomPanel.add(new Card("GREEN", "4"));
-        bottomPanel.add(new Card("Yellow", "5"));
-        bottomPanel.add(new Card("blue", "6"));
-        bottomPanel.add(new Card("red", "8"));
+        bottomPanel.add(new Card(Color.RED, "1"));
+        bottomPanel.add(new Card(Color.GREEN, "4"));
+        bottomPanel.add(new Card(Color.BLUE, "5"));
+        bottomPanel.add(new Card(Color.RED, "6"));
+        bottomPanel.add(new Card(Color.BLUE, "8"));
 
         Button unoButton = new Button("UNO");
         unoButton.setPreferredSize(new Dimension(100,100));
@@ -45,6 +45,5 @@ public class Screen extends JFrame {
         LogPanel log = new LogPanel();
         log.setPreferredSize(new Dimension(300,800));
         add(log, BorderLayout.EAST);
-
     }
 }
