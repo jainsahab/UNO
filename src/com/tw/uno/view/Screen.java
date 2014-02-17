@@ -3,7 +3,7 @@ package com.tw.uno.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
+import java.nio.ByteOrder;
 
 public class Screen extends JFrame {
 
@@ -19,13 +19,22 @@ public class Screen extends JFrame {
         players.addPlayer(new Player("pallvi"));
         players.addPlayer(new Player("SHABRIN"));
         players.addPlayer(new Player("SUMIT"));
-        players.addPlayer(new Player("PRATEEK"));
-        players.addPlayer(new Player("DIGVIJAY"));
+        players.addPlayer(new Player("KAVITA"));
+        players.addPlayer(new Player("pallvi"));
+        players.addPlayer(new Player("pallvi"));
+        players.addPlayer(new Player("pallvi"));
+        players.addPlayer(new Player("pallvi"));
+        players.addPlayer(new Player("pallvi"));
         players.addPlayer(new Player("pallvi"));
         players.addPlayer(new Player("KAVITA"));
         players.addPlayer(new Player("KAJAL"));
+        players.addPlayer(new Player("KAVITA"));
         players.setBackground(Color.BLACK);
-        add(players, BorderLayout.NORTH);
+
+        JScrollPane pane = new JScrollPane(players);
+        pane.setPreferredSize(new Dimension(500,230));
+        JPanel contentPane = (JPanel)this.getContentPane();
+        contentPane.add(pane, BorderLayout.NORTH);
 
         Deck deck = new Deck();
         add(deck, BorderLayout.CENTER);
@@ -42,6 +51,7 @@ public class Screen extends JFrame {
         LogPanel log = new LogPanel();
         log.setPreferredSize(new Dimension(300, 800));
         add(log, BorderLayout.EAST);
+
     }
 
 }
