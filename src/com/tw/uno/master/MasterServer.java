@@ -1,7 +1,5 @@
 package com.tw.uno.master;
 
-import com.tw.uno.view.Players;
-
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +8,7 @@ public class MasterServer {
     private final int totalPlayers;
     private final int totalPacks;
     private ServerSocket serverSocket;
-    private List<Players> players = new ArrayList<>();
+    private List<Client> players = new ArrayList<>();
     private UnoFactory unoFactory;
 
     public MasterServer(int totalPlayers, int packs, UnoFactory unoFactory) {

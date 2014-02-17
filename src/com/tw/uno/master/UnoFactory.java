@@ -14,13 +14,13 @@ public class UnoFactory {
         }
     }
 
-    public Player acceptPlayer(ServerSocket serverSocket) {
+    public Client acceptPlayer(ServerSocket serverSocket) {
         Socket socket;
         try {
             socket = serverSocket.accept();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new Player(socket);
+        return new Client(socket);
     }
 }

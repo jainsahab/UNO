@@ -1,5 +1,6 @@
 package com.tw.uno.view;
 
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,39 +11,39 @@ public class Screen extends JFrame {
     public Screen() {
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setTitle("UNO");
-        GridBagLayout layout = new GridBagLayout();
-        setLayout(layout);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(screenSize);
 
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 3;
-        c.gridheight = 1;
-        Players playersPanel = new Players();
-        add(playersPanel, c);
+        TopPanel players = new TopPanel();
+        players.addPlayer(new Player("pallvi"));
+        players.addPlayer(new Player("SHABRIN"));
+        players.addPlayer(new Player("SUMIT"));
+        players.addPlayer(new Player("PRATEEK"));
+        players.addPlayer(new Player("DIGVIJAY"));
+        players.addPlayer(new Player("pallvi"));
+        players.addPlayer(new Player("KAVITA"));
+        players.addPlayer(new Player("KAJAL"));
+        players.setBackground(Color.BLACK);
+        add(players, BorderLayout.NORTH);
 
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 3;
-        c.gridheight = 2;
         Deck deck = new Deck();
-        add(deck, c);
+        add(deck, BorderLayout.CENTER);
 
-        c.gridx = 0;
-        c.gridy = 3;
-        c.gridwidth = 3;
-        c.gridheight = 1;
-        BottomPanel cards = new BottomPanel(400,400);
-        add(cards, c);
+        BottomPanel bottomPanel = new BottomPanel(400, 400);
+        bottomPanel.add(new Card(Color.RED, Sign.ONE));
+        bottomPanel.add(new Card(Color.GREEN, Sign.EIGHT));
+        bottomPanel.add(new Card(Color.BLUE, Sign.FIVE));
+        bottomPanel.add(new Card(Color.RED, Sign.SEVEN));
+        bottomPanel.add(new Card(Color.BLUE, Sign.NINE));
 
-        c.gridx = 3;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 4;
+        Button unoButton = new Button("UNO");
+        unoButton.setPreferredSize(new Dimension(100, 100));
+        unoButton.setBackground(Color.ORANGE);
+        bottomPanel.add(unoButton);
+        add(bottomPanel, BorderLayout.SOUTH);
+
         LogPanel log = new LogPanel();
-        add(log, c);
-
+        log.setPreferredSize(new Dimension(300, 800));
+        add(log, BorderLayout.EAST);
     }
 }
