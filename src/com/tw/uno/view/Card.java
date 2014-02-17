@@ -3,7 +3,7 @@ package com.tw.uno.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class Card extends JButton{
+public class Card extends JButton {
     String color;
     String sign;
 
@@ -11,6 +11,6 @@ public class Card extends JButton{
         this.color = color;
         this.sign = sign;
         super.setText(sign);
-        this.setPreferredSize(new Dimension(150,200));
+        this.setPreferredSize(new Dimension(150, 200));
     }
 }
