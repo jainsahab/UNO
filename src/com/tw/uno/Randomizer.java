@@ -2,6 +2,7 @@ package com.tw.uno;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Randomizer {
     List list;
@@ -11,7 +12,7 @@ public class Randomizer {
     }
 
     public List shuffleCards(){
-        List<Object> result = new ArrayList();
+        List<Object> result = new ArrayList<>();
         int limit = this.list.size()-1;
         int count = limit+1;
         for(int i = 0 ; i < count ; i++){
