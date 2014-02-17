@@ -14,7 +14,7 @@ public class RandomizerTest {
         temp.add(2);
         temp.add(3);
         Randomizer randomizer = new Randomizer(temp);
-        List<Integer> result = randomizer.shuffle();
+        List<Integer> result = randomizer.shuffleCards();
         assertEquals(true,result.contains(1));
         assertEquals(true,result.contains(2));
         assertEquals(true,result.contains(3));
@@ -27,7 +27,7 @@ public class RandomizerTest {
         temp.add(2.67);
         temp.add(3.89);
         Randomizer randomizer = new Randomizer(temp);
-        List<Integer> result = randomizer.shuffle();
+        List<Integer> result = randomizer.shuffleCards();
         assertEquals(true,result.contains(1.45));
         assertEquals(true,result.contains(2.67));
         assertEquals(true,result.contains(3.89));

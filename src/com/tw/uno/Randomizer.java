@@ -10,7 +10,7 @@ public class Randomizer {
         this.list = list;
     }
 
-    public List shuffle(){
+    public List shuffleCards(){
         List<Object> result = new ArrayList();
         int limit = this.list.size()-1;
         int count = limit+1;
@@ -18,6 +18,7 @@ public class Randomizer {
             int retrieveNumber = (int) (Math.random()*limit--);
             result.add(this.list.get(retrieveNumber));
             this.list.remove(retrieveNumber);
+
         }
         return result;
     }
