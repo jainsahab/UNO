@@ -8,4 +8,12 @@ public class Player {
         this.messageChannel = messageChannel;
         this.name = name;
     }
+
+    public MessageChannel getChannel() {
+        return messageChannel;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

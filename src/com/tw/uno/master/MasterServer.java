@@ -27,7 +27,7 @@ public class MasterServer implements MessageChannelListener {
     @Override
     public void onMessage(MessageChannel messageChannel, Object o) {
         players.add(unoFactory.createPlayer(messageChannel, (String) o));
-        messageChannel.send("wait");
+        messageChannel.send(new Message("wait"));
     }
 
     @Override

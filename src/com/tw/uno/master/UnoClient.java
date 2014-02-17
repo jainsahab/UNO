@@ -26,12 +26,14 @@ public class UnoClient implements LoginFormListener, MessageChannelListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loginForm.setVisible(false);
     }
 
     @Override
     public void onMessage(MessageChannel messageChannel, Object o) {
-        loginForm.setVisible(false);
-        new Loading();
+        Message message = (Message)o;
+        if(message.getStatus().equals("wait"))
+            new Loading();
     }
 
     @Override
