@@ -34,7 +34,7 @@ public class Screen extends JFrame {
         c.gridy = 3;
         c.gridwidth = 3;
         c.gridheight = 1;
-        BottomPanel cards = new BottomPanel();
+        BottomPanel cards = new BottomPanel(400,400);
         add(cards, c);
 
         c.gridx = 3;
