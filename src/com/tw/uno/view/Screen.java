@@ -12,6 +12,7 @@ public class Screen extends JFrame {
         setTitle("UNO");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(screenSize);
+        setVisible(true);
 
         TopPanel players = new TopPanel();
         players.addPlayer(new PlayerButton("pallvi"));
@@ -29,22 +30,32 @@ public class Screen extends JFrame {
         players.addPlayer(new PlayerButton("KAVITA"));
         players.setBackground(Color.BLACK);
 
-        JScrollPane pane = new JScrollPane(players);
-        pane.setPreferredSize(new Dimension(500,230));
+        JScrollPane playerPane = new JScrollPane(players);
+        playerPane.setPreferredSize(new Dimension(500, 230));
         JPanel contentPane = (JPanel)this.getContentPane();
-        contentPane.add(pane, BorderLayout.NORTH);
+        contentPane.add(playerPane, BorderLayout.NORTH);
 
         Deck deck = new Deck();
         add(deck, BorderLayout.CENTER);
 
-        BottomPanel bottomPanel = new BottomPanel(400, 400);
-        bottomPanel.add(new Card(Color.RED, Sign.ONE));
-        bottomPanel.add(new Card(Color.GREEN, Sign.EIGHT));
-        bottomPanel.add(new Card(Color.BLUE, Sign.FIVE));
-        bottomPanel.add(new Card(Color.RED, Sign.SEVEN));
-        bottomPanel.add(new Card(Color.YELLOW, Sign.NINE));
+        BottomPanel cards = new BottomPanel(500, 230);
+        cards.add(new CardButton(Color.RED, Sign.ONE));
+        cards.add(new CardButton(Color.GREEN, Sign.EIGHT));
+        cards.add(new CardButton(Color.BLUE, Sign.FIVE));
+        cards.add(new CardButton(Color.YELLOW, Sign.NINE));
+        cards.add(new CardButton(Color.BLUE, Sign.FIVE));
+        cards.add(new CardButton(Color.YELLOW, Sign.NINE));
+        cards.add(new CardButton(Color.RED, Sign.ONE));
+        cards.add(new CardButton(Color.GREEN, Sign.EIGHT));
+        cards.add(new CardButton(Color.BLUE, Sign.FIVE));
+        cards.add(new CardButton(Color.YELLOW, Sign.NINE));
+        cards.add(new CardButton(Color.RED, Sign.ONE));
+        cards.add(new CardButton(Color.GREEN, Sign.EIGHT));
+        cards.add(new CardButton(Color.BLUE, Sign.FIVE));
 
-        add(bottomPanel, BorderLayout.SOUTH);
+        JScrollPane cardPane = new JScrollPane(cards);
+        cardPane.setPreferredSize(new Dimension(300, 240));
+        contentPane.add(cardPane, BorderLayout.SOUTH);
 
         LogPanel log = new LogPanel();
         log.setPreferredSize(new Dimension(300, 800));

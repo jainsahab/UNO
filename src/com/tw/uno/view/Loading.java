@@ -11,4 +11,5 @@ public class Loading extends JFrame {
         setVisible(true);
         add(new LoadingPanel());
     }
+
 }
