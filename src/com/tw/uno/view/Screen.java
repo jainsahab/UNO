@@ -29,21 +29,21 @@ public class Screen extends JFrame {
         Deck deck = new Deck();
         add(deck, BorderLayout.CENTER);
 
-        BottomPanel bottomPanel = new BottomPanel(400,400);
-        bottomPanel.add(new Card(Color.RED, "1"));
-        bottomPanel.add(new Card(Color.GREEN, "4"));
-        bottomPanel.add(new Card(Color.BLUE, "5"));
-        bottomPanel.add(new Card(Color.RED, "6"));
-        bottomPanel.add(new Card(Color.BLUE, "8"));
+        BottomPanel bottomPanel = new BottomPanel(400, 400);
+        bottomPanel.add(new Card(Color.RED, Sign.ONE));
+        bottomPanel.add(new Card(Color.GREEN, Sign.EIGHT));
+        bottomPanel.add(new Card(Color.BLUE, Sign.FIVE));
+        bottomPanel.add(new Card(Color.RED, Sign.SEVEN));
+        bottomPanel.add(new Card(Color.BLUE, Sign.NINE));
 
         Button unoButton = new Button("UNO");
-        unoButton.setPreferredSize(new Dimension(100,100));
+        unoButton.setPreferredSize(new Dimension(100, 100));
         unoButton.setBackground(Color.ORANGE);
         bottomPanel.add(unoButton);
         add(bottomPanel, BorderLayout.SOUTH);
 
         LogPanel log = new LogPanel();
-        log.setPreferredSize(new Dimension(300,800));
+        log.setPreferredSize(new Dimension(300, 800));
         add(log, BorderLayout.EAST);
     }
 }
