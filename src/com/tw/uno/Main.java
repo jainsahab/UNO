@@ -1,6 +1,5 @@
 package com.tw.uno;
 
-import com.tw.uno.view.Card;
 import com.tw.uno.view.Loading;
 import com.tw.uno.view.LoginForm;
 import com.tw.uno.view.Screen;
