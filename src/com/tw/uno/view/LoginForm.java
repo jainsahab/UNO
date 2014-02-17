@@ -2,47 +2,64 @@ package com.tw.uno.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginForm {
-    JFrame frame;
+public class LoginForm extends JFrame implements ActionListener{
+    private JPanel panel;
+    private LoginFormListener listener;
+    private JTextField gameMasterField;
+    private JTextField nameField;
 
-    public LoginForm() {
-        frame = new JFrame("UNO");
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    public LoginForm(LoginFormListener listener) {
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setVisible(true);
+        setSize(500,500);
+
+        this.listener = listener;
+        panel = new JPanel();
+        panel.setVisible(true);
 
         JPanel loginPanel = new JPanel();
-        frame.add(loginPanel);
+        panel.add(loginPanel);
         loginPanel.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(10,10,10,10);
+        constraints.insets = new Insets(10, 10, 10, 10);
 
         JLabel gameMasterLabel = new JLabel("Game Master:");
         constraints.gridx = 0;
         constraints.gridy = 0;
-        loginPanel.add(gameMasterLabel,constraints);
+        loginPanel.add(gameMasterLabel, constraints);
 
-        JTextField gameMasterField = new JTextField(15);
+        gameMasterField = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 0;
-        loginPanel.add(gameMasterField,constraints);
+        loginPanel.add(gameMasterField, constraints);
 
         JLabel nameLabel = new JLabel("Name:");
         constraints.gridx = 0;
         constraints.gridy = 1;
-        loginPanel.add(nameLabel,constraints);
+        loginPanel.add(nameLabel, constraints);
 
-        JTextField nameField = new JTextField(15);
+        nameField = new JTextField(15);
         constraints.gridx = 1;
         constraints.gridy = 1;
-        loginPanel.add(nameField,constraints);
+        loginPanel.add(nameField, constraints);
 
         JButton join = new JButton("JOIN");
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
-        loginPanel.add(join,constraints);
+        loginPanel.add(join, constraints);
+
+        join.addActionListener(this);
+        add(panel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        listener.notify(gameMasterField.getText(), nameField.getText());
     }
 }

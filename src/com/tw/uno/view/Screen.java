@@ -15,14 +15,14 @@ public class Screen extends JFrame {
         setSize(screenSize);
 
         TopPanel players = new TopPanel();
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("SHABRIN"));
-        players.addPlayer(new Player("SUMIT"));
-        players.addPlayer(new Player("PRATEEK"));
-        players.addPlayer(new Player("DIGVIJAY"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("KAVITA"));
-        players.addPlayer(new Player("KAJAL"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("SHABRIN"));
+        players.addPlayer(new PlayerButton("SUMIT"));
+        players.addPlayer(new PlayerButton("PRATEEK"));
+        players.addPlayer(new PlayerButton("DIGVIJAY"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("KAVITA"));
+        players.addPlayer(new PlayerButton("KAJAL"));
         players.setBackground(Color.BLACK);
         add(players, BorderLayout.NORTH);
 

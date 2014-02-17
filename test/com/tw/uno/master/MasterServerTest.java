@@ -26,6 +26,6 @@ public class MasterServerTest {
         MasterServer server = new MasterServer(10,1,unoFactory);
         server.start();
 
-        verify(unoFactory,times(10)).acceptPlayer(any(ServerSocket.class));
+        verify(unoFactory,times(10)).acceptPlayerSocket(any(ServerSocket.class));
     }
 }

@@ -4,10 +4,10 @@ package com.tw.uno.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class Player extends JButton {
+public class PlayerButton extends JButton {
     String name;
 
-    public Player(String name) {
+    public PlayerButton(String name) {
         this.name = name;
         this.setText(name);
         this.setPreferredSize(new Dimension(150, 200));
