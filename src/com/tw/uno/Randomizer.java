@@ -15,11 +15,9 @@ public class Randomizer {
         int limit = this.list.size()-1;
         int count = limit+1;
         for(int i = 0 ; i < count ; i++){
-            int retrieveNumber = (int) (Math.random()*limit);
+            int retrieveNumber = (int) (Math.random()*limit--);
             result.add(this.list.get(retrieveNumber));
             this.list.remove(retrieveNumber);
-            limit--;
-
         }
         return result;
     }
