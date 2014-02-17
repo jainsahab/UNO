@@ -3,6 +3,7 @@ package com.tw.uno.master;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class UnoFactory {
 
@@ -14,13 +15,21 @@ public class UnoFactory {
         }
     }
 
-    public Client acceptPlayer(ServerSocket serverSocket) {
-        Socket socket;
+    public MessageChannel acceptPlayerSocket(ServerSocket serverSocket) {
         try {
-            socket = serverSocket.accept();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            Socket socket = serverSocket.accept();
+            socket.setSoTimeout(100);
+            return new MessageChannel(socket);
         }
-        return new Client(socket);
+        catch (SocketTimeoutException ste){
+            return null;
+        }
+        catch (IOException e) {
+            throw new RuntimeException("could not accept connection",e);
+        }
+    }
+
+    public Player createPlayer(MessageChannel messageChannel, String name) {
+        return new Player(messageChannel,name);
     }
 }

@@ -11,7 +11,7 @@ public class TopPanel extends JPanel {
         this.setVisible(true);
         this.setBackground(Color.BLUE);
     }
-    public void addPlayer(Player player){
-        this.add(player);
+    public void addPlayer(PlayerButton playerButton){
+        this.add(playerButton);
     }
 }

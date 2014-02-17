@@ -3,10 +3,8 @@ package com.tw.uno.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.ByteOrder;
 
 public class Screen extends JFrame {
-
     private final Dimension screenSize;
 
     public Screen() {
@@ -16,19 +14,19 @@ public class Screen extends JFrame {
         setSize(screenSize);
 
         TopPanel players = new TopPanel();
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("SHABRIN"));
-        players.addPlayer(new Player("SUMIT"));
-        players.addPlayer(new Player("KAVITA"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("pallvi"));
-        players.addPlayer(new Player("KAVITA"));
-        players.addPlayer(new Player("KAJAL"));
-        players.addPlayer(new Player("KAVITA"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("SHABRIN"));
+        players.addPlayer(new PlayerButton("SUMIT"));
+        players.addPlayer(new PlayerButton("KAVITA"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("pallvi"));
+        players.addPlayer(new PlayerButton("KAVITA"));
+        players.addPlayer(new PlayerButton("KAJAL"));
+        players.addPlayer(new PlayerButton("KAVITA"));
         players.setBackground(Color.BLACK);
 
         JScrollPane pane = new JScrollPane(players);
