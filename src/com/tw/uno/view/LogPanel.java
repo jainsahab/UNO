@@ -14,7 +14,6 @@ public class LogPanel extends JPanel {
         jList = new JList(stringDefaultListModel);
         pane = new JScrollPane(jList);
         add(pane);
-        setSize(300, 200);
         setBackground(Color.BLACK);
         setVisible(true);
     }
