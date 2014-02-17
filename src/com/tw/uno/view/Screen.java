@@ -19,7 +19,7 @@ public class Screen extends JFrame {
         c.gridy = 0;
         c.gridwidth = 3;
         c.gridheight = 1;
-        Players playersPanel = new Players();
+        TopPanel playersPanel = new TopPanel();
         playersPanel.setBackground(Color.blue);
         add(playersPanel, c);
 
