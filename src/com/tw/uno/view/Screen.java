@@ -3,6 +3,7 @@ package com.tw.uno.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class Screen extends JFrame {
 
@@ -34,16 +35,13 @@ public class Screen extends JFrame {
         bottomPanel.add(new Card(Color.GREEN, Sign.EIGHT));
         bottomPanel.add(new Card(Color.BLUE, Sign.FIVE));
         bottomPanel.add(new Card(Color.RED, Sign.SEVEN));
-        bottomPanel.add(new Card(Color.BLUE, Sign.NINE));
+        bottomPanel.add(new Card(Color.YELLOW, Sign.NINE));
 
-        Button unoButton = new Button("UNO");
-        unoButton.setPreferredSize(new Dimension(100, 100));
-        unoButton.setBackground(Color.ORANGE);
-        bottomPanel.add(unoButton);
         add(bottomPanel, BorderLayout.SOUTH);
 
         LogPanel log = new LogPanel();
         log.setPreferredSize(new Dimension(300, 800));
         add(log, BorderLayout.EAST);
     }
+
 }

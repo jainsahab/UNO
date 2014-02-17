@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Card extends JButton {
-    Color color;
-    Sign sign;
+    private Color color;
+    private Sign sign;
 
     public Card(Color color, Sign sign) {
         this.color = color;

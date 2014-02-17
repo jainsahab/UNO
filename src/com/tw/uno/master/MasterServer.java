@@ -20,18 +20,13 @@ public class MasterServer implements MessageChannelListener {
     public void start() {
         serverSocket = unoFactory.createServerSocket();
         for (int i = 0; i < totalPlayers; i++) {
-            acceptPlayer();
+            unoFactory.acceptPlayerSocket(serverSocket).startListeningForMessages(this);
         }
-    }
-
-    private void acceptPlayer() {
-        MessageChannel messageChannel = unoFactory.acceptPlayerSocket(serverSocket);
-        messageChannel.startListeningForMessages(this);
     }
 
     @Override
     public void onMessage(MessageChannel messageChannel, Object o) {
-        players.add(unoFactory.createPlayer(messageChannel,(String)o));
+        players.add(unoFactory.createPlayer(messageChannel, (String) o));
         messageChannel.send("wait");
     }
 

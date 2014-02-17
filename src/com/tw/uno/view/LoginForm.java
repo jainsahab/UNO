@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginForm extends JFrame implements ActionListener{
+public class LoginForm extends JFrame implements ActionListener {
     private JPanel panel;
     private LoginFormListener listener;
     private JTextField gameMasterField;
@@ -14,7 +14,6 @@ public class LoginForm extends JFrame implements ActionListener{
     public LoginForm(LoginFormListener listener) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-        setSize(500,500);
 
         this.listener = listener;
         panel = new JPanel();
@@ -62,4 +61,5 @@ public class LoginForm extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         listener.notify(gameMasterField.getText(), nameField.getText());
     }
+
 }
