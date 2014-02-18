@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Randomizer {
+public class Random {
     List list;
 
-    public Randomizer(List list) {
+    public Random(List list) {
         this.list = list;
     }
 

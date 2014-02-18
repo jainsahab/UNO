@@ -1,6 +1,6 @@
 package com.tw.uno.master;
 
-import com.tw.uno.Randomizer;
+import com.tw.uno.Random;
 import com.tw.uno.view.CardButton;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class Pack {
     }
 
     public void shuffle(){
-        Randomizer randomizer = new Randomizer(this.cardButtons);
+        Random randomizer = new Random(this.cardButtons);
         this.cardButtons = randomizer.shuffleCards();
     }
 
