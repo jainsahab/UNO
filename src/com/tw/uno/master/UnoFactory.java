@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UnoFactory {
@@ -40,9 +41,9 @@ public class UnoFactory {
         return new Message(status);
     }
 
-    public Message createMessage(String status, HashMap<String, ServerPlayer> map) {
+    public Message createMessage(String status, ArrayList<ServerPlayer> playersInOrder) {
         Message message = new Message(status);
-        message.players = map;
+        message.players = playersInOrder;
         return message;
     }
 }

@@ -1,6 +1,8 @@
 package com.tw.uno.master;
 
 import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class MasterServer implements MessageChannelListener {
@@ -9,6 +11,7 @@ public class MasterServer implements MessageChannelListener {
     private ServerSocket serverSocket;
     private UnoFactory unoFactory;
     private HashMap<MessageChannel, ServerPlayer> playerHashMap = new HashMap<>();
+    private ArrayList<ServerPlayer> playersInOrder = new ArrayList<>();
 
     public MasterServer(int totalPlayers, int packs, UnoFactory unoFactory) {
         this.totalPlayers = totalPlayers;
@@ -24,24 +27,15 @@ public class MasterServer implements MessageChannelListener {
         }
     }
 
-    private void informAllPlayers() {
+    private void startGame() {
+        for (MessageChannel messageChannel : playerHashMap.keySet()) {
+            playersInOrder.add(playerHashMap.get(messageChannel));
+        }
+        Collections.shuffle(playersInOrder);
         for (MessageChannel messageChannel : playerHashMap.keySet()) {
             messageChannel.send(unoFactory.createMessage("start"));
+            messageChannel.send(unoFactory.createMessage("addPlayers", playersInOrder));
         }
-        HashMap<String, ServerPlayer> serializableMap = createSerializableMap(playerHashMap);
-        for (MessageChannel messageChannel : playerHashMap.keySet()) {
-            messageChannel.send(unoFactory.createMessage("addPlayers", serializableMap));
-        }
-    }
-
-    private HashMap<String, ServerPlayer> createSerializableMap(HashMap<MessageChannel, ServerPlayer> playerHashMap) {
-        HashMap<String, ServerPlayer> map = new HashMap<>();
-        Integer index = 0;
-        for (MessageChannel messageChannel : playerHashMap.keySet()) {
-            ServerPlayer serverPlayer = playerHashMap.get(messageChannel);
-            map.put(index.toString(), serverPlayer);
-        }
-        return map;
     }
 
     @Override
@@ -51,7 +45,7 @@ public class MasterServer implements MessageChannelListener {
             ServerPlayer player = unoFactory.createServerPlayer(message.playerName);
             playerHashMap.put(messageChannel, player);
             messageChannel.send(unoFactory.createMessage("wait"));
-            if (playerHashMap.size() == totalPlayers) informAllPlayers();
+            if (playerHashMap.size() == totalPlayers) startGame();
         }
     }
 
