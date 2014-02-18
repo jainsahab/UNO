@@ -7,11 +7,11 @@ public class LogPanel extends JPanel {
 
     private JScrollPane pane;
     private DefaultListModel<String> stringDefaultListModel;
-    private JList jList;
+    private JList<String> jList;
 
     public LogPanel() {
         stringDefaultListModel = new DefaultListModel<>();
-        jList = new JList(stringDefaultListModel);
+        jList = new JList<>(stringDefaultListModel);
         pane = new JScrollPane(jList);
         add(pane);
         setBackground(Color.BLACK);

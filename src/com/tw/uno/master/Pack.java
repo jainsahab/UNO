@@ -3,21 +3,24 @@ package com.tw.uno.master;
 import com.tw.uno.Random;
 import com.tw.uno.view.CardButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pack {
-    private List<CardButton> cardButtons;
+    private List<CardButton> cardButtons = new ArrayList<>();
 
     public Pack(List<CardButton> cardButtons) {
         this.cardButtons = cardButtons;
     }
 
-    public void shuffle(){
+    public void shuffle() {
         Random randomizer = new Random(this.cardButtons);
-        this.cardButtons = randomizer.shuffleCards();
+        for (Object o : randomizer.shuffleCards()) {
+            this.cardButtons.add((CardButton) o);
+        }
     }
 
-    public List<CardButton> getCardButtons(){
+    public List<CardButton> getCardButtons() {
         shuffle();
         return this.cardButtons;
     }
