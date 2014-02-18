@@ -1,11 +1,12 @@
 package com.tw.uno.master;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Message implements Serializable{
-    public String status;
-    public String playerName;
-    public ServerPlayer newPlayer;
+    String status;
+    String playerName;
+    public HashMap<String, ServerPlayer> players;
 
     public Message(String status) {
         this.status = status;

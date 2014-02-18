@@ -7,6 +7,7 @@ import com.tw.uno.view.Screen;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class UnoClient implements LoginFormListener, MessageChannelListener {
     private final LoadingForm loadingForm;
@@ -52,6 +53,14 @@ public class UnoClient implements LoginFormListener, MessageChannelListener {
         if(message.getStatus().equals("start")){
             loadingForm.setVisible(false);
             screen.setVisible(true);
+        }
+        if(message.getStatus().equals("addPlayers")) {
+            HashMap<String,ServerPlayer> playerHashMap = message.players;
+            System.out.println(playerHashMap.size());
+            for (String s : playerHashMap.keySet()) {
+                ServerPlayer serverPlayer = playerHashMap.get(s);
+                screen.addPlayer(serverPlayer);
+            }
         }
     }
 
