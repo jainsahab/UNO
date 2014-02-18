@@ -19,7 +19,7 @@ public class LoadingPanel extends JPanel {
 
         G.setColor(Color.RED);
         G.setFont(new Font(Font.SANS_SERIF ,Font.BOLD,20));
-        G.drawString("Loading the Game...",xCoordinate , yCoordinate);
+        G.drawString("LoadingForm the Game...",xCoordinate , yCoordinate);
 
         G.drawString("Please wait...", xCoordinate, yCoordinate+20);
     }

@@ -3,7 +3,7 @@ package com.tw.uno.master;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Message implements Serializable {
+public class Message implements Serializable{
     String status;
     String playerName;
     public ArrayList<ServerPlayer> players;
@@ -20,5 +20,4 @@ public class Message implements Serializable {
     public String getStatus() {
         return status;
     }
-
 }

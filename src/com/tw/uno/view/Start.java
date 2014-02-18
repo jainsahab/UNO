@@ -50,4 +50,8 @@ public class Start {
         join.setBackground(Color.cyan);
         startingPanel.add(join, constraints);
     }
+
+    public static void main(String[] args) {
+        Start start = new Start();;
+    }
 }

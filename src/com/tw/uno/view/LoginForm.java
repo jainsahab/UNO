@@ -11,11 +11,9 @@ public class LoginForm extends JFrame implements ActionListener {
     private JTextField gameMasterField;
     private JTextField nameField;
 
-    public LoginForm(LoginFormListener listener) {
+    public LoginForm() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setVisible(true);
 
-        this.listener = listener;
         panel = new JPanel();
         panel.setVisible(true);
 
@@ -55,6 +53,10 @@ public class LoginForm extends JFrame implements ActionListener {
 
         join.addActionListener(this);
         add(panel);
+    }
+
+    public void addListener(LoginFormListener listener){
+        this.listener = listener;
     }
 
     @Override

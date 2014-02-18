@@ -10,7 +10,7 @@ public class TopPanel extends JPanel {
         this.setVisible(true);
         this.setBackground(Color.BLUE);
     }
-    public void addPlayer(PlayerButton playerButton){
+    public void addPlayerButton(PlayerButton playerButton){
         this.add(playerButton);
     }
 }
