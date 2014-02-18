@@ -12,7 +12,6 @@ public class MasterServerTest {
     public class UnoFactoryStub extends UnoFactory {
         public ServerSocket serverSocket = mock(ServerSocket.class);
         public MessageChannel channel = mock(MessageChannel.class);
-        public Socket socket = mock(Socket.class);
 
         public ServerSocket createServerSocket() {
             return serverSocket;
@@ -26,8 +25,6 @@ public class MasterServerTest {
             return new Player(messageChannel, name);
         }
     }
-
-    ;
 
     @Test
     public void startingServerAcceptsNumberOfPlayers() {
