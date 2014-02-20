@@ -14,8 +14,8 @@ public class Pack {
     }
 
     public void shuffle() {
-        Random randomizer = new Random(this.cardButtons);
-        for (Object o : randomizer.shuffleCards()) {
+        Random random = new Random(this.cardButtons);
+        for (Object o : random.shuffleCards()) {
             this.cardButtons.add((CardButton) o);
         }
     }

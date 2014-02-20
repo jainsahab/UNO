@@ -9,7 +9,7 @@ import java.awt.*;
 public class Screen extends JFrame {
     private final Dimension screenSize;
     private TopPanel playerButtons;
-    private Deck deck;
+    private DeckView deck;
     private BottomPanel cards;
     private LogPanel log;
 
@@ -40,7 +40,7 @@ public class Screen extends JFrame {
         JPanel contentPane = (JPanel)this.getContentPane();
         contentPane.add(playerPane, BorderLayout.NORTH);
 
-        deck = new Deck();
+        deck = new DeckView();
         add(deck, BorderLayout.CENTER);
 
         cards = new BottomPanel(500, 230);
