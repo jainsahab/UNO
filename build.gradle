@@ -5,12 +5,19 @@ apply plugin: 'idea'
 group = "com.tw.uno"
 version = "0.1"
 
-mainClassName = "com.tw.uno.master.Main" // Change it to your main class
+mainClassName = "com.step.programs.ClientApp" // Change it to your main class
 
 repositories { mavenCentral() }
 
 dependencies {
     testCompile 'junit:junit:4.10', 'jgoodies:forms:1.0.5','org.mockito:mockito-all:1.8.4'
+}
+
+jar {
+    manifest.attributes(
+            "Main-Class": "com.step.programs.ClientApp",
+            'Class-Path': configurations.runtime.files.collect { it.name }.join(' ')
+    )
 }
 
 sourceSets {
@@ -25,5 +32,11 @@ task wrapper(type: Wrapper) {
 idea {
     module {
         excludeDirs += [file(".gradle"), file('gradle')]
+    }
+}
+
+distZip {
+    into(project.name +"-0.1"+ "/bin") {
+        from 'src/run-server.sh' include '*'
     }
 }
