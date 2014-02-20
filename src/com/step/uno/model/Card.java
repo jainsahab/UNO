@@ -1,9 +1,10 @@
 package com.step.uno.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Card {
+public class Card implements Serializable{
     public Colour colour;
     public Sign sign;
 

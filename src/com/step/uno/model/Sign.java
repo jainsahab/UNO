@@ -1,6 +1,8 @@
 package com.step.uno.model;
 
-public enum Sign{
+import java.io.Serializable;
+
+public enum Sign implements Serializable {
     _0(0),
     _1(1),
     _2(2),

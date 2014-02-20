@@ -1,6 +1,8 @@
 package com.step.uno.model;
 
-public enum Colour{
+import java.io.Serializable;
+
+public enum Colour implements Serializable {
     Red,
     Green,
     Blue,

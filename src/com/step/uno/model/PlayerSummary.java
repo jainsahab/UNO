@@ -1,6 +1,8 @@
 package com.step.uno.model;
 
-public class PlayerSummary {
+import java.io.Serializable;
+
+public class PlayerSummary implements Serializable {
     public String name;
     public int cardsInHand;
     private boolean declaredUno;
