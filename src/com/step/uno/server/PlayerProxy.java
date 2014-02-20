@@ -59,12 +59,10 @@ public class PlayerProxy implements MessageChannelListener {
         observer.onNoActionOnDrawnCard(player);
     }
 
-
-
     @Override
     public void onMessage(MessageChannel client, Object message) {
         try {
-            Method method = this.getClass().getMethod("onClientMessage",message.getClass());
+            Method method = this.getClass().getDeclaredMethod("onClientMessage",message.getClass());
             method.invoke(this,message);
         } catch (NoSuchMethodException e) {
 
