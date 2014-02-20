@@ -15,7 +15,8 @@ public class Controller implements GameClientObserver, UnoViewListener {
     }
 
     @Override
-    public void update(Snapshot message) {
+    public void update(Snapshot snapshot) {
+        view.displayPlayerScreen(snapshot);
         //present snapshot on to screen of view
     }
 

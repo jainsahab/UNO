@@ -6,6 +6,6 @@ import com.step.uno.server.GameMaster;
 
 public class ServerApp {
     public static void main(String[] args) {
-        new GameMaster(1, 1, new CommunicationFactory(),new UnoFactory()).start();
+        new GameMaster(1, 1, new CommunicationFactory(), new UnoFactory()).start();
     }
 }
