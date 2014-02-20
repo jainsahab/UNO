@@ -2,6 +2,7 @@ package com.step.uno.view;
 
 
 import com.step.uno.model.Card;
+import com.step.uno.model.PlayerSummary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,5 +44,17 @@ public class PlayerScreen extends JFrame {
 
     public void addMyCard(Card card) {
 
+    }
+
+    public void addCard(Card myCard) {
+        cards.add(new JButton(myCard.colour.toString() + " " + myCard.sign.toString()));
+    }
+
+    public void addPlayer(PlayerSummary playerSummary) {
+        playerButtons.addPlayerButton(new PlayerButton(playerSummary.name,playerSummary.cardsInHand));
+    }
+
+    public void updateOpenCard(Card openCard) {
+        deck.updateOpenCard(openCard);
     }
 }

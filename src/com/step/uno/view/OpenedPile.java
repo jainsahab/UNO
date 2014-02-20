@@ -8,6 +8,5 @@ public class OpenedPile extends JButton {
         setPreferredSize(new Dimension(150, 200));
         setBackground(Color.green);
         setVisible(true);
-
     }
 }

@@ -9,6 +9,7 @@ import com.step.uno.view.UnoViewListener;
 public class Controller implements GameClientObserver, UnoViewListener {
     private GameClient gameClient;
     private UnoView view;
+    private Snapshot snapshot;
 
     public Controller(GameClient gameClient) {
         this.gameClient = gameClient;
@@ -16,8 +17,8 @@ public class Controller implements GameClientObserver, UnoViewListener {
 
     @Override
     public void update(Snapshot snapshot) {
-        view.displayPlayerScreen(snapshot);
-        //present snapshot on to screen of view
+        this.snapshot = snapshot;
+        view.updatePlayerScreen(snapshot);
     }
 
     public void start(UnoView view) {

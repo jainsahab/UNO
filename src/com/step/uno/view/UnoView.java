@@ -1,6 +1,8 @@
 package com.step.uno.view;
 
 import com.step.uno.messages.Snapshot;
+import com.step.uno.model.Card;
+import com.step.uno.model.PlayerSummary;
 
 public class UnoView {
     private UnoViewListener listener;
@@ -20,7 +22,14 @@ public class UnoView {
         loginForm.setVisible(false);
     }
 
-    public void displayPlayerScreen(Snapshot snapshot) {
+    public void updatePlayerScreen(Snapshot snapshot) {
         playerScreen.setVisible(true);
+        for (Card myCard : snapshot.myCards) {
+            playerScreen.addCard(myCard);
+        }
+        for (PlayerSummary playerSummary : snapshot.playerSummaries) {
+            playerScreen.addPlayer(playerSummary);
+        }
+        playerScreen.updateOpenCard(snapshot.openCard);
     }
 }
