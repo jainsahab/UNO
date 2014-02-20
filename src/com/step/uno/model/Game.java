@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class Game {
     private int currentPlayerIndex = 0;
     public final List<Player> players;
@@ -15,7 +14,7 @@ public class Game {
     private final Deck openDeck;
     private boolean isInAscendingOrder = true;
     private Colour runningColour;
-    private int draw2Run = 0;
+    private int draw2Run=0;
 
     public Game(int packs, List<Player> givenPlayers) {
         players = new ArrayList<>(givenPlayers);
@@ -43,10 +42,9 @@ public class Game {
         //handle special cards in open card
         openDeck.add(draw());
     }
-
-    private Card draw() {
+    private Card draw(){
         //if cards are over, need to shuffle and pick from the bottom of open pile
-        if (closedDeck.isEmpty()) {
+        if(closedDeck.isEmpty()){
             closedDeck.addAll(openDeck.drawAllButLast());
             closedDeck.shuffle();
         }
@@ -91,7 +89,7 @@ public class Game {
 
     private void handleReverse(Card card) {
         if (!card.sign.equals(Sign.Reverse)) return;
-        isInAscendingOrder = !isInAscendingOrder;
+        isInAscendingOrder=!isInAscendingOrder;
     }
 
     private void handleSkip(Card card) {
@@ -119,7 +117,7 @@ public class Game {
 
     private void nextTurn() {
         //handle reverse and skip
-        int increment = isInAscendingOrder ? 1 : -1;
+        int increment = isInAscendingOrder?1:-1;
         currentPlayerIndex = currentPlayerIndex + increment + players.size();
         currentPlayerIndex %= players.size();
     }
