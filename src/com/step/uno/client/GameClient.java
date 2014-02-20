@@ -3,7 +3,6 @@ package com.step.uno.client;
 import com.step.communication.channel.MessageChannel;
 import com.step.communication.channel.MessageChannelListener;
 import com.step.communication.factory.CommunicationFactory;
-import com.step.uno.factory.Factory;
 import com.step.uno.messages.*;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
