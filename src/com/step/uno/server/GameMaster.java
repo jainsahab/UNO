@@ -5,7 +5,7 @@ import com.step.communication.channel.MessageChannel;
 import com.step.communication.factory.CommunicationFactory;
 import com.step.communication.server.MessageServer;
 import com.step.communication.server.MessageServerListener;
-import com.step.uno.factory.Factory;
+import com.step.uno.factory.UnoFactory;
 import com.step.uno.messages.GameResult;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
@@ -18,20 +18,22 @@ import java.util.List;
 public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     private final int totalPlayers;
     private final int totalPacks;
-    private final CommunicationFactory factory;
+    private final CommunicationFactory communicationFactory;
+    private UnoFactory unoFactory;
     private MessageServer server;
     private final List<PlayerProxy> proxies = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
     private Game game;
 
-    public GameMaster(int totalPlayers, int packs, CommunicationFactory factory) {
+    public GameMaster(int totalPlayers, int packs, CommunicationFactory communicationFactory, UnoFactory unoFactory) {
         this.totalPlayers = totalPlayers;
         this.totalPacks = packs;
-        this.factory = factory;
+        this.communicationFactory = communicationFactory;
+        this.unoFactory = unoFactory;
     }
 
     public void start() {
-        server = factory.createMessageServer();
+        server = communicationFactory.createMessageServer();
         server.startListeningForConnections(this);
     }
 
@@ -41,13 +43,13 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
             channel.stop();
             return;
         }
-        PlayerProxy proxy = new PlayerProxy(channel, this);
+        PlayerProxy proxy = unoFactory.createPlayerProxy(channel, this);
         proxy.start();
-        proxies.add(proxy);
+        proxies.add(proxy); //line not tested
     }
 
     private void startGame() {
-        game = new Game(totalPacks, players);
+        game = unoFactory.createGame(totalPacks, players);
         game.initialize();
         sendSnapshot();
     }
@@ -55,7 +57,6 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     private void sendSnapshot() {
         for (PlayerProxy proxy : proxies)
             proxy.sendSnapshot(game);
-
     }
 
     @Override
