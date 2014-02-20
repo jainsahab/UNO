@@ -1,6 +1,8 @@
+
 package com.step.uno.server;
 
 import com.step.communication.channel.MessageChannel;
+import com.step.communication.factory.CommunicationFactory;
 import com.step.communication.server.MessageServer;
 import com.step.communication.server.MessageServerListener;
 import com.step.uno.factory.Factory;
@@ -16,20 +18,20 @@ import java.util.List;
 public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     private final int totalPlayers;
     private final int totalPacks;
-    private final Factory factory;
+    private final CommunicationFactory factory;
     private MessageServer server;
     private final List<PlayerProxy> proxies = new ArrayList<>();
     private List<Player> players = new ArrayList<>();
     private Game game;
 
-    public GameMaster(int totalPlayers, int packs, Factory factory) {
+    public GameMaster(int totalPlayers, int packs, CommunicationFactory factory) {
         this.totalPlayers = totalPlayers;
         this.totalPacks = packs;
         this.factory = factory;
     }
 
     public void start() {
-        server = factory.communication.createMessageServer();
+        server = factory.createMessageServer();
         server.startListeningForConnections(this);
     }
 
