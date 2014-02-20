@@ -1,0 +1,1 @@
+java -cp ../lib/UNO-0.1.jar com.step.programs.ServerApp $@  
