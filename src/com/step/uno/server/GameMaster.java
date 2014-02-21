@@ -32,6 +32,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     }
 
     public void start() {
+        System.out.println("Server started");
         server = communicationFactory.createMessageServer();
         server.startListeningForConnections(this);
     }
@@ -45,9 +46,11 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
         PlayerProxy proxy = unoFactory.createPlayerProxy(channel, this);
         proxy.start();
         proxies.add(proxy); //line not tested
+        System.out.println("New player registered");
     }
 
     private void startGame() {
+        System.out.println("Game started");
         game = unoFactory.createGame(totalPacks, players);
         game.initialize();
         sendSnapshot();
