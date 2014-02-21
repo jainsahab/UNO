@@ -46,8 +46,8 @@ public class PlayerScreen extends JFrame implements ActionListener {
         add(log, BorderLayout.EAST);
     }
 
-    public void addCard(Card myCard, boolean enable) {
-        CardButton button = new CardButton(myCard);
+    public void addCard(Card card, boolean enable) {
+        CardButton button = new CardButton(card);
         button.setEnabled(enable);
         button.addActionListener(this);
         cards.addButton(button);

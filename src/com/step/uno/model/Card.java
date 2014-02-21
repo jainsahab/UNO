@@ -8,7 +8,9 @@ public class Card implements Serializable {
     public Colour colour;
     public Sign sign;
 
-    //in one pack
+    private Card() {
+    }
+//in one pack
     // 4 X {wildcard,wild+4}, 2 X {1-9, +2, reverse, skip}, 0,  for colours {red, green, blue, yellow},
 
     public static Card[] createNewPacks(int packs) {
@@ -40,12 +42,10 @@ public class Card implements Serializable {
         return cards;
     }
 
-    private static Card createCard(Colour c, String signText) {
+    public static Card createCard(Colour c, String signText) {
         Card card = new Card();
         card.colour = c;
         card.sign = Sign.valueOf(signText);
         return card;
     }
 }
-
-

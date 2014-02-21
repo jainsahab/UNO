@@ -1,6 +1,8 @@
 package com.step.uno.controller;
 
 import com.step.uno.client.GameClient;
+import com.step.uno.model.Card;
+import com.step.uno.model.Colour;
 import com.step.uno.view.UnoView;
 import org.junit.Test;
 
@@ -26,5 +28,14 @@ public class ControllerTest {
         controller.onJoin("me", "serverAddress");
         verify(viewMock, times(1)).hideLoginForm();
         verify(gameClientMock, times(1)).start("me", "serverAddress", controller);
+    }
+
+    @Test
+    public void informs_game_client_when_player_plays_a_card() {
+        GameClient gameClientMock = mock(GameClient.class);
+        Controller controller = new Controller(gameClientMock);
+        Card card = Card.createCard(Colour.Black, "_4");
+        controller.cardPlayed(card);
+        verify(gameClientMock, times(1)).play(card);
     }
 }

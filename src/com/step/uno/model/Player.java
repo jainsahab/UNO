@@ -27,9 +27,13 @@ public class Player {
         return new PlayerSummary(name, cards.size(), declaredUno);
     }
 
-    public void play(Card card) {
-        System.out.println("Card removed");
-        cards.remove(card);
+    public void play(Card playedCard) {
+        for (Card card : cards) {
+            if (card.colour.equals(playedCard.colour) && card.sign.equals(playedCard.sign)) {
+                cards.remove(card);
+                break;
+            }
+        }
     }
 
     public void declareUno() {
