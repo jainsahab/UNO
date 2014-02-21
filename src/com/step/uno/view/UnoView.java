@@ -7,10 +7,11 @@ import com.step.uno.model.PlayerSummary;
 public class UnoView {
     private UnoViewListener listener;
     private LoginForm loginForm;
-    private PlayerScreen playerScreen = new PlayerScreen();
+    private PlayerScreen playerScreen;
 
     public UnoView(UnoViewListener listener) {
         this.listener = listener;
+        playerScreen = new PlayerScreen(listener);
     }
 
     public void showLoginForm() {
@@ -24,12 +25,25 @@ public class UnoView {
 
     public void updatePlayerScreen(Snapshot snapshot) {
         playerScreen.setVisible(true);
-        for (Card myCard : snapshot.myCards) {
-            playerScreen.addCard(myCard);
-        }
-        for (PlayerSummary playerSummary : snapshot.playerSummaries) {
-            playerScreen.addPlayer(playerSummary);
-        }
+        playerScreen.clean();
+        displayAllCards(snapshot);
+        displayPlayers(snapshot);
+        updateOpenDeck(snapshot);
+    }
+
+    private void updateOpenDeck(Snapshot snapshot) {
         playerScreen.updateOpenCard(snapshot.openCard);
+    }
+
+    private void displayPlayers(Snapshot snapshot) {
+        for (int i = 0; i < snapshot.playerSummaries.length; i++) {
+            playerScreen.addPlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
+        }
+    }
+
+    private void displayAllCards(Snapshot snapshot) {
+        for (Card myCard : snapshot.myCards) {
+            playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex);
+        }
     }
 }

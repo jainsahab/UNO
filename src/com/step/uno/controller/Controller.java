@@ -3,6 +3,7 @@ package com.step.uno.controller;
 import com.step.uno.client.GameClient;
 import com.step.uno.client.GameClientObserver;
 import com.step.uno.messages.Snapshot;
+import com.step.uno.model.Card;
 import com.step.uno.view.UnoView;
 import com.step.uno.view.UnoViewListener;
 
@@ -31,5 +32,10 @@ public class Controller implements GameClientObserver, UnoViewListener {
     public void onJoin(String name, String serverAddress) {
         this.view.hideLoginForm();
         gameClient.start(name, serverAddress, this);
+    }
+
+    @Override
+    public void cardPlayed(Card card) {
+        gameClient.play(card);
     }
 }
