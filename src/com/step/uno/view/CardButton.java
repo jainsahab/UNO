@@ -5,7 +5,6 @@ import com.step.uno.model.Sign;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 
 public class CardButton extends JButton {
     private Colour colour;
