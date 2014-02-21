@@ -4,7 +4,6 @@ apply plugin: 'idea'
 
 group = "com.tw.uno"
 version = "0.1"
-
 mainClassName = "com.step.programs.ClientApp" // Change it to your main class
 
 repositories { mavenCentral() }
