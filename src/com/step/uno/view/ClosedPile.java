@@ -6,8 +6,10 @@ import java.awt.*;
 public class ClosedPile extends JButton {
     public ClosedPile() {
         this.setPreferredSize(new Dimension(150, 200));
-        super.setSize(100, 100);
-        setBackground(Color.green);
+        this.setSize(100, 100);
+        String text = "Closed Pile";
+        this.setText(text);
+        this.setFont(new Font("Algerian", Font.ITALIC, 30));
         setVisible(true);
     }
 }

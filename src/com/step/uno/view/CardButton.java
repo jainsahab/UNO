@@ -17,7 +17,7 @@ public class CardButton extends JButton {
         printableSign = printableSign.replaceAll("_"," ");
         super.setText(printableSign);
         super.setBackground(colour.getColor());
-        super.setForeground(Color.WHITE);
+        super.setForeground(Color.LIGHT_GRAY);
         super.setFont(new Font("Arial", Font.ITALIC, 30));
         this.setPreferredSize(new Dimension(200, 220));
     }
