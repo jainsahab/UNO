@@ -104,7 +104,7 @@ public class Game {
 
     private void handleWildCard(Card card, Colour newColour) {
         runningColour = card.colour.equals(Colour.Black) ? newColour : card.colour;
-        if (card.sign.equals(Sign.WildDrawFour)) applyDrawFour();
+        if (card.sign.equals(Sign.DrawFour)) applyDrawFour();
     }
 
     private void applyDrawFour() {

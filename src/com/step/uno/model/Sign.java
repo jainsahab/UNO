@@ -16,7 +16,7 @@ public enum Sign implements Serializable {
     Reverse(20),
     Skip(20),
     DrawTwo(20),
-    WildDrawFour(50),
+    DrawFour(50),
     Wild(50);
     public final int points;
 
