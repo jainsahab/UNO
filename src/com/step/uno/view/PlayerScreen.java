@@ -56,7 +56,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     public void updatePlayer(PlayerSummary playerSummary, boolean turn) {
         PlayerButton playerButton = new PlayerButton(playerSummary.name, playerSummary.cardsInHand);
-        if (turn) playerButton.setBackground(Color.green);
+        if (turn) playerButton.setBackground(Color.decode("#317317"));
         playerButtons.addPlayerButton(playerButton);
     }
 

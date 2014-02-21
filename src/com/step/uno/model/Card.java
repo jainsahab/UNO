@@ -29,13 +29,13 @@ public class Card implements Serializable {
                 }
                 cards.add(createCard(c, "Reverse"));
                 cards.add(createCard(c, "Skip"));
-                cards.add(createCard(c, "DrawTwo"));
+                cards.add(createCard(c, "Draw2"));
             }
         }
 
         for (int times = 0; times < 4; times++) {
             cards.add(createCard(Colour.Black, "Wild"));
-            cards.add(createCard(Colour.Black, "DrawFour"));
+            cards.add(createCard(Colour.Black, "Draw4"));
         }
         return cards;
     }
