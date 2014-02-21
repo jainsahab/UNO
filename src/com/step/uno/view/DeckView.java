@@ -19,6 +19,11 @@ public class DeckView extends JPanel {
         add(closedPile);
         JLabel statusHint = new JLabel("This is hint");
         add(statusHint);
+
+        Button unoButton = new Button("UNO");
+        unoButton.setPreferredSize(new Dimension(100, 100));
+        unoButton.setBackground(Color.ORANGE);
+        add(unoButton);
     }
 
     public DeckView() {
