@@ -34,6 +34,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
         contentPane.add(playerPane, BorderLayout.NORTH);
 
         deck = new DeckView();
+        deck.closedPile.addActionListener(this);
         add(deck, BorderLayout.CENTER);
 
         cards = new BottomPanel(500, 230);
@@ -69,16 +70,14 @@ public class PlayerScreen extends JFrame implements ActionListener {
         if (source.getClass().equals(CardButton.class)) {
             listener.cardPlayed(((CardButton) source).getCard());
         }
+        if (source.getClass().equals(ClosedPile.class))
+            listener.cardDrawn();
     }
 
     public void clean() {
-        removeComponents(playerButtons);
-        removeComponents(cards);
-    }
-
-    private void removeComponents(JPanel panel) {
-        for (Component component : panel.getComponents()) {
-            panel.remove(component);
-        }
+        playerButtons.removeAll();
+        playerButtons.validate();
+        cards.removeAll();
+        cards.validate();
     }
 }
