@@ -11,5 +11,4 @@ public class ClientApp {
         Controller controller = new Controller(gameClient);
         controller.start(new UnoView(controller));
     }
-
 }

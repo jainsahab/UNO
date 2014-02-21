@@ -34,8 +34,8 @@ public class GameClient implements MessageChannelListener {
     }
 
     public void play(Card card, Colour newColour) {
-        //dont allow WildDraw4 when running colour is present
-        //dont allow colour change to last card when heading to last card
+        //don't allow WildDraw4 when running colour is present
+        //don't allow colour change to last card when heading to last card
         channel.send(new PlayCardAction(card, newColour));
     }
 

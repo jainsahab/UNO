@@ -28,6 +28,7 @@ public class Player {
     }
 
     public void play(Card card) {
+        System.out.println("Card removed");
         cards.remove(card);
     }
 
