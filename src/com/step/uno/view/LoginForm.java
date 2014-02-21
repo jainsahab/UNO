@@ -1,12 +1,15 @@
 package com.step.uno.view;
 
+import com.step.communication.factory.CommunicationFactory;
+import com.step.uno.client.GameClient;
+import com.step.uno.controller.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginForm extends JFrame implements ActionListener {
-    private JPanel panel;
     private JTextField gameMasterField;
     private JTextField nameField;
     private UnoViewListener listener;
@@ -15,11 +18,10 @@ public class LoginForm extends JFrame implements ActionListener {
         this.listener = listener;
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        panel = new JPanel();
-        panel.setVisible(true);
-
         JPanel loginPanel = new JPanel();
-        panel.add(loginPanel);
+        loginPanel.setSize(300,300);
+        this.add(loginPanel);
+
         loginPanel.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -53,12 +55,12 @@ public class LoginForm extends JFrame implements ActionListener {
         loginPanel.add(join, constraints);
 
         join.addActionListener(this);
-        add(panel);
+        this.setSize(400,400);
+        this.setLocationRelativeTo(null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         listener.onJoin(nameField.getText(), gameMasterField.getText());
     }
-
 }
