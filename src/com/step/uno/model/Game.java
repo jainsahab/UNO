@@ -98,13 +98,13 @@ public class Game {
     }
 
     private void handleDrawTwo(Card card) {
-        if (!card.sign.equals(Sign.DrawTwo)) return;
+        if (!card.sign.equals(Sign.Draw2)) return;
         draw2Run++;
     }
 
     private void handleWildCard(Card card, Colour newColour) {
         runningColour = card.colour.equals(Colour.Black) ? newColour : card.colour;
-        if (card.sign.equals(Sign.DrawFour)) applyDrawFour();
+        if (card.sign.equals(Sign.Draw4)) applyDrawFour();
     }
 
     private void applyDrawFour() {
