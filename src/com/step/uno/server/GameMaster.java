@@ -32,7 +32,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     }
 
     public void start() {
-        System.out.println("Server started");
+        System.out.println("Server started : ");
         server = communicationFactory.createMessageServer();
         server.startListeningForConnections(this);
     }
@@ -50,7 +50,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     }
 
     private void startGame() {
-        System.out.println("Game started");
+        System.out.println("Game started : ");
         game = unoFactory.createGame(totalPacks, players);
         game.initialize();
         sendSnapshot();

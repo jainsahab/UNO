@@ -27,7 +27,6 @@ public class Controller implements GameClientObserver, UnoViewListener {
         this.view.showLoginForm();
     }
 
-
     @Override
     public void onJoin(String name, String serverAddress) {
         this.view.hideLoginForm();

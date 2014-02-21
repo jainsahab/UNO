@@ -2,7 +2,6 @@ package com.step.uno.view;
 
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
-import com.step.uno.model.PlayerSummary;
 
 public class UnoView {
     private UnoViewListener listener;
