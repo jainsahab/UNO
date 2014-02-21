@@ -1,10 +1,8 @@
 package com.step.uno.view;
-
 import com.step.uno.model.Card;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class DeckView extends JPanel {
 
     private OpenedPile openedPile;
@@ -27,8 +25,7 @@ public class DeckView extends JPanel {
         this(new Dimension(500, 500));
     }
 
-
     public void updateOpenCard(Card card) {
-        openedPile.setText(card.colour.toString() + " " + card.sign.toString());
+        openedPile.updateCardOnOpenPile(card.colour,card.sign);
     }
 }
