@@ -47,18 +47,6 @@ public class GameClient implements MessageChannelListener {
         channel.send(new DrawCardAction());
     }
 
-    public void drawTwo() {
-        channel.send(new DrawTwoCardAction());
-    }
-
-    public void declareUno() {
-        channel.send(new DeclareUnoAction());
-    }
-
-    public void catchUno(int playerIndex) {
-        channel.send(new CatchUnoAction(playerIndex));
-    }
-
     @Override
     public void onError(MessageChannel client, Exception e) {
 
@@ -69,19 +57,10 @@ public class GameClient implements MessageChannelListener {
         if (message.getClass().equals(Snapshot.class)) {
             observer.update((Snapshot) message);
         }
-
-        if (message.getClass().equals(GameResult.class)) {
-            //present result on to screen
-        }
-
-        if (message.getClass().equals(WaitingForDrawnCardAction.class)) {
-            //add new card to screen
-            //wait for 5 seconds to play that card
-            //send no NoActionOnDrawnCard message
-        }
     }
 
     @Override
     public void onConnectionClosed(MessageChannel client) {
+
     }
 }

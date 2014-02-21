@@ -5,8 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 public class DeckView extends JPanel {
 
-    private OpenedPile openedPile;
-    private ClosedPile closedPile;
+    public OpenedPile openedPile;
+    public ClosedPile closedPile;
 
     public DeckView(Dimension size) {
         setBackground(Color.gray);

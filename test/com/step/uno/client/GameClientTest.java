@@ -3,6 +3,7 @@ package com.step.uno.client;
 import com.step.communication.channel.MessageChannel;
 import com.step.communication.channel.MessageChannelListener;
 import com.step.communication.factory.CommunicationFactory;
+import com.step.uno.messages.DrawCardAction;
 import com.step.uno.messages.Introduction;
 import com.step.uno.messages.Snapshot;
 import org.junit.Test;
@@ -46,4 +47,12 @@ public class GameClientTest {
         gameClient.onMessage(factoryStub.messageChannel, snapshot);
         verify(gameClientObserverMock, times(1)).update(snapshot);
     }
+
+    @Test
+    public void on_draw_card_client_sends_message_on_channel() {
+        gameClient.start("me", "serverAddress", gameClientObserverMock);
+        gameClient.draw();
+        verify(factoryStub.messageChannel, times(2)).send(any(DrawCardAction.class));
+    }
+
 }

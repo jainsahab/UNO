@@ -38,4 +38,9 @@ public class Controller implements GameClientObserver, UnoViewListener {
     public void cardPlayed(Card card) {
         gameClient.play(card);
     }
+
+    @Override
+    public void cardDrawn(){
+        gameClient.draw();
+    }
 }
