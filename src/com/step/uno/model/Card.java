@@ -10,8 +10,6 @@ public class Card implements Serializable {
 
     private Card() {
     }
-//in one pack
-    // 4 X {wildcard,wild+4}, 2 X {1-9, +2, reverse, skip}, 0,  for colours {red, green, blue, yellow},
 
     public static Card[] createNewPacks(int packs) {
         List<Card> cards = new ArrayList<>();

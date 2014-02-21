@@ -35,26 +35,4 @@ public class Player {
             }
         }
     }
-
-    public void declareUno() {
-        declaredUno = true;
-    }
-
-    public boolean checkUno() {
-        return cards.size() == 1 && !declaredUno;
-    }
-
-    public boolean hasWon() {
-        return cards.size() == 0;
-    }
-
-    public PlayerResult generateResult() {
-        return new PlayerResult(name, cards, calculatePoints());
-    }
-
-    private int calculatePoints() {
-        int total = 0;
-        for (Card card : cards) total += card.sign.points;
-        return total;
-    }
 }

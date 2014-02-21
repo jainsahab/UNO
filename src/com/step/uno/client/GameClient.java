@@ -3,9 +3,11 @@ package com.step.uno.client;
 import com.step.communication.channel.MessageChannel;
 import com.step.communication.channel.MessageChannelListener;
 import com.step.communication.factory.CommunicationFactory;
-import com.step.uno.messages.*;
+import com.step.uno.messages.DrawCardAction;
+import com.step.uno.messages.Introduction;
+import com.step.uno.messages.PlayCardAction;
+import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
-import com.step.uno.model.Colour;
 
 public class GameClient implements MessageChannelListener {
     private CommunicationFactory factory;
@@ -31,16 +33,6 @@ public class GameClient implements MessageChannelListener {
 
     public void play(Card card) {
         channel.send(new PlayCardAction(card));
-    }
-
-    public void play(Card card, Colour newColour) {
-        //don't allow WildDraw4 when running colour is present
-        //don't allow colour change to last card when heading to last card
-        channel.send(new PlayCardAction(card, newColour));
-    }
-
-    public void informNoActionOnDrawnCard() {
-        channel.send(new NoActionOnDrawnCard());
     }
 
     public void draw() {

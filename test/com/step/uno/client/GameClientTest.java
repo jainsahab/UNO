@@ -54,5 +54,4 @@ public class GameClientTest {
         gameClient.draw();
         verify(factoryStub.messageChannel, times(2)).send(any(DrawCardAction.class));
     }
-
 }

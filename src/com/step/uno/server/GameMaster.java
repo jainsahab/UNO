@@ -5,7 +5,6 @@ import com.step.communication.factory.CommunicationFactory;
 import com.step.communication.server.MessageServer;
 import com.step.communication.server.MessageServerListener;
 import com.step.uno.factory.UnoFactory;
-import com.step.uno.messages.GameResult;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
 import com.step.uno.model.Game;
@@ -45,7 +44,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
         }
         PlayerProxy proxy = unoFactory.createPlayerProxy(channel, this);
         proxy.start();
-        proxies.add(proxy); //line not tested
+        proxies.add(proxy);
         System.out.println("New player registered");
     }
 
@@ -75,53 +74,13 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
 
     @Override
     public void onPlayerPlayed(Player player, Card card, Colour newColour) {
-        game.playCard(player, card, newColour);
-        if (player.hasWon())
-            sendResult();
-        else
-            sendSnapshot();
-    }
-
-    private void sendResult() {
-        GameResult result = new GameResult();
-        game.populate(result);
-        for (PlayerProxy proxy : proxies)
-            proxy.sendResult(result);
+        game.playCard(player, card);
+        sendSnapshot();
     }
 
     @Override
     public void onPlayerDrewCard(Player player) {
-        Card card = game.drawCard(player);
-        sendWaitingForDrawnCardAction(player, card);
-    }
-
-    private void sendWaitingForDrawnCardAction(Player player, Card card) {
-        for (PlayerProxy proxy : proxies) {
-            proxy.sendWaitingForDrawnCardAction(player, card);
-        }
-    }
-
-    @Override
-    public void onPlayerDeclaredUno(Player player) {
-        game.declareUno(player);
-        sendSnapshot();
-    }
-
-    @Override
-    public void onPlayerCaughtUno(Player player, int playerIndex) {
-        game.catchUno(player, playerIndex);
-        sendSnapshot();
-    }
-
-    @Override
-    public void onPlayerDrewTwoCards(Player player) {
-        game.drawTwoCards(player);
-        sendSnapshot();
-    }
-
-    @Override
-    public void onNoActionOnDrawnCard(Player player) {
-        game.moveForwardAsPlayerTookNoActionOnDrawnCard();
+        game.drawCard(player);
         sendSnapshot();
     }
 }
