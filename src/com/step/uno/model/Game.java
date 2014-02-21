@@ -65,6 +65,7 @@ public class Game {
     public Card drawCard(Player player) {
         Card newCard = draw();
         player.take(newCard);
+        nextTurn();
         return newCard;
     }
 }

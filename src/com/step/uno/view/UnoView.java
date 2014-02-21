@@ -24,6 +24,7 @@ public class UnoView {
 
     public void updatePlayerScreen(Snapshot snapshot) {
         playerScreen.setVisible(true);
+        playerScreen.setClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
         playerScreen.clean();
         displayAllCards(snapshot);
         displayPlayers(snapshot);
@@ -36,7 +37,7 @@ public class UnoView {
 
     private void displayPlayers(Snapshot snapshot) {
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
-            playerScreen.addPlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
+            playerScreen.updatePlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
         }
     }
 

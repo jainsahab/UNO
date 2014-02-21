@@ -54,7 +54,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
         cards.addButton(button);
     }
 
-    public void addPlayer(PlayerSummary playerSummary, boolean turn) {
+    public void updatePlayer(PlayerSummary playerSummary, boolean turn) {
         PlayerButton playerButton = new PlayerButton(playerSummary.name, playerSummary.cardsInHand);
         if (turn) playerButton.setBackground(Color.green);
         playerButtons.addPlayerButton(playerButton);
@@ -76,8 +76,12 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     public void clean() {
         playerButtons.removeAll();
-        playerButtons.validate();
-        cards.removeAll();
-        cards.validate();
+        for (Component component : cards.getComponents()) {
+            component.setVisible(false);
+        }
+    }
+
+    public void setClosedPile(boolean closedPile) {
+        deck.setClosedPile(closedPile);
     }
 }

@@ -33,4 +33,8 @@ public class DeckView extends JPanel {
     public void updateOpenCard(Card card) {
         openedPile.updateCardOnOpenPile(card.colour,card.sign);
     }
+
+    public void setClosedPile(boolean enable) {
+        closedPile.setEnabled(enable);
+    }
 }
