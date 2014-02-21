@@ -14,7 +14,7 @@ public class BottomPanel extends JPanel {
         setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
     }
 
-    public void addButton(JButton button) {
+    public void addButton(CardButton button) {
         add(button);
     }
 }

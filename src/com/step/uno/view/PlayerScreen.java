@@ -42,12 +42,8 @@ public class PlayerScreen extends JFrame {
         add(log, BorderLayout.EAST);
     }
 
-    public void addMyCard(Card card) {
-
-    }
-
     public void addCard(Card myCard) {
-        cards.add(new JButton(myCard.colour.toString() + " " + myCard.sign.toString()));
+        cards.addButton(new CardButton(myCard.colour, myCard.sign));
     }
 
     public void addPlayer(PlayerSummary playerSummary) {

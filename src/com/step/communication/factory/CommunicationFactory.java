@@ -21,7 +21,6 @@ public class CommunicationFactory {
 
     public ServerSocket createServerSocket() {
         try {
-
             ServerSocket serverSocket = new ServerSocket(9090);
             serverSocket.setSoTimeout(200);
             return serverSocket;
