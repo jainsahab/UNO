@@ -110,7 +110,6 @@ public class GameMasterTest {
     @Test
     public void on_draw2_card_it_should_draw_two_cards_from_game_for_the_given_player() {
         GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
-        gameMaster.start();
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDrewTwoCard(playerMock);

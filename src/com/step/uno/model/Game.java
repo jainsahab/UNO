@@ -70,7 +70,13 @@ public class Game {
         openDeck.add(card);
         this.runningColour = card.colour;
         handleDrawTwo(card);
+        handleSkip(card);
         nextTurn();
+    }
+
+    private void handleSkip(Card card) {
+        if(card.sign.equals(Sign.Skip))
+            nextTurn();
     }
 
     private void handleDrawTwo(Card card) {

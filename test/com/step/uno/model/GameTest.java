@@ -45,4 +45,13 @@ public class GameTest {
 
         verify(playerMock,times(2)).take(any(Card.class));
     }
+
+
+    @Test
+    public void on_skip_one_player_will_be_skipped() {
+        Card cardPlayed = Card.createCard(Colour.Yellow,"Skip");
+        game.playCard(playerMock,cardPlayed);
+
+        assertEquals(0,game.getCurrentPlayerIndex());
+    }
 }
