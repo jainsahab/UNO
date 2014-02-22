@@ -8,7 +8,7 @@ public class Card implements Serializable {
     public Colour colour;
     public Sign sign;
 
-    private Card() {
+    public Card() {
     }
 
     public static Card[] createNewPacks(int packs) {

@@ -4,6 +4,8 @@ import com.step.communication.channel.MessageChannel;
 import com.step.communication.factory.CommunicationFactory;
 import com.step.communication.server.MessageServer;
 import com.step.uno.factory.UnoFactory;
+import com.step.uno.model.Card;
+import com.step.uno.model.Colour;
 import com.step.uno.model.Game;
 import com.step.uno.model.Player;
 import org.junit.Test;
@@ -93,5 +95,15 @@ public class GameMasterTest {
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDrewCard(playerMock);
         verify(unoFactoryStub.game, times(1)).drawCard(playerMock);
+    }
+
+    @Test
+    public void gameMaster_sends_game_result_to_all_players_if_any_players_wins() {
+        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        Player playerMock = mock(Player.class);
+        when(playerMock.hasWon()).thenReturn(true);
+        gameMaster.onPlayerRegistered(playerMock);
+        gameMaster.onPlayerPlayed(playerMock, mock(Card.class), Colour.Black);
+        verify(unoFactoryStub.game, times(1)).populateResult();
     }
 }

@@ -21,6 +21,7 @@ public class Player {
 
     public void populateSelf(Snapshot snapshot) {
         snapshot.myCards = cards.toArray(new Card[]{});
+        snapshot.currentPlayerName = this.name;
     }
 
     public PlayerSummary generateSummary() {
@@ -34,5 +35,22 @@ public class Player {
                 break;
             }
         }
+    }
+
+    public boolean hasWon() {
+        return cards.size() == 0;
+    }
+
+    public PlayerResult generateResult() {
+        PlayerResult result = new PlayerResult(cards.toArray(new Card[]{}), calculatePoints());
+        return result;
+    }
+
+    private int calculatePoints() {
+        int total = 0;
+        for (Card card : cards) {
+            total += card.sign.points;
+        }
+        return total;
     }
 }

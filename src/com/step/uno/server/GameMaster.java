@@ -5,6 +5,7 @@ import com.step.communication.factory.CommunicationFactory;
 import com.step.communication.server.MessageServer;
 import com.step.communication.server.MessageServerListener;
 import com.step.uno.factory.UnoFactory;
+import com.step.uno.messages.GameResult;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
 import com.step.uno.model.Game;
@@ -52,10 +53,10 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
         System.out.println("Game started : ");
         game = unoFactory.createGame(totalPacks, players);
         game.initialize();
-        sendSnapshot();
+        sendGameSnapshot();
     }
 
-    private void sendSnapshot() {
+    private void sendGameSnapshot() {
         for (PlayerProxy proxy : proxies)
             proxy.sendSnapshot(game);
     }
@@ -75,12 +76,20 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     @Override
     public void onPlayerPlayed(Player player, Card card, Colour newColour) {
         game.playCard(player, card);
-        sendSnapshot();
+        sendGameSnapshot();
+        if (player.hasWon()) sendResult();
+    }
+
+    private void sendResult() {
+        GameResult result = game.populateResult();
+        for (PlayerProxy proxy : proxies) {
+            proxy.sendResultSnapshot(result);
+        }
     }
 
     @Override
     public void onPlayerDrewCard(Player player) {
         game.drawCard(player);
-        sendSnapshot();
+        sendGameSnapshot();
     }
 }
