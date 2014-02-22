@@ -1,5 +1,6 @@
 package com.step.uno.view;
 
+import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.rules.RuleEngine;
@@ -48,5 +49,13 @@ public class UnoView {
         for (Card myCard : snapshot.myCards) {
             playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && ruleEngine.isPlayableCard(snapshot,myCard));
         }
+    }
+
+    public void showResult(GameResult result) {
+        new GameOverScreen(result);
+    }
+
+    public void hidePlayerScreen() {
+        playerScreen.setVisible(false);
     }
 }

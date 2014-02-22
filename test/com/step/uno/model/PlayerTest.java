@@ -41,4 +41,30 @@ public class PlayerTest {
         PlayerSummary summary = new PlayerSummary("name", 2, false);
         assertEquals(summary, player.generateSummary());
     }
+
+    @Test
+    public void player_wins_game_when_has_no_cards_in_hand() {
+        Player player = new Player("name");
+        assertEquals(true, player.hasWon());
+    }
+
+    @Test
+    public void player_does_not_wins_when_have_at_least_one_card_in_hand() {
+        Player player = new Player("name");
+        Card card1 = Card.createCard(Colour.Blue, "_1");
+        player.take(card1);
+        assertEquals(false, player.hasWon());
+    }
+
+    @Test
+    public void player_calculates_points_and_generates_result() {
+        Player player = new Player("name");
+        Card card1 = Card.createCard(Colour.Blue, "_5");
+        Card card2 = Card.createCard(Colour.Blue, "_7");
+        player.take(card1);
+        player.take(card2);
+        PlayerResult playerResult = player.generateResult();
+        assertEquals(playerResult.cards.length, 2);
+        assertEquals(playerResult.points, 12);
+    }
 }

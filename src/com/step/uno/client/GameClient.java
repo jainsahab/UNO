@@ -3,10 +3,7 @@ package com.step.uno.client;
 import com.step.communication.channel.MessageChannel;
 import com.step.communication.channel.MessageChannelListener;
 import com.step.communication.factory.CommunicationFactory;
-import com.step.uno.messages.DrawCardAction;
-import com.step.uno.messages.Introduction;
-import com.step.uno.messages.PlayCardAction;
-import com.step.uno.messages.Snapshot;
+import com.step.uno.messages.*;
 import com.step.uno.model.Card;
 
 public class GameClient implements MessageChannelListener {
@@ -48,6 +45,9 @@ public class GameClient implements MessageChannelListener {
     public void onMessage(MessageChannel client, Object message) {
         if (message.getClass().equals(Snapshot.class)) {
             observer.update((Snapshot) message);
+        }
+        if (message.getClass().equals(GameResult.class)) {
+            observer.onGameOver((GameResult) message);
         }
     }
 

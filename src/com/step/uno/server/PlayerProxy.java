@@ -66,4 +66,8 @@ public class PlayerProxy implements MessageChannelListener {
         game.populate(snapshot, player);
         channel.send(snapshot);
     }
+
+    public void sendResultSnapshot(GameResult result) {
+        channel.send(result);
+    }
 }

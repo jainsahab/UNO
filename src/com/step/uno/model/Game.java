@@ -1,5 +1,6 @@
 package com.step.uno.model;
 
+import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 
 import java.util.ArrayList;
@@ -72,5 +73,13 @@ public class Game {
         player.take(newCard);
         nextTurn();
         return newCard;
+    }
+
+    public GameResult populateResult() {
+        List<PlayerResult> result = new ArrayList<>();
+        for (Player player : players) {
+            result.add(player.generateResult());
+        }
+        return new GameResult(result.toArray(new PlayerResult[]{}));
     }
 }
