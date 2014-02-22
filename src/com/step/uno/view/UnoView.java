@@ -24,6 +24,7 @@ public class UnoView {
 
     public void updatePlayerScreen(Snapshot snapshot) {
         playerScreen.setVisible(true);
+        playerScreen.setTitle("UNO : "+snapshot.currentPlayerName);
         playerScreen.setClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
         playerScreen.clean();
         displayAllCards(snapshot);

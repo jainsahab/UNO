@@ -21,6 +21,7 @@ public class Player {
 
     public void populateSelf(Snapshot snapshot) {
         snapshot.myCards = cards.toArray(new Card[]{});
+        snapshot.currentPlayerName = this.name;
     }
 
     public PlayerSummary generateSummary() {
