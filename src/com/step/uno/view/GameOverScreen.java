@@ -10,12 +10,13 @@ public class GameOverScreen extends JFrame {
 
     public GameOverScreen(GameResult result) {
         setTitle("Game Over");
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(380, 330);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(600, 500);
+        setLayout(null);
         setResizable(false);
         setVisible(true);
-        add(panel);
         table = new JTable(result.playerResults.length, 2);
         panel.add(table);
+        add(panel);
     }
 }
