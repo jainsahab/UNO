@@ -3,16 +3,19 @@ package com.step.uno.view;
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
+import com.step.uno.model.PlayerResult;
 import com.step.uno.rules.RuleEngine;
 
 public class UnoView {
     private UnoViewListener listener;
     private LoginForm loginForm;
     private PlayerScreen playerScreen;
+    private GameOverScreen gameOverScreen;
 
     public UnoView(UnoViewListener listener) {
         this.listener = listener;
         playerScreen = new PlayerScreen(listener);
+        gameOverScreen = new GameOverScreen();
     }
 
     public void showLoginForm() {
@@ -26,7 +29,7 @@ public class UnoView {
 
     public void updatePlayerScreen(Snapshot snapshot) {
         playerScreen.setVisible(true);
-        playerScreen.setTitle("UNO : "+snapshot.currentPlayerName);
+        playerScreen.setTitle("UNO : " + snapshot.currentPlayerName);
         playerScreen.setClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
         playerScreen.clean();
         displayAllCards(snapshot);
@@ -47,12 +50,12 @@ public class UnoView {
     private void displayAllCards(Snapshot snapshot) {
         RuleEngine ruleEngine = new RuleEngine();
         for (Card myCard : snapshot.myCards) {
-            playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && ruleEngine.isPlayableCard(snapshot,myCard));
+            playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && ruleEngine.isPlayableCard(snapshot, myCard));
         }
     }
 
     public void showResult(GameResult result) {
-        new GameOverScreen(result);
+        gameOverScreen.showResult(result);
     }
 
     public void hidePlayerScreen() {
