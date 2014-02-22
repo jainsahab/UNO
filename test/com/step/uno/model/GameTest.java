@@ -45,6 +45,7 @@ public class GameTest {
         game.drawTwoCard(playerMock);
 
         verify(playerMock,times(2)).take(any(Card.class));
+        assertEquals(0,game.getDraw2Run());
     }
 
 

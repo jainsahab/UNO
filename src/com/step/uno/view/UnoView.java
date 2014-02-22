@@ -54,7 +54,8 @@ public class UnoView {
 
     private void displayPlayers(Snapshot snapshot) {
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
-            playerScreen.updatePlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
+            String appendString = snapshot.isInAscendingOrder ?"==>":"<==";
+            playerScreen.updatePlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i,appendString);
         }
     }
 

@@ -63,6 +63,7 @@ public class Game {
         snapshot.currentPlayerIndex = currentPlayerIndex;
         snapshot.openCard = openDeck.lookAtLast();
         snapshot.draw2Run = this.draw2Run * 2;
+        snapshot.isInAscendingOrder = isInAscendingOrder;
     }
 
     public void playCard(Player player, Card card) {
@@ -121,6 +122,7 @@ public class Game {
             newCard = draw();
             player.take(newCard);
         }
+        draw2Run = 0;
         nextTurn();
     }
 }
