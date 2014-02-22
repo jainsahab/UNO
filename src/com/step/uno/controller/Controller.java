@@ -2,6 +2,7 @@ package com.step.uno.controller;
 
 import com.step.uno.client.GameClient;
 import com.step.uno.client.GameClientObserver;
+import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.view.UnoView;
@@ -22,6 +23,13 @@ public class Controller implements GameClientObserver, UnoViewListener {
         view.updatePlayerScreen(snapshot);
     }
 
+    @Override
+    public void onGameOver(GameResult result) {
+        System.out.println("i m here");
+        view.hidePlayerScreen();
+        view.showResult(result);
+    }
+
     public void start(UnoView view) {
         this.view = view;
         this.view.showLoginForm();
@@ -39,7 +47,7 @@ public class Controller implements GameClientObserver, UnoViewListener {
     }
 
     @Override
-    public void cardDrawn(){
+    public void cardDrawn() {
         gameClient.draw();
     }
 }

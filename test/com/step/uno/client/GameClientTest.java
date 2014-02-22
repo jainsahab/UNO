@@ -4,6 +4,7 @@ import com.step.communication.channel.MessageChannel;
 import com.step.communication.channel.MessageChannelListener;
 import com.step.communication.factory.CommunicationFactory;
 import com.step.uno.messages.DrawCardAction;
+import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Introduction;
 import com.step.uno.messages.Snapshot;
 import org.junit.Test;
@@ -53,5 +54,13 @@ public class GameClientTest {
         gameClient.start("me", "serverAddress", gameClientObserverMock);
         gameClient.draw();
         verify(factoryStub.messageChannel, times(2)).send(any(DrawCardAction.class));
+    }
+
+    @Test
+    public void on_message_with_game_result_calls_showResult_of_observer() {
+        GameResult result = new GameResult();
+        gameClient.start("me", "serverAddress", gameClientObserverMock);
+        gameClient.onMessage(factoryStub.messageChannel, result);
+        verify(gameClientObserverMock, times(1)).onGameOver(result);
     }
 }
