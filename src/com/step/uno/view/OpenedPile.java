@@ -12,6 +12,7 @@ public class OpenedPile extends JButton {
         this.setFont(new Font("Arial", Font.ITALIC, 30));
         this.setPreferredSize(new Dimension(200, 220));
         this.setVisible(true);
+        this.setEnabled(false);
     }
     public void updateCardOnOpenPile(Colour colour,Sign sign){
         String printableSign = String.valueOf(sign);
