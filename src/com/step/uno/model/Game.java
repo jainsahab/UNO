@@ -14,6 +14,8 @@ public class Game {
     private final Deck openDeck;
     private boolean isInAscendingOrder = true;
     private Colour runningColour;
+    private List<String> activityLog;
+
     private int draw2Run = 0;
 
     public int getDraw2Run() {
@@ -28,6 +30,7 @@ public class Game {
         players = new ArrayList<>(givenPlayers);
         closedDeck = new Deck(Card.createNewPacks(packs));
         openDeck = new Deck();
+        activityLog = new ArrayList<>();
     }
 
     public void initialize() {
@@ -40,6 +43,8 @@ public class Game {
         }
         Card startingCard = draw();
         openDeck.add(startingCard);
+        activityLog.add("Game opened with : " + startingCard.colour + " " + startingCard.sign);
+        runningColour = startingCard.colour;
         this.runningColour = startingCard.colour;
     }
 
@@ -62,6 +67,7 @@ public class Game {
         snapshot.playerSummaries = summaries.toArray(new PlayerSummary[]{});
         snapshot.currentPlayerIndex = currentPlayerIndex;
         snapshot.openCard = openDeck.lookAtLast();
+        snapshot.lastActivity = activityLog.get(activityLog.size() - 1);
         snapshot.draw2Run = this.draw2Run * 2;
         snapshot.isInAscendingOrder = isInAscendingOrder;
     }
@@ -77,17 +83,17 @@ public class Game {
     }
 
     private void handleReverse(Card card) {
-        if(card.sign.equals(Sign.Reverse))
+        if (card.sign.equals(Sign.Reverse))
             isInAscendingOrder = !isInAscendingOrder;
     }
 
     private void handleSkip(Card card) {
-        if(card.sign.equals(Sign.Skip))
+        if (card.sign.equals(Sign.Skip))
             nextTurn();
     }
 
     private void handleDrawTwo(Card card) {
-        if(card.sign.equals(Sign.Draw2))
+        if (card.sign.equals(Sign.Draw2))
             this.draw2Run++;
     }
 
@@ -112,13 +118,21 @@ public class Game {
         return new GameResult(result.toArray(new PlayerResult[]{}));
     }
 
+    public void updateLogOnPlayerPlayed(Player player, Card card) {
+        activityLog.add(player.name + " played " + card.colour + " : " + card.sign);
+    }
+
+    public void updateLogOnPlayerDrewCard(Player player) {
+        activityLog.add(player.name + " Drawn a card");
+    }
+
     public Colour getRunningColor() {
         return runningColour;
     }
 
     public void drawTwoCard(Player player) {
         Card newCard;
-        for (int i = 0; i < draw2Run*2; i++) {
+        for (int i = 0; i < draw2Run * 2; i++) {
             newCard = draw();
             player.take(newCard);
         }

@@ -15,7 +15,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
     private TopPanel playerButtons;
     private DeckView deck;
     private BottomPanel cards;
-    private LogPanel log;
+    private LogPanel logPanel;
     private UnoViewListener listener;
 
     public PlayerScreen(UnoViewListener listener) {
@@ -41,10 +41,8 @@ public class PlayerScreen extends JFrame implements ActionListener {
         JScrollPane cardPane = new JScrollPane(cards);
         cardPane.setPreferredSize(new Dimension(300, 240));
         contentPane.add(cardPane, BorderLayout.SOUTH);
-
-        log = new LogPanel();
-        log.setPreferredSize(new Dimension(300, 800));
-        add(log, BorderLayout.EAST);
+        logPanel = new LogPanel(new Dimension(400, 650));
+        contentPane.add(logPanel, BorderLayout.EAST);
     }
 
     public void addCard(Card card, boolean enable) {
@@ -64,7 +62,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
         deck.updateOpenCard(openCard);
     }
 
-    public void setScreenTitle(String title){
+    public void setScreenTitle(String title) {
         this.setTitle(title);
     }
 
@@ -87,6 +85,11 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     public void setClosedPile(boolean closedPile) {
         deck.setClosedPile(closedPile);
+    }
+
+
+    public void updateLog(String currentLog) {
+        logPanel.add(currentLog.toString());
     }
 
     public void updateCloseDeck(String text) {

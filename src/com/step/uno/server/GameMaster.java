@@ -46,7 +46,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
         PlayerProxy proxy = unoFactory.createPlayerProxy(channel, this);
         proxy.start();
         proxies.add(proxy);
-        System.out.println("New player registered");
+        System.out.println("New player registered.");
     }
 
     private void startGame() {
@@ -75,6 +75,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
 
     @Override
     public void onPlayerPlayed(Player player, Card card, Colour newColour) {
+        game.updateLogOnPlayerPlayed(player, card);
         game.playCard(player, card);
         sendGameSnapshot();
         if (player.hasWon()) sendResult();
@@ -89,6 +90,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
 
     @Override
     public void onPlayerDrewCard(Player player) {
+        game.updateLogOnPlayerDrewCard(player);
         game.drawCard(player);
         sendGameSnapshot();
     }
