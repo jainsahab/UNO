@@ -42,7 +42,7 @@ public class Player {
     }
 
     public PlayerResult generateResult() {
-        PlayerResult result = new PlayerResult(cards.toArray(new Card[]{}), calculatePoints());
+        PlayerResult result = new PlayerResult(cards.toArray(new Card[]{}), calculatePoints(), this.name);
         return result;
     }
 

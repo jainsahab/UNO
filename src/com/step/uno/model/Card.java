@@ -33,10 +33,10 @@ public class Card implements Serializable {
             }
         }
 
-        for (int times = 0; times < 4; times++) {
-            cards.add(createCard(Colour.Black, "Wild"));
-            cards.add(createCard(Colour.Black, "Draw4"));
-        }
+//        for (int times = 0; times < 4; times++) {
+//            cards.add(createCard(Colour.Black, "Wild"));
+//            cards.add(createCard(Colour.Black, "Draw4"));
+//        }
         return cards;
     }
 
