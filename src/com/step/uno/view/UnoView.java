@@ -11,11 +11,13 @@ public class UnoView {
     private LoginForm loginForm;
     private PlayerScreen playerScreen;
     private GameOverScreen gameOverScreen;
+    private LoadingForm loadingForm;
 
     public UnoView(UnoViewListener listener) {
         this.listener = listener;
         playerScreen = new PlayerScreen(listener);
         gameOverScreen = new GameOverScreen();
+        loadingForm = new LoadingForm();
     }
 
     public void showLoginForm() {
@@ -25,9 +27,11 @@ public class UnoView {
 
     public void hideLoginForm() {
         loginForm.setVisible(false);
+        loadingForm.setVisible(true);
     }
 
     public void updatePlayerScreen(Snapshot snapshot) {
+        loadingForm.setVisible(false);
         playerScreen.setVisible(true);
         playerScreen.setTitle("UNO : " + snapshot.currentPlayerName);
         playerScreen.setClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
