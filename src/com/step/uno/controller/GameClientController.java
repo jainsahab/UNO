@@ -50,6 +50,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     public void drawCard() {
         if(snapshot.draw2Run > 0)
             gameClient.drawTwo();
-        gameClient.draw();
+        else
+            gameClient.draw();
     }
 }

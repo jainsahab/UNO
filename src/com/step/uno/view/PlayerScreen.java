@@ -1,6 +1,7 @@
 package com.step.uno.view;
 
 
+import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.model.PlayerSummary;
 
@@ -86,5 +87,9 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     public void setClosedPile(boolean closedPile) {
         deck.setClosedPile(closedPile);
+    }
+
+    public void updateCloseDeck(String text) {
+        deck.closedPile.setText(text);
     }
 }

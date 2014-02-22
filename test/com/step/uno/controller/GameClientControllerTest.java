@@ -7,9 +7,7 @@ import com.step.uno.model.Colour;
 import com.step.uno.view.UnoView;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class GameClientControllerTest {
     GameClient gameClientMock = mock(GameClient.class);
@@ -49,5 +47,6 @@ public class GameClientControllerTest {
         gameClientController.drawCard();
 
         verify(gameClientMock,times(1)).drawTwo();
+        verify(gameClientMock,never()).draw();
     }
 }

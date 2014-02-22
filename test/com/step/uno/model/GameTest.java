@@ -22,6 +22,7 @@ public class GameTest {
         ArrayList<Player> players = new ArrayList<>();
         players.add(playerMock);
         players.add(playerMock);
+        players.add(playerMock);
         game = new Game(1, players);
     }
 
@@ -52,6 +53,14 @@ public class GameTest {
         Card cardPlayed = Card.createCard(Colour.Yellow,"Skip");
         game.playCard(playerMock,cardPlayed);
 
-        assertEquals(0,game.getCurrentPlayerIndex());
+        assertEquals(2,game.getCurrentPlayerIndex());
+    }
+
+    @Test
+    public void on_reverse_sequence_of_players_should_be_reversed() {
+        Card cardPlayed = Card.createCard(Colour.Yellow,"Reverse");
+        game.playCard(playerMock,cardPlayed);
+
+        assertEquals(2,game.getCurrentPlayerIndex());
     }
 }

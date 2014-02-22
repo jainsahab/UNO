@@ -39,6 +39,13 @@ public class UnoView {
         displayAllCards(snapshot);
         displayPlayers(snapshot);
         updateOpenDeck(snapshot);
+        updateCloseDeck(snapshot);
+    }
+
+    private void updateCloseDeck(Snapshot snapshot) {
+        String message = "Draw 1";
+        if(snapshot.draw2Run > 0) message = "Draw " + snapshot.draw2Run;
+        playerScreen.updateCloseDeck(message);
     }
 
     private void updateOpenDeck(Snapshot snapshot) {

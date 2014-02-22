@@ -71,7 +71,13 @@ public class Game {
         this.runningColour = card.colour;
         handleDrawTwo(card);
         handleSkip(card);
+        handleReverse(card);
         nextTurn();
+    }
+
+    private void handleReverse(Card card) {
+        if(card.sign.equals(Sign.Reverse))
+            isInAscendingOrder = !isInAscendingOrder;
     }
 
     private void handleSkip(Card card) {
