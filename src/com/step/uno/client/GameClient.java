@@ -36,6 +36,10 @@ public class GameClient implements MessageChannelListener {
         channel.send(new DrawCardAction());
     }
 
+    public void drawTwo() {
+        channel.send(new DrawTwoCardAction());
+    }
+
     @Override
     public void onError(MessageChannel client, Exception e) {
 

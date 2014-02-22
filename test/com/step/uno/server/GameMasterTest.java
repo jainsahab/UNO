@@ -106,4 +106,14 @@ public class GameMasterTest {
         gameMaster.onPlayerPlayed(playerMock, mock(Card.class), Colour.Black);
         verify(unoFactoryStub.game, times(1)).populateResult();
     }
+
+    @Test
+    public void on_draw2_card_it_should_draw_two_cards_from_game_for_the_given_player() {
+        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start();
+        Player playerMock = mock(Player.class);
+        gameMaster.onPlayerRegistered(playerMock);
+        gameMaster.onPlayerDrewTwoCard(playerMock);
+        verify(unoFactoryStub.game,times(1)).drawTwoCard(playerMock);
+    }
 }

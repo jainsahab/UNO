@@ -14,6 +14,15 @@ public class Game {
     private final Deck openDeck;
     private boolean isInAscendingOrder = true;
     private Colour runningColour;
+    private int draw2Run = 0;
+
+    public int getDraw2Run() {
+        return draw2Run;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
 
     public Game(int packs, List<Player> givenPlayers) {
         players = new ArrayList<>(givenPlayers);
@@ -31,7 +40,7 @@ public class Game {
         }
         Card startingCard = draw();
         openDeck.add(startingCard);
-        runningColour = startingCard.colour;
+        this.runningColour = startingCard.colour;
     }
 
     private Card draw() {
@@ -53,13 +62,20 @@ public class Game {
         snapshot.playerSummaries = summaries.toArray(new PlayerSummary[]{});
         snapshot.currentPlayerIndex = currentPlayerIndex;
         snapshot.openCard = openDeck.lookAtLast();
+        snapshot.draw2Run = this.draw2Run * 2;
     }
 
     public void playCard(Player player, Card card) {
         player.play(card);
         openDeck.add(card);
         this.runningColour = card.colour;
+        handleDrawTwo(card);
         nextTurn();
+    }
+
+    private void handleDrawTwo(Card card) {
+        if(card.sign.equals(Sign.Draw2))
+            this.draw2Run++;
     }
 
     private void nextTurn() {
@@ -81,5 +97,18 @@ public class Game {
             result.add(player.generateResult());
         }
         return new GameResult(result.toArray(new PlayerResult[]{}));
+    }
+
+    public Colour getRunningColor() {
+        return runningColour;
+    }
+
+    public void drawTwoCard(Player player) {
+        Card newCard;
+        for (int i = 0; i < draw2Run*2; i++) {
+            newCard = draw();
+            player.take(newCard);
+        }
+        nextTurn();
     }
 }

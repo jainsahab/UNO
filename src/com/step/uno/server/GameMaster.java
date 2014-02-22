@@ -92,4 +92,10 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
         game.drawCard(player);
         sendGameSnapshot();
     }
+
+    @Override
+    public void onPlayerDrewTwoCard(Player player) {
+        game.drawTwoCard(player);
+        sendGameSnapshot();
+    }
 }

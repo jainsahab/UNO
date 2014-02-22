@@ -74,7 +74,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
             listener.cardPlayed(((CardButton) source).getCard());
         }
         if (source.getClass().equals(ClosedPile.class))
-            listener.cardDrawn();
+            listener.drawCard();
     }
 
     public void clean() {
