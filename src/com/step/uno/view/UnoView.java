@@ -2,6 +2,7 @@ package com.step.uno.view;
 
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
+import com.step.uno.rules.RuleEngine;
 
 public class UnoView {
     private UnoViewListener listener;
@@ -42,8 +43,9 @@ public class UnoView {
     }
 
     private void displayAllCards(Snapshot snapshot) {
+        RuleEngine ruleEngine = new RuleEngine();
         for (Card myCard : snapshot.myCards) {
-            playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex);
+            playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && ruleEngine.isPlayableCard(snapshot,myCard));
         }
     }
 }

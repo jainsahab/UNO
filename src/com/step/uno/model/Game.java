@@ -12,6 +12,7 @@ public class Game {
     private final Deck closedDeck;
     private final Deck openDeck;
     private boolean isInAscendingOrder = true;
+    private Colour runningColour;
 
     public Game(int packs, List<Player> givenPlayers) {
         players = new ArrayList<>(givenPlayers);
@@ -27,7 +28,9 @@ public class Game {
                 player.take(draw());
             }
         }
-        openDeck.add(draw());
+        Card startingCard = draw();
+        openDeck.add(startingCard);
+        runningColour = startingCard.colour;
     }
 
     private Card draw() {
@@ -45,6 +48,7 @@ public class Game {
         for (Player p : players) {
             summaries.add(p.generateSummary());
         }
+        snapshot.runningColour = this.runningColour;
         snapshot.playerSummaries = summaries.toArray(new PlayerSummary[]{});
         snapshot.currentPlayerIndex = currentPlayerIndex;
         snapshot.openCard = openDeck.lookAtLast();
@@ -53,6 +57,7 @@ public class Game {
     public void playCard(Player player, Card card) {
         player.play(card);
         openDeck.add(card);
+        this.runningColour = card.colour;
         nextTurn();
     }
 
