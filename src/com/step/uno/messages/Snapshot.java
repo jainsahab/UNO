@@ -15,6 +15,7 @@ public class Snapshot implements Serializable {
     public int myPlayerIndex;
     public Colour runningColour;
     public int draw2Run;
+    public String currentPlayerName;
 
     public static Snapshot createSnapshot() {
         return new Snapshot();

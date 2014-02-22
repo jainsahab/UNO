@@ -20,7 +20,6 @@ public class PlayerScreen extends JFrame implements ActionListener {
     public PlayerScreen(UnoViewListener listener) {
         this.listener = listener;
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setTitle("UNO");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(screenSize);
 
@@ -62,6 +61,10 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     public void updateOpenCard(Card openCard) {
         deck.updateOpenCard(openCard);
+    }
+
+    public void setScreenTitle(String title){
+        this.setTitle(title);
     }
 
     @Override
