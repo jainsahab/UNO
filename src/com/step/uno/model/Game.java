@@ -14,11 +14,14 @@ public class Game {
     private final Deck openDeck;
     private boolean isInAscendingOrder = true;
     private Colour runningColour;
+    private List<String> activityLog;
+
 
     public Game(int packs, List<Player> givenPlayers) {
         players = new ArrayList<>(givenPlayers);
         closedDeck = new Deck(Card.createNewPacks(packs));
         openDeck = new Deck();
+        activityLog = new ArrayList<>();
     }
 
     public void initialize() {
@@ -31,6 +34,7 @@ public class Game {
         }
         Card startingCard = draw();
         openDeck.add(startingCard);
+        activityLog.add("Game opened with : " + startingCard.colour + " " + startingCard.sign);
         runningColour = startingCard.colour;
     }
 
@@ -53,6 +57,7 @@ public class Game {
         snapshot.playerSummaries = summaries.toArray(new PlayerSummary[]{});
         snapshot.currentPlayerIndex = currentPlayerIndex;
         snapshot.openCard = openDeck.lookAtLast();
+        snapshot.lastActivity = activityLog.get(activityLog.size() - 1);
     }
 
     public void playCard(Player player, Card card) {
@@ -81,5 +86,13 @@ public class Game {
             result.add(player.generateResult());
         }
         return new GameResult(result.toArray(new PlayerResult[]{}));
+    }
+
+    public void updateLogOnPlayerPlayed(Player player, Card card) {
+        activityLog.add(player.name + " played " + card.colour + " : " + card.sign);
+    }
+
+    public void updateLogOnPlayerDrewCard(Player player) {
+        activityLog.add(player.name + " Drawn a card");
     }
 }
