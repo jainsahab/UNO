@@ -85,4 +85,13 @@ public class GameMasterTest {
 
         verify(unoFactoryStub.playerProxy, times(1)).sendSnapshot(unoFactoryStub.game);
     }
+
+    @Test
+    public void draws_a_card_from_closed_pile() {
+        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        Player playerMock = mock(Player.class);
+        gameMaster.onPlayerRegistered(playerMock);
+        gameMaster.onPlayerDrewCard(playerMock);
+        verify(unoFactoryStub.game, times(1)).drawCard(playerMock);
+    }
 }

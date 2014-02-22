@@ -8,8 +8,8 @@ public class Card implements Serializable {
     public Colour colour;
     public Sign sign;
 
-    //in one pack
-    // 4 X {wildcard,wild+4}, 2 X {1-9, +2, reverse, skip}, 0,  for colours {red, green, blue, yellow},
+    private Card() {
+    }
 
     public static Card[] createNewPacks(int packs) {
         List<Card> cards = new ArrayList<>();
@@ -29,23 +29,21 @@ public class Card implements Serializable {
                 }
                 cards.add(createCard(c, "Reverse"));
                 cards.add(createCard(c, "Skip"));
-                cards.add(createCard(c, "DrawTwo"));
+                cards.add(createCard(c, "Draw2"));
             }
         }
 
         for (int times = 0; times < 4; times++) {
             cards.add(createCard(Colour.Black, "Wild"));
-            cards.add(createCard(Colour.Black, "DrawFour"));
+            cards.add(createCard(Colour.Black, "Draw4"));
         }
         return cards;
     }
 
-    private static Card createCard(Colour c, String signText) {
+    public static Card createCard(Colour c, String signText) {
         Card card = new Card();
         card.colour = c;
         card.sign = Sign.valueOf(signText);
         return card;
     }
 }
-
-

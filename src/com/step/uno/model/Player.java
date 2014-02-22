@@ -27,30 +27,12 @@ public class Player {
         return new PlayerSummary(name, cards.size(), declaredUno);
     }
 
-    public void play(Card card) {
-        System.out.println("Card removed");
-        cards.remove(card);
-    }
-
-    public void declareUno() {
-        declaredUno = true;
-    }
-
-    public boolean checkUno() {
-        return cards.size() == 1 && !declaredUno;
-    }
-
-    public boolean hasWon() {
-        return cards.size() == 0;
-    }
-
-    public PlayerResult generateResult() {
-        return new PlayerResult(name, cards, calculatePoints());
-    }
-
-    private int calculatePoints() {
-        int total = 0;
-        for (Card card : cards) total += card.sign.points;
-        return total;
+    public void play(Card playedCard) {
+        for (Card card : cards) {
+            if (card.colour.equals(playedCard.colour) && card.sign.equals(playedCard.sign)) {
+                cards.remove(card);
+                break;
+            }
+        }
     }
 }

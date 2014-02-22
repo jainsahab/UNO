@@ -10,6 +10,7 @@ public class ClosedPile extends JButton {
         String text = "Closed Pile";
         this.setText(text);
         this.setFont(new Font("Algerian", Font.ITALIC, 30));
+        this.setBackground(Color.decode("#8CA5D4"));
         setVisible(true);
     }
 }

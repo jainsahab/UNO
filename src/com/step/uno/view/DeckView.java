@@ -5,11 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 public class DeckView extends JPanel {
 
-    private OpenedPile openedPile;
-    private ClosedPile closedPile;
+    public OpenedPile openedPile;
+    public ClosedPile closedPile;
 
     public DeckView(Dimension size) {
-        setBackground(Color.gray);
+        setBackground(Color.decode("#BAB3AB"));
         setLayout(new GridLayout(2, 2));
         setSize(size);
         setVisible(true);
@@ -22,7 +22,8 @@ public class DeckView extends JPanel {
 
         Button unoButton = new Button("UNO");
         unoButton.setPreferredSize(new Dimension(100, 100));
-        unoButton.setBackground(Color.ORANGE);
+        unoButton.setBackground(Color.decode("#FA880F"));
+        unoButton.setFont(new Font("Arial", Font.BOLD, 75));
         add(unoButton);
     }
 
@@ -32,5 +33,9 @@ public class DeckView extends JPanel {
 
     public void updateOpenCard(Card card) {
         openedPile.updateCardOnOpenPile(card.colour,card.sign);
+    }
+
+    public void setClosedPile(boolean enable) {
+        closedPile.setEnabled(enable);
     }
 }

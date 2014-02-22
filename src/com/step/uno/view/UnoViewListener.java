@@ -5,4 +5,5 @@ import com.step.uno.model.Card;
 public interface UnoViewListener {
     void onJoin(String name, String serverAddress);
     void cardPlayed(Card card);
+    void cardDrawn();
 }

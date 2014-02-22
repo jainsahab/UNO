@@ -33,6 +33,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
         contentPane.add(playerPane, BorderLayout.NORTH);
 
         deck = new DeckView();
+        deck.closedPile.addActionListener(this);
         add(deck, BorderLayout.CENTER);
 
         cards = new BottomPanel(500, 230);
@@ -45,16 +46,16 @@ public class PlayerScreen extends JFrame implements ActionListener {
         add(log, BorderLayout.EAST);
     }
 
-    public void addCard(Card myCard, boolean enable) {
-        CardButton button = new CardButton(myCard);
+    public void addCard(Card card, boolean enable) {
+        CardButton button = new CardButton(card);
         button.setEnabled(enable);
         button.addActionListener(this);
         cards.addButton(button);
     }
 
-    public void addPlayer(PlayerSummary playerSummary, boolean turn) {
+    public void updatePlayer(PlayerSummary playerSummary, boolean turn) {
         PlayerButton playerButton = new PlayerButton(playerSummary.name, playerSummary.cardsInHand);
-        if (turn) playerButton.setBackground(Color.green);
+        if (turn) playerButton.setBackground(Color.decode("#317317"));
         playerButtons.addPlayerButton(playerButton);
     }
 
@@ -72,16 +73,18 @@ public class PlayerScreen extends JFrame implements ActionListener {
         if (source.getClass().equals(CardButton.class)) {
             listener.cardPlayed(((CardButton) source).getCard());
         }
+        if (source.getClass().equals(ClosedPile.class))
+            listener.cardDrawn();
     }
 
     public void clean() {
-        removeComponents(playerButtons);
-        removeComponents(cards);
+        playerButtons.removeAll();
+        for (Component component : cards.getComponents()) {
+            component.setVisible(false);
+        }
     }
 
-    private void removeComponents(JPanel panel) {
-        for (Component component : panel.getComponents()) {
-            panel.remove(component);
-        }
+    public void setClosedPile(boolean closedPile) {
+        deck.setClosedPile(closedPile);
     }
 }

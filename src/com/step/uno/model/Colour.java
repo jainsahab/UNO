@@ -4,11 +4,11 @@ import java.awt.*;
 import java.io.Serializable;
 
 public enum Colour implements Serializable {
-    Red(Color.RED),
-    Green(Color.GREEN),
-    Blue(Color.BLUE),
-    Yellow(Color.YELLOW),
-    Black(Color.BLACK);
+    Red(Color.decode("#DB1C07")),
+    Green(Color.decode("#50DE37")),
+    Blue(Color.decode("#324AD1")),
+    Yellow(Color.decode("#F2EF16")),
+    Black(Color.decode("#080801"));
     private final Color color;
 
     Colour(Color color) {

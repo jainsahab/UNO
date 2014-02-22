@@ -2,7 +2,6 @@ package com.step.uno.view;
 
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
-import com.step.uno.model.PlayerSummary;
 
 public class UnoView {
     private UnoViewListener listener;
@@ -25,6 +24,7 @@ public class UnoView {
 
     public void updatePlayerScreen(Snapshot snapshot) {
         playerScreen.setVisible(true);
+        playerScreen.setClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
         playerScreen.clean();
         displayAllCards(snapshot);
         displayPlayers(snapshot);
@@ -37,7 +37,7 @@ public class UnoView {
 
     private void displayPlayers(Snapshot snapshot) {
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
-            playerScreen.addPlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
+            playerScreen.updatePlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
         }
     }
 
