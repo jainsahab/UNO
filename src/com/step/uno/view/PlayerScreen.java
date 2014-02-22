@@ -1,6 +1,7 @@
 package com.step.uno.view;
 
 
+import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.model.PlayerSummary;
 
@@ -72,7 +73,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
             listener.cardPlayed(((CardButton) source).getCard());
         }
         if (source.getClass().equals(ClosedPile.class))
-            listener.cardDrawn();
+            listener.drawCard();
     }
 
     public void clean() {
@@ -86,7 +87,12 @@ public class PlayerScreen extends JFrame implements ActionListener {
         deck.setClosedPile(closedPile);
     }
 
+
     public void updateLog(String currentLog) {
         logPanel.add(currentLog.toString());
+    }
+
+    public void updateCloseDeck(String text) {
+        deck.closedPile.setText(text);
     }
 }

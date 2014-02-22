@@ -16,6 +16,15 @@ public class Game {
     private Colour runningColour;
     private List<String> activityLog;
 
+    private int draw2Run = 0;
+
+    public int getDraw2Run() {
+        return draw2Run;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
 
     public Game(int packs, List<Player> givenPlayers) {
         players = new ArrayList<>(givenPlayers);
@@ -36,6 +45,7 @@ public class Game {
         openDeck.add(startingCard);
         activityLog.add("Game opened with : " + startingCard.colour + " " + startingCard.sign);
         runningColour = startingCard.colour;
+        this.runningColour = startingCard.colour;
     }
 
     private Card draw() {
@@ -58,13 +68,32 @@ public class Game {
         snapshot.currentPlayerIndex = currentPlayerIndex;
         snapshot.openCard = openDeck.lookAtLast();
         snapshot.lastActivity = activityLog.get(activityLog.size() - 1);
+        snapshot.draw2Run = this.draw2Run * 2;
     }
 
     public void playCard(Player player, Card card) {
         player.play(card);
         openDeck.add(card);
         this.runningColour = card.colour;
+        handleDrawTwo(card);
+        handleSkip(card);
+        handleReverse(card);
         nextTurn();
+    }
+
+    private void handleReverse(Card card) {
+        if (card.sign.equals(Sign.Reverse))
+            isInAscendingOrder = !isInAscendingOrder;
+    }
+
+    private void handleSkip(Card card) {
+        if (card.sign.equals(Sign.Skip))
+            nextTurn();
+    }
+
+    private void handleDrawTwo(Card card) {
+        if (card.sign.equals(Sign.Draw2))
+            this.draw2Run++;
     }
 
     private void nextTurn() {
@@ -94,5 +123,18 @@ public class Game {
 
     public void updateLogOnPlayerDrewCard(Player player) {
         activityLog.add(player.name + " Drawn a card");
+    }
+
+    public Colour getRunningColor() {
+        return runningColour;
+    }
+
+    public void drawTwoCard(Player player) {
+        Card newCard;
+        for (int i = 0; i < draw2Run * 2; i++) {
+            newCard = draw();
+            player.take(newCard);
+        }
+        nextTurn();
     }
 }

@@ -38,4 +38,8 @@ public class DeckView extends JPanel {
     public void setClosedPile(boolean enable) {
         closedPile.setEnabled(enable);
     }
+
+    public void setTextOnClosePile(String text){
+        closedPile.setText(text);
+    }
 }

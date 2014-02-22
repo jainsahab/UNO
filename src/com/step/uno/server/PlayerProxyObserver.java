@@ -10,4 +10,6 @@ public interface PlayerProxyObserver {
     void onPlayerPlayed(Player player, Card card, Colour newColour);
 
     void onPlayerDrewCard(Player player);
+
+    void onPlayerDrewTwoCard(Player player);
 }

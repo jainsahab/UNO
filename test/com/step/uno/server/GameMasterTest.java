@@ -124,4 +124,13 @@ public class GameMasterTest {
         gameMaster.onPlayerDrewCard(playerMock);
         verify(unoFactoryStub.game, times(1)).updateLogOnPlayerDrewCard(any(Player.class));
     }
+
+    @Test
+    public void on_draw2_card_it_should_draw_two_cards_from_game_for_the_given_player() {
+        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        Player playerMock = mock(Player.class);
+        gameMaster.onPlayerRegistered(playerMock);
+        gameMaster.onPlayerDrewTwoCard(playerMock);
+        verify(unoFactoryStub.game, times(1)).drawTwoCard(playerMock);
+    }
 }

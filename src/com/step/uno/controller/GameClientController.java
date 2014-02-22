@@ -8,12 +8,12 @@ import com.step.uno.model.Card;
 import com.step.uno.view.UnoView;
 import com.step.uno.view.UnoViewListener;
 
-public class Controller implements GameClientObserver, UnoViewListener {
+public class GameClientController implements GameClientObserver, UnoViewListener {
     private GameClient gameClient;
     private UnoView view;
     private Snapshot snapshot;
 
-    public Controller(GameClient gameClient) {
+    public GameClientController(GameClient gameClient) {
         this.gameClient = gameClient;
     }
 
@@ -47,7 +47,10 @@ public class Controller implements GameClientObserver, UnoViewListener {
     }
 
     @Override
-    public void cardDrawn() {
-        gameClient.draw();
+    public void drawCard() {
+        if(snapshot.draw2Run > 0)
+            gameClient.drawTwo();
+        else
+            gameClient.draw();
     }
 }

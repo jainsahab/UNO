@@ -31,7 +31,6 @@ public class MessageChannel {
     }
 
     private void checkForMessage() {
-
         try {
             InputStream inputStream = socket.getInputStream();
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
