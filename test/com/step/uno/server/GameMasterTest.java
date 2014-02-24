@@ -122,7 +122,7 @@ public class GameMasterTest {
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDrewCard(playerMock);
-        verify(unoFactoryStub.game, times(1)).updateLogOnPlayerDrewCard(any(Player.class));
+        verify(unoFactoryStub.game, times(1)).updateLogOnPlayerDrewCard(any(Player.class), any(String.class));
     }
 
     @Test

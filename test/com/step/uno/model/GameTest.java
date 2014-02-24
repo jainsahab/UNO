@@ -4,8 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -27,6 +29,24 @@ public class GameTest {
     }
 
     @Test
+    public void on_initializing_game_each_player_should_get_seven_cards() {
+        Player player1 = mock(Player.class);
+        Player player2 = mock(Player.class);
+        Player player3 = mock(Player.class);
+        List<Player> players = new ArrayList<>();
+        players.add(player1);
+        players.add(player2);
+        players.add(player3);
+        game = new Game(1, players);
+
+        game.initialize();
+        verify(player1, times(7)).take(any(Card.class));
+        verify(player2, times(7)).take(any(Card.class));
+        verify(player3, times(7)).take(any(Card.class));
+        assertNotNull(game.getCurrentPlayerIndex());
+    }
+
+    @Test
     public void on_playing_draw2_the_draw2run_count_should_increment_by_1_and_turn_should_change() {
         Card cardPlayed = Card.createCard(Colour.Yellow, "Draw2");
 
@@ -45,6 +65,7 @@ public class GameTest {
         game.drawTwoCard(playerMock);
 
         verify(playerMock, times(2)).take(any(Card.class));
+        assertEquals(0, game.getDraw2Run());
     }
 
 

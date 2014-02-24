@@ -2,7 +2,7 @@ package com.step.uno.messages;
 
 import java.io.Serializable;
 
-public class Introduction implements Serializable{
+public class Introduction implements Serializable {
     public String playerName;
 
     public static Introduction create(String playerName) {

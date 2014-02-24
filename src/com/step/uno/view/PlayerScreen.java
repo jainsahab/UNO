@@ -35,6 +35,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
         deck = new DeckView();
         deck.closedPile.addActionListener(this);
+        deck.unoButton.addActionListener(this);
         add(deck, BorderLayout.CENTER);
 
         cards = new BottomPanel(500, 230);
@@ -52,8 +53,8 @@ public class PlayerScreen extends JFrame implements ActionListener {
         cards.addButton(button);
     }
 
-    public void updatePlayer(PlayerSummary playerSummary, boolean turn) {
-        PlayerButton playerButton = new PlayerButton(playerSummary.name, playerSummary.cardsInHand);
+    public void updatePlayer(String playerText, boolean turn) {
+        PlayerButton playerButton = new PlayerButton(playerText);
         if (turn) playerButton.setBackground(Color.decode("#317317"));
         playerButtons.addPlayerButton(playerButton);
     }
@@ -68,12 +69,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
-        if (source.getClass().equals(CardButton.class)) {
-            listener.cardPlayed(((CardButton) source).getCard());
-        }
-        if (source.getClass().equals(ClosedPile.class))
-            listener.drawCard();
+        listener.onAction(e);
     }
 
     public void clean() {

@@ -40,6 +40,10 @@ public class GameClient implements MessageChannelListener {
         channel.send(new DrawTwoCardAction());
     }
 
+    public void declareUno() {
+        channel.send(new DeclareUnoAction());
+    }
+
     @Override
     public void onError(MessageChannel client, Exception e) {
 

@@ -2,7 +2,6 @@ package com.step.uno.view;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import java.awt.*;
 
 public class BottomPanel extends JPanel {
     public BottomPanel(int width, int height) {

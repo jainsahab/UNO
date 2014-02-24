@@ -69,6 +69,7 @@ public class Game {
         snapshot.openCard = openDeck.lookAtLast();
         snapshot.lastActivity = activityLog.get(activityLog.size() - 1);
         snapshot.draw2Run = this.draw2Run * 2;
+        snapshot.isInAscendingOrder = isInAscendingOrder;
     }
 
     public void playCard(Player player, Card card) {
@@ -123,8 +124,8 @@ public class Game {
         activityLog.add(player.name + " played " + card.colour + " : " + sign);
     }
 
-    public void updateLogOnPlayerDrewCard(Player player) {
-        activityLog.add(player.name + " Drawn a card");
+    public void updateLogOnPlayerDrewCard(Player player, String totalCards) {
+        activityLog.add(player.name + " Drawn " + totalCards + " cards");
     }
 
     public Colour getRunningColor() {
@@ -137,6 +138,7 @@ public class Game {
             newCard = draw();
             player.take(newCard);
         }
+        draw2Run = 0;
         nextTurn();
     }
 }

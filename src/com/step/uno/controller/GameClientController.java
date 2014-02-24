@@ -5,8 +5,9 @@ import com.step.uno.client.GameClientObserver;
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
-import com.step.uno.view.UnoView;
-import com.step.uno.view.UnoViewListener;
+import com.step.uno.view.*;
+
+import java.awt.event.ActionEvent;
 
 public class GameClientController implements GameClientObserver, UnoViewListener {
     private GameClient gameClient;
@@ -25,7 +26,6 @@ public class GameClientController implements GameClientObserver, UnoViewListener
 
     @Override
     public void onGameOver(GameResult result) {
-        System.out.println("i m here");
         view.hidePlayerScreen();
         view.showResult(result);
     }
@@ -48,9 +48,29 @@ public class GameClientController implements GameClientObserver, UnoViewListener
 
     @Override
     public void drawCard() {
-        if(snapshot.draw2Run > 0)
+        if (snapshot.draw2Run > 0)
             gameClient.drawTwo();
         else
             gameClient.draw();
+    }
+
+    private void declaredUno() {
+        if (snapshot.myCards.length == 1) {
+            gameClient.declareUno();
+        }
+    }
+
+    @Override
+    public void onAction(ActionEvent e) {
+        Object source = e.getSource();
+        if (source.getClass().equals(CardButton.class)) {
+            cardPlayed(((CardButton) source).getCard());
+        }
+        if (source.getClass().equals(ClosedPile.class)) {
+            drawCard();
+        }
+        if (source.getClass().equals(UnoButton.class)) {
+            declaredUno();
+        }
     }
 }

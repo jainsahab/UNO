@@ -3,6 +3,7 @@ package com.step.uno.view;
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
+import com.step.uno.model.PlayerSummary;
 import com.step.uno.rules.RuleEngine;
 
 public class UnoView {
@@ -43,7 +44,7 @@ public class UnoView {
 
     private void updateCloseDeck(Snapshot snapshot) {
         String message = "Draw 1";
-        if(snapshot.draw2Run > 0) message = "Draw " + snapshot.draw2Run;
+        if (snapshot.draw2Run > 0) message = "Draw " + snapshot.draw2Run;
         playerScreen.updateCloseDeck(message);
     }
 
@@ -61,8 +62,16 @@ public class UnoView {
     }
 
     private void displayPlayers(Snapshot snapshot) {
+        String appendString;
+        PlayerSummary playerSummary;
+        String totalCards;
+        String playerButtonText;
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
-            playerScreen.updatePlayer(snapshot.playerSummaries[i], snapshot.currentPlayerIndex == i);
+            playerSummary = snapshot.playerSummaries[i];
+            appendString = snapshot.isInAscendingOrder ? " ==>" : " <==";
+            totalCards = playerSummary.declaredUno ? " UNO " : Integer.toString(playerSummary.cardsInHand);
+            playerButtonText = playerSummary.name + " " + totalCards + appendString;
+            playerScreen.updatePlayer(playerButtonText, snapshot.currentPlayerIndex == i);
         }
     }
 
