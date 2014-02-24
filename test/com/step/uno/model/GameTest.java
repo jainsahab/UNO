@@ -84,7 +84,7 @@ public class GameTest {
         assertEquals(0,game.getCurrentPlayerIndex());
         game.playCard(playerMock,cardPlayed, null);
 
-        assertEquals(2, game.getCurrentPlayerIndex());
+        assertEquals(3, game.getCurrentPlayerIndex());
     }
 
 
