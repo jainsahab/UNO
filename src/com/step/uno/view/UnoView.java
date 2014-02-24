@@ -6,6 +6,9 @@ import com.step.uno.model.Card;
 import com.step.uno.model.PlayerSummary;
 import com.step.uno.rules.RuleEngine;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class UnoView {
     private UnoViewListener listener;
     private LoginForm loginForm;
@@ -13,6 +16,7 @@ public class UnoView {
     private GameOverScreen gameOverScreen;
     private LoadingForm loadingForm;
     private boolean isStartedNow = true;
+    private ChangeColour changeColour;
 
     public UnoView(UnoViewListener listener) {
         this.listener = listener;
@@ -89,5 +93,14 @@ public class UnoView {
 
     public void hidePlayerScreen() {
         playerScreen.setVisible(false);
+    }
+
+    public void showChangeColorDialog() {
+        changeColour  = new ChangeColour(playerScreen, Dialog.ModalityType.DOCUMENT_MODAL, listener);
+        changeColour.makeVisible();
+    }
+
+    public void hideChangeColorDialog() {
+        changeColour.makeInvisible();
     }
 }
