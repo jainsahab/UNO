@@ -1,12 +1,15 @@
 package com.step.uno.view;
+
 import com.step.uno.model.Card;
 
 import javax.swing.*;
 import java.awt.*;
+
 public class DeckView extends JPanel {
 
     public OpenedPile openedPile;
     public ClosedPile closedPile;
+    public UnoButton unoButton;
 
     public DeckView(Dimension size) {
         setBackground(Color.decode("#BAB3AB"));
@@ -14,16 +17,12 @@ public class DeckView extends JPanel {
         setSize(size);
         setVisible(true);
         openedPile = new OpenedPile();
-        add(openedPile);
         closedPile = new ClosedPile();
-        add(closedPile);
+        unoButton = new UnoButton();
         JLabel statusHint = new JLabel("This is hint");
+        add(closedPile);
+        add(openedPile);
         add(statusHint);
-
-        Button unoButton = new Button("UNO");
-        unoButton.setPreferredSize(new Dimension(100, 100));
-        unoButton.setBackground(Color.decode("#FA880F"));
-        unoButton.setFont(new Font("Arial", Font.BOLD, 75));
         add(unoButton);
     }
 
@@ -32,14 +31,11 @@ public class DeckView extends JPanel {
     }
 
     public void updateOpenCard(Card card) {
-        openedPile.updateCardOnOpenPile(card.colour,card.sign);
+        openedPile.updateCardOnOpenPile(card.colour, card.sign);
     }
 
     public void setClosedPile(boolean enable) {
         closedPile.setEnabled(enable);
     }
 
-    public void setTextOnClosePile(String text){
-        closedPile.setText(text);
-    }
 }

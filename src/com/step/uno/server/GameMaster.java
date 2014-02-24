@@ -90,14 +90,21 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
 
     @Override
     public void onPlayerDrewCard(Player player) {
-        game.updateLogOnPlayerDrewCard(player);
+        game.updateLogOnPlayerDrewCard(player, "1");
         game.drawCard(player);
         sendGameSnapshot();
     }
 
     @Override
     public void onPlayerDrewTwoCard(Player player) {
+        game.updateLogOnPlayerDrewCard(player, "2");
         game.drawTwoCard(player);
+        sendGameSnapshot();
+    }
+
+    @Override
+    public void onPlayerDeclaredUno(Player player) {
+        player.declaredUno();
         sendGameSnapshot();
     }
 }

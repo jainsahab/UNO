@@ -137,6 +137,10 @@ public class Game {
         activityLog.add(log);
     }
 
+    public void updateLogOnPlayerDrewCard(Player player, String totalCards) {
+        activityLog.add(player.name + " Drawn " + totalCards + " cards");
+    }
+
     public Colour getRunningColor() {
         return runningColour;
     }

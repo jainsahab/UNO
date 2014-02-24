@@ -12,7 +12,7 @@ public class CardButton extends JButton {
     public CardButton(Card card) {
         this.card = card;
         String printableSign = String.valueOf(card.sign);
-        printableSign = printableSign.replaceAll("_"," ");
+        printableSign = printableSign.replaceAll("_", " ");
         this.setText(printableSign);
         this.setForeground(Color.LIGHT_GRAY);
         this.setBackground(card.colour.getColor());

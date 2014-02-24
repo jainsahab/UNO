@@ -53,4 +53,8 @@ public class Player {
         }
         return total;
     }
+
+    public void declaredUno() {
+        this.declaredUno = true;
+    }
 }
