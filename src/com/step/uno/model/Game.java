@@ -119,14 +119,8 @@ public class Game {
     }
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
-<<<<<<< HEAD
-        String sign = card.sign.toString();
-        sign.replaceAll("_", "");
-        activityLog.add(player.name + " played " + card.colour + " : " + sign);
-=======
-        String cardSign = card.sign.toString().replaceAll("_","");
+        String cardSign = card.sign.toString().replaceAll("_", "");
         activityLog.add(player.name + " played " + card.colour + " : " + cardSign);
->>>>>>> 935618039c1c2c6fd609b3ae71e26394b34a6c44
     }
 
     public void updateLogOnPlayerDrewCard(Player player, String totalCards) {
