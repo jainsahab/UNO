@@ -1,4 +1,4 @@
-package com.step.uno.view;
+package com.step.uno.client.view;
 
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
@@ -6,7 +6,6 @@ import com.step.uno.model.Card;
 import com.step.uno.model.PlayerSummary;
 import com.step.uno.rules.RuleEngine;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class UnoView {

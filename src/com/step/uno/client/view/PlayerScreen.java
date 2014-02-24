@@ -1,9 +1,7 @@
-package com.step.uno.view;
+package com.step.uno.client.view;
 
 
-import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
-import com.step.uno.model.PlayerSummary;
 
 import javax.swing.*;
 import java.awt.*;

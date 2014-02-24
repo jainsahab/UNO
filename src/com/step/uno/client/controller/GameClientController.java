@@ -1,4 +1,4 @@
-package com.step.uno.controller;
+package com.step.uno.client.controller;
 
 import com.step.uno.client.GameClient;
 import com.step.uno.client.GameClientObserver;
@@ -6,7 +6,7 @@ import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
-import com.step.uno.view.*;
+import com.step.uno.client.view.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

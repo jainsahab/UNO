@@ -1,4 +1,4 @@
-package com.step.uno.view;
+package com.step.uno.client.view;
 
 import javax.swing.JFrame;
 
