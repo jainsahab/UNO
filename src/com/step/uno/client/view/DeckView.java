@@ -10,20 +10,32 @@ public class DeckView extends JPanel {
     public OpenedPile openedPile;
     public ClosedPile closedPile;
     public UnoButton unoButton;
+    public StatusHint statusHint;
 
     public DeckView(Dimension size) {
         setBackground(Color.decode("#BAB3AB"));
-        setLayout(new GridLayout(2, 2));
         setSize(size);
         setVisible(true);
+        this.setLayout(null);
         openedPile = new OpenedPile();
+        openedPile.setPreferredSize(new Dimension(150, 200));
+        openedPile.setBounds(400, 100, 150, 200);
+
         closedPile = new ClosedPile();
-        unoButton = new UnoButton();
-        JLabel statusHint = new JLabel("This is hint");
-        add(closedPile);
-        add(openedPile);
-        add(statusHint);
-        add(unoButton);
+        closedPile.setBounds(700, 100, 150, 200);
+        closedPile.setPreferredSize(new Dimension(150, 200));
+
+
+        unoButton = new UnoButton("UNO");
+        unoButton.setBounds(1100, 400, 200, 200);
+
+        statusHint = new StatusHint();
+        statusHint.setBounds(500, 400, 400, 100);
+
+        this.add(closedPile);
+        this.add(openedPile);
+        this.add(unoButton);
+        this.add(statusHint);
     }
 
     public DeckView() {
