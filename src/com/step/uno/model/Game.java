@@ -118,7 +118,9 @@ public class Game {
     }
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
-        activityLog.add(player.name + " played " + card.colour + " : " + card.sign);
+        String sign = card.sign.toString();
+        sign.replaceAll("_", "");
+        activityLog.add(player.name + " played " + card.colour + " : " + sign);
     }
 
     public void updateLogOnPlayerDrewCard(Player player) {

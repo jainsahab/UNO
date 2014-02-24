@@ -39,28 +39,28 @@ public class GameTest {
 
     @Test
     public void on_draw2_a_player_should_draw_a_card_for_draw2run_times() {
-        Card cardPlayed = Card.createCard(Colour.Yellow,"Draw2");
+        Card cardPlayed = Card.createCard(Colour.Yellow, "Draw2");
         game.playCard(playerMock, cardPlayed);
 
         game.drawTwoCard(playerMock);
 
-        verify(playerMock,times(2)).take(any(Card.class));
+        verify(playerMock, times(2)).take(any(Card.class));
     }
 
 
     @Test
     public void on_skip_one_player_will_be_skipped() {
-        Card cardPlayed = Card.createCard(Colour.Yellow,"Skip");
-        game.playCard(playerMock,cardPlayed);
+        Card cardPlayed = Card.createCard(Colour.Yellow, "Skip");
+        game.playCard(playerMock, cardPlayed);
 
-        assertEquals(2,game.getCurrentPlayerIndex());
+        assertEquals(2, game.getCurrentPlayerIndex());
     }
 
     @Test
     public void on_reverse_sequence_of_players_should_be_reversed() {
-        Card cardPlayed = Card.createCard(Colour.Yellow,"Reverse");
-        game.playCard(playerMock,cardPlayed);
+        Card cardPlayed = Card.createCard(Colour.Yellow, "Reverse");
+        game.playCard(playerMock, cardPlayed);
 
-        assertEquals(2,game.getCurrentPlayerIndex());
+        assertEquals(2, game.getCurrentPlayerIndex());
     }
 }
