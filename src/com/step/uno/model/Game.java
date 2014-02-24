@@ -127,6 +127,10 @@ public class Game {
         activityLog.add(player.name + " Drawn " + totalCards + " cards");
     }
 
+    public void updateLogOnPlayerDeclaredUno(Player player) {
+        activityLog.add(player.name + " Declared UNO !!");
+    }
+
     public Colour getRunningColor() {
         return runningColour;
     }

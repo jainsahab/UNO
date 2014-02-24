@@ -64,13 +64,14 @@ public class UnoView {
     private void displayPlayers(Snapshot snapshot) {
         String appendString;
         PlayerSummary playerSummary;
-        String totalCards;
+        String cardsField;
         String playerButtonText;
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
             playerSummary = snapshot.playerSummaries[i];
-            appendString = snapshot.isInAscendingOrder ? " ==>" : " <==";
-            totalCards = playerSummary.declaredUno ? " UNO " : Integer.toString(playerSummary.cardsInHand);
-            playerButtonText = playerSummary.name + " " + totalCards + appendString;
+            appendString = snapshot.isInAscendingOrder ? "->>" : "<<-";
+            cardsField = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
+            System.out.println(cardsField);
+            playerButtonText = playerSummary.name + " " + cardsField + appendString;
             playerScreen.updatePlayer(playerButtonText, snapshot.currentPlayerIndex == i);
         }
     }

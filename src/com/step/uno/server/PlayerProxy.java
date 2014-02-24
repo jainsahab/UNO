@@ -45,6 +45,7 @@ public class PlayerProxy implements MessageChannelListener {
     private void onClientMessage(DrawTwoCardAction drawCard) {
         observer.onPlayerDrewTwoCard(player);
     }
+
     private void onClientMessage(DeclareUnoAction declareUnoAction) {
         observer.onPlayerDeclaredUno(player);
     }

@@ -133,4 +133,22 @@ public class GameMasterTest {
         gameMaster.onPlayerDrewTwoCard(playerMock);
         verify(unoFactoryStub.game, times(1)).drawTwoCard(playerMock);
     }
+
+    @Test
+    public void on_player_declared_uno_update_status_of_player() {
+        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        Player playerMock = mock(Player.class);
+        gameMaster.onPlayerRegistered(playerMock);
+        gameMaster.onPlayerDeclaredUno(playerMock);
+        verify(playerMock, times(1)).declaredUno();
+    }
+
+    @Test
+    public void on_player_declared_uno_update_log_of_game() {
+        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        Player playerMock = mock(Player.class);
+        gameMaster.onPlayerRegistered(playerMock);
+        gameMaster.onPlayerDeclaredUno(playerMock);
+        verify(unoFactoryStub.game, times(1)).updateLogOnPlayerDeclaredUno(playerMock);
+    }
 }

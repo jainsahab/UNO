@@ -104,6 +104,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
 
     @Override
     public void onPlayerDeclaredUno(Player player) {
+        game.updateLogOnPlayerDeclaredUno(player);
         player.declaredUno();
         sendGameSnapshot();
     }

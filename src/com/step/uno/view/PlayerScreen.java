@@ -73,7 +73,9 @@ public class PlayerScreen extends JFrame implements ActionListener {
     }
 
     public void clean() {
-        playerButtons.removeAll();
+        for (Component component : playerButtons.getComponents()) {
+            component.setVisible(false);
+        }
         for (Component component : cards.getComponents()) {
             component.setVisible(false);
         }
