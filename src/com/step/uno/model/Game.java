@@ -43,6 +43,7 @@ public class Game {
         }
         Card startingCard = draw();
         openDeck.add(startingCard);
+        activityLog.add("Game opened with : " + startingCard.colour + " " + startingCard.sign);
         runningColour = startingCard.colour;
         this.runningColour = startingCard.colour;
     }
