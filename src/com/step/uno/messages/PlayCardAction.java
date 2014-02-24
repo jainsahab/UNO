@@ -12,4 +12,9 @@ public class PlayCardAction implements Serializable {
     public PlayCardAction(Card card) {
         this.card = card;
     }
+
+    public PlayCardAction(Card card, Colour newColour) {
+        this.card = card;
+        this.newColour = newColour;
+    }
 }

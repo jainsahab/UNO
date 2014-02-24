@@ -50,7 +50,7 @@ public class GameTest {
     public void on_playing_draw2_the_draw2run_count_should_increment_by_1_and_turn_should_change() {
         Card cardPlayed = Card.createCard(Colour.Yellow, "Draw2");
 
-        game.playCard(playerMock, cardPlayed);
+        game.playCard(playerMock, cardPlayed, null);
 
         assertEquals(1, game.getDraw2Run());
         assertEquals(1, game.getCurrentPlayerIndex());
@@ -60,7 +60,7 @@ public class GameTest {
     @Test
     public void on_draw2_a_player_should_draw_a_card_for_draw2run_times() {
         Card cardPlayed = Card.createCard(Colour.Yellow,"Draw2");
-        game.playCard(playerMock, cardPlayed);
+        game.playCard(playerMock, cardPlayed, null);
 
         game.drawTwoCard(playerMock);
 
@@ -72,7 +72,7 @@ public class GameTest {
     @Test
     public void on_skip_one_player_will_be_skipped() {
         Card cardPlayed = Card.createCard(Colour.Yellow,"Skip");
-        game.playCard(playerMock,cardPlayed);
+        game.playCard(playerMock,cardPlayed, null);
 
         assertEquals(2,game.getCurrentPlayerIndex());
     }
@@ -80,8 +80,17 @@ public class GameTest {
     @Test
     public void on_reverse_sequence_of_players_should_be_reversed() {
         Card cardPlayed = Card.createCard(Colour.Yellow,"Reverse");
-        game.playCard(playerMock,cardPlayed);
+        game.playCard(playerMock,cardPlayed, null);
 
         assertEquals(2,game.getCurrentPlayerIndex());
+    }
+
+
+    @Test
+    public void on_wild_card_with_color_the_running_color_should_change() {
+        Card cardPlayed = Card.createCard(Colour.Black,"Wild");
+        game.playCard(playerMock,cardPlayed,Colour.Yellow);
+
+        assertEquals(Colour.Yellow,game.getRunningColor());
     }
 }

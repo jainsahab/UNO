@@ -7,6 +7,8 @@ import com.step.uno.model.Colour;
 import com.step.uno.view.UnoView;
 import org.junit.Test;
 
+import java.awt.*;
+
 import static org.mockito.Mockito.*;
 
 public class GameClientControllerTest {
@@ -31,7 +33,7 @@ public class GameClientControllerTest {
     @Test
     public void informs_game_client_when_player_plays_a_card() {
         GameClientController gameClientController = new GameClientController(gameClientMock);
-        Card card = Card.createCard(Colour.Black, "_4");
+        Card card = Card.createCard(Colour.Yellow, "_2");
         gameClientController.cardPlayed(card);
         verify(gameClientMock, times(1)).play(card);
     }
@@ -48,5 +50,32 @@ public class GameClientControllerTest {
 
         verify(gameClientMock,times(1)).drawTwo();
         verify(gameClientMock,never()).draw();
+    }
+
+    @Test
+    public void when_player_plays_wild_card_change_color_dialog_should_open() {
+        GameClientController gameClientController = new GameClientController(gameClientMock);
+        UnoView unoViewMock = mock(UnoView.class);
+        gameClientController.start(unoViewMock);
+        Card card = Card.createCard(Colour.Black,"Wild");
+
+        gameClientController.cardPlayed(card);
+
+        verify(unoViewMock,times(1)).showChangeColorDialog();
+        verify(gameClientMock,never()).play(any(Card.class),any(Colour.class));
+    }
+
+    @Test
+    public void on_selecting_new_color_color_dialog_should_hide_and_game_client_should_be_notified() {
+        GameClientController gameClientController = new GameClientController(gameClientMock);
+        UnoView unoViewMock = mock(UnoView.class);
+        gameClientController.start(unoViewMock);
+        Card card = Card.createCard(Colour.Black,"Wild");
+        gameClientController.cardPlayed(card);
+
+        gameClientController.setNewColor(Color.GREEN);
+
+        verify(unoViewMock,times(1)).hideChangeColorDialog();
+        verify(gameClientMock,times(1)).play(card,Colour.Green);
     }
 }

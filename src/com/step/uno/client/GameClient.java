@@ -5,6 +5,7 @@ import com.step.communication.channel.MessageChannelListener;
 import com.step.communication.factory.CommunicationFactory;
 import com.step.uno.messages.*;
 import com.step.uno.model.Card;
+import com.step.uno.model.Colour;
 
 public class GameClient implements MessageChannelListener {
     private CommunicationFactory factory;
@@ -58,5 +59,9 @@ public class GameClient implements MessageChannelListener {
     @Override
     public void onConnectionClosed(MessageChannel client) {
 
+    }
+
+    public void play(Card card, Colour colour) {
+        channel.send(new PlayCardAction(card,colour));
     }
 }

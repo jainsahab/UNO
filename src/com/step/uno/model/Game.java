@@ -43,7 +43,8 @@ public class Game {
         }
         Card startingCard = draw();
         openDeck.add(startingCard);
-        activityLog.add("Game opened with : " + startingCard.colour + " " + startingCard.sign);
+
+        addToActivityLog("Game opened with : " + startingCard.colour + " " + startingCard.sign);
         runningColour = startingCard.colour;
         this.runningColour = startingCard.colour;
     }
@@ -72,14 +73,16 @@ public class Game {
         snapshot.isInAscendingOrder = isInAscendingOrder;
     }
 
-    public void playCard(Player player, Card card) {
+    public void playCard(Player player, Card card, Colour newColour) {
         player.play(card);
         openDeck.add(card);
         this.runningColour = card.colour;
+        if(newColour!=null) this.runningColour = newColour;
         handleDrawTwo(card);
         handleSkip(card);
         handleReverse(card);
         nextTurn();
+        System.out.println("new Color" +  getRunningColor());
     }
 
     private void handleReverse(Card card) {
@@ -119,11 +122,19 @@ public class Game {
     }
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
-        activityLog.add(player.name + " played " + card.colour + " : " + card.sign);
+        addToActivityLog(player.name + " played " + card.colour + " : " + card.sign);
     }
 
     public void updateLogOnPlayerDrewCard(Player player) {
-        activityLog.add(player.name + " Drawn a card");
+        addToActivityLog(player.name + " Drawn a card");
+    }
+
+    public void updateLogOnNewColorChosen(Player player,Colour newColour) {
+        addToActivityLog(player.name + " chose color " + newColour.toString());
+    }
+
+    private void addToActivityLog(String log) {
+        activityLog.add(log);
     }
 
     public Colour getRunningColor() {
