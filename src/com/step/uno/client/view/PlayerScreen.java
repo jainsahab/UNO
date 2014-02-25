@@ -1,9 +1,11 @@
 package com.step.uno.client.view;
 
-
+import com.step.uno.client.ClientPlayer;
 import com.step.uno.model.Card;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,9 +53,12 @@ public class PlayerScreen extends JFrame implements ActionListener {
         cards.addButton(button);
     }
 
-    public void addPlayer(String playerText, boolean turn) {
-        PlayerButton playerButton = new PlayerButton(playerText);
-        if (turn) playerButton.setBackground(Color.decode("#317317"));
+    public void addPlayer(String playerText, boolean turn, ClientPlayer player) {
+        PlayerButton playerButton = new PlayerButton(playerText, player);
+        if (turn) {
+            playerButton.setBackground(Color.decode("#317317"));
+        }
+        playerButton.addActionListener(this);
         playerButtons.addPlayerButton(playerButton);
     }
 

@@ -172,6 +172,10 @@ public class Game {
         activityLog.add(player.name + " Declared UNO !!");
     }
 
+    public void updateLogOnPlayerCaught(String name) {
+        activityLog.add(name + " was caught on UNO !!");
+    }
+
     public Colour getRunningColor() {
         return runningColour;
     }
@@ -184,5 +188,10 @@ public class Game {
         }
         draw2Run = 0;
         nextTurn();
+    }
+
+    public void onPlayerCaughtOnUno(Player player) {
+        player.take(closedDeck.draw());
+        player.take(closedDeck.draw());
     }
 }

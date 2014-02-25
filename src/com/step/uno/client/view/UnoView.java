@@ -1,5 +1,6 @@
 package com.step.uno.client.view;
 
+import com.step.uno.client.ClientPlayer;
 import com.step.uno.messages.GameResult;
 import com.step.uno.model.Card;
 
@@ -72,15 +73,14 @@ public class UnoView {
 
     public void enableClosedPile(boolean enable) {
         playerScreen.enableClosedPile(enable);
-
     }
 
     public void clearPlayerScreen() {
         playerScreen.clean();
     }
 
-    public void addPlayer(String playerButtonText, boolean enable) {
-        playerScreen.addPlayer(playerButtonText, enable);
+    public void addPlayer(String playerButtonText, boolean enable, ClientPlayer player) {
+        playerScreen.addPlayer(playerButtonText, enable, player);
     }
 
     public void updateOpenDeck(Card openCard) {
