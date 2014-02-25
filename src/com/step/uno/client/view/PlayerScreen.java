@@ -53,9 +53,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
 
     public void addPlayer(String playerText, boolean turn, ClientPlayer player) {
         PlayerButton playerButton = new PlayerButton(playerText, player);
-        if (turn) {
-            playerButton.setBackground(Color.decode("#317317"));
-        }
+        playerButton.setPreferredSize(new Dimension(175, 175));
         playerButton.addActionListener(this);
         playerButtons.addPlayerButton(playerButton);
     }
@@ -95,7 +93,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
         deck.closedPile.setText(text);
     }
 
-    public void updateStatusHint(String message){
+    public void updateStatusHint(String message) {
         deck.updateStatusHint(message);
     }
 }

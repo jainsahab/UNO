@@ -3,11 +3,11 @@ package com.step.uno.client.controller;
 import com.step.uno.client.ClientPlayer;
 import com.step.uno.client.GameClient;
 import com.step.uno.client.GameClientObserver;
+import com.step.uno.client.view.*;
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
-import com.step.uno.client.view.*;
 import com.step.uno.model.PlayerSummary;
 import com.step.uno.model.Sign;
 
@@ -81,9 +81,12 @@ public class GameClientController implements GameClientObserver, UnoViewListener
             totalCards = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
             ClientPlayer player = new ClientPlayer(name, totalCards, i, playerSummary.declaredUno);
             boolean isMyTurn = snapshot.currentPlayerIndex == i;
-            appendString = snapshot.isInAscendingOrder ? "<br/><br/> <p>==>><p/> " : "<br/><br/> <p>&lt&lt== <p/>";
+            if (isMyTurn) {
+                appendString = snapshot.isInAscendingOrder ? "<br/><br/> <b>=><b/> " : "<br/><br/> <b>&lt= <b/>";
+            }
             playerButtonText = "<html> <i>" + name + ": " + totalCards + appendString + "</i></html>";
             this.view.addPlayer(playerButtonText, isMyTurn, player);
+            appendString = "";
         }
     }
 
