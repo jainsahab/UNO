@@ -46,6 +46,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
         displayAllPlayers();
         updateOpenDeck();
         updateCloseDeck();
+        updateHint();
     }
 
     private void updateCloseDeck() {
@@ -56,6 +57,17 @@ public class GameClientController implements GameClientObserver, UnoViewListener
 
     private void updateOpenDeck() {
         this.view.updateOpenDeck(snapshot.openCard);
+    }
+
+    private void updateHint() {
+        String message = getAppropriateMessage();
+        view.updateHint(message);
+    }
+
+    private String getAppropriateMessage() {
+        if (snapshot.openCard.colour.equals(Colour.Black))
+            return "Play a " + snapshot.runningColour + " .";
+        return "Play a " + snapshot.runningColour + " or " + snapshot.openCard.sign.toString().replaceAll("_", "") + " .";
     }
 
     private void displayAllPlayers() {

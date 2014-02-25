@@ -50,4 +50,8 @@ public class DeckView extends JPanel {
         closedPile.setEnabled(enable);
     }
 
+
+    public void updateStatusHint(String message) {
+        statusHint.updateHint(message);
+    }
 }

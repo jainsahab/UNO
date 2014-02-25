@@ -9,9 +9,7 @@ import java.util.List;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class GameTest {
 
@@ -33,23 +31,14 @@ public class GameTest {
         players.add(player2);
         players.add(player3);
         players.add(playerMock);
-        game = new Game(1, players,new Pack());
-    }
-
-    @Test
-    public void on_initializing_game_each_player_should_get_seven_cards() {
-        game.initialize();
-        verify(player1, times(7)).take(any(Card.class));
-        verify(player2, times(7)).take(any(Card.class));
-        verify(player3, times(7)).take(any(Card.class));
-        assertNotNull(game.getCurrentPlayerIndex());
+        game = new Game(1, players, new Pack());
     }
 
     @Test
     public void on_playing_draw2_the_draw2run_count_should_increment_by_1_and_turn_should_change() {
         Card cardPlayed = Card.createCard(Colour.Yellow, "Draw2");
 
-        assertEquals(0,game.getCurrentPlayerIndex());
+        assertEquals(0, game.getCurrentPlayerIndex());
         game.playCard(playerMock, cardPlayed, null);
 
         assertEquals(1, game.getDraw2Run());
@@ -59,8 +48,8 @@ public class GameTest {
 
     @Test
     public void on_draw2_a_player_should_draw_a_card_for_draw2run_times() {
-        Card cardPlayed = Card.createCard(Colour.Yellow,"Draw2");
-        assertEquals(0,game.getCurrentPlayerIndex());
+        Card cardPlayed = Card.createCard(Colour.Yellow, "Draw2");
+        assertEquals(0, game.getCurrentPlayerIndex());
         game.playCard(playerMock, cardPlayed, null);
 
         game.drawTwoCard(playerMock);
@@ -72,18 +61,18 @@ public class GameTest {
 
     @Test
     public void on_skip_one_player_will_be_skipped() {
-        Card cardPlayed = Card.createCard(Colour.Yellow,"Skip");
-        assertEquals(0,game.getCurrentPlayerIndex());
-        game.playCard(playerMock,cardPlayed, null);
+        Card cardPlayed = Card.createCard(Colour.Yellow, "Skip");
+        assertEquals(0, game.getCurrentPlayerIndex());
+        game.playCard(playerMock, cardPlayed, null);
 
         assertEquals(2, game.getCurrentPlayerIndex());
     }
 
     @Test
     public void on_reverse_sequence_of_players_should_be_reversed() {
-        Card cardPlayed = Card.createCard(Colour.Yellow,"Reverse");
-        assertEquals(0,game.getCurrentPlayerIndex());
-        game.playCard(playerMock,cardPlayed, null);
+        Card cardPlayed = Card.createCard(Colour.Yellow, "Reverse");
+        assertEquals(0, game.getCurrentPlayerIndex());
+        game.playCard(playerMock, cardPlayed, null);
 
         assertEquals(3, game.getCurrentPlayerIndex());
     }
@@ -91,21 +80,21 @@ public class GameTest {
 
     @Test
     public void on_wild_card_with_color_the_running_color_should_change() {
-        Card cardPlayed = Card.createCard(Colour.Black,"Wild");
-        assertEquals(0,game.getCurrentPlayerIndex());
-        game.playCard(playerMock,cardPlayed,Colour.Yellow);
+        Card cardPlayed = Card.createCard(Colour.Black, "Wild");
+        assertEquals(0, game.getCurrentPlayerIndex());
+        game.playCard(playerMock, cardPlayed, Colour.Yellow);
 
-        assertEquals(Colour.Yellow,game.getRunningColor());
+        assertEquals(Colour.Yellow, game.getRunningColor());
     }
 
     @Test
     public void on_draw_four_next_player_should_take_four_cards_and_turn_should_change() {
-        Card cardPlayed = Card.createCard(Colour.Black,"Draw4");
-        assertEquals(0,game.getCurrentPlayerIndex());
-        game.playCard(player1,cardPlayed,Colour.Yellow);
+        Card cardPlayed = Card.createCard(Colour.Black, "Draw4");
+        assertEquals(0, game.getCurrentPlayerIndex());
+        game.playCard(player1, cardPlayed, Colour.Yellow);
 
-        verify(player2,times(4)).take(any(Card.class));
-        assertEquals(2,game.getCurrentPlayerIndex());
+        verify(player2, times(4)).take(any(Card.class));
+        assertEquals(2, game.getCurrentPlayerIndex());
     }
 
     @Test
@@ -118,13 +107,13 @@ public class GameTest {
                 for (int i = 0; i < 108; i++) {
                     cards.add(reverse);
                 }
-                return  cards.toArray(new Card[]{});
+                return cards.toArray(new Card[]{});
             }
         }
-        game = new Game(2,players,new PackStub());
+        game = new Game(2, players, new PackStub());
         game.initialize();
 
-        assertEquals(false,game.getIsInAscendingOrder());
+        assertEquals(false, game.getIsInAscendingOrder());
     }
 
     @Test
@@ -137,13 +126,13 @@ public class GameTest {
                 for (int i = 0; i < 108; i++) {
                     cards.add(skip);
                 }
-                return  cards.toArray(new Card[]{});
+                return cards.toArray(new Card[]{});
             }
         }
-        game = new Game(2,players,new PackStub());
+        game = new Game(2, players, new PackStub());
         game.initialize();
 
-        assertEquals(1,game.getCurrentPlayerIndex());
+        assertEquals(1, game.getCurrentPlayerIndex());
     }
 
     @Test
@@ -156,13 +145,13 @@ public class GameTest {
                 for (int i = 0; i < 108; i++) {
                     cards.add(wild);
                 }
-                return  cards.toArray(new Card[]{});
+                return cards.toArray(new Card[]{});
             }
         }
-        game = new Game(2,players,new PackStub());
+        game = new Game(2, players, new PackStub());
         game.initialize();
 
-        assertEquals(Colour.Green,game.getRunningColor());
+        assertEquals(Colour.Green, game.getRunningColor());
     }
 
     @Test
@@ -175,14 +164,14 @@ public class GameTest {
                 for (int i = 0; i < 108; i++) {
                     cards.add(draw4);
                 }
-                return  cards.toArray(new Card[]{});
+                return cards.toArray(new Card[]{});
             }
         }
-        game = new Game(2,players,new PackStub());
+        game = new Game(2, players, new PackStub());
         game.initialize();
 
-        assertEquals(Colour.Green,game.getRunningColor());
-        assertEquals(1,game.getCurrentPlayerIndex());
+        assertEquals(Colour.Green, game.getRunningColor());
+        assertEquals(1, game.getCurrentPlayerIndex());
     }
 
     @Test
@@ -195,13 +184,13 @@ public class GameTest {
                 for (int i = 0; i < 108; i++) {
                     cards.add(draw2);
                 }
-                return  cards.toArray(new Card[]{});
+                return cards.toArray(new Card[]{});
             }
         }
-        game = new Game(2,players,new PackStub());
+        game = new Game(2, players, new PackStub());
         game.initialize();
 
-        assertEquals(1,game.getDraw2Run());
+        assertEquals(1, game.getDraw2Run());
     }
 
 }
