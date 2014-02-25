@@ -9,7 +9,6 @@ import com.step.uno.model.Colour;
 import com.step.uno.client.view.*;
 import com.step.uno.model.PlayerSummary;
 import com.step.uno.model.Sign;
-import com.step.uno.rules.RuleEngine;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -96,4 +96,14 @@ public class GameTest {
 
         assertEquals(Colour.Yellow,game.getRunningColor());
     }
+
+    @Test
+    public void on_draw_four_next_player_should_take_four_cards_and_turn_should_change() {
+        Card cardPlayed = Card.createCard(Colour.Black,"Draw4");
+        assertEquals(0,game.getCurrentPlayerIndex());
+        game.playCard(player1,cardPlayed,Colour.Yellow);
+
+        verify(player2,times(4)).take(any(Card.class));
+        assertEquals(2,game.getCurrentPlayerIndex());
+    }
 }

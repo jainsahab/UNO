@@ -1,22 +1,20 @@
 package com.step.uno.client.controller;
 
 import com.step.uno.client.GameClient;
-import com.step.uno.client.view.PlayerButton;
+import com.step.uno.client.view.UnoView;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
-import com.step.uno.client.view.UnoView;
 import com.step.uno.model.PlayerSummary;
-import com.step.uno.rules.RuleEngine;
 import org.junit.Test;
 
 import java.awt.*;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class GameClientControllerTest {
     GameClient gameClientMock = mock(GameClient.class);
+
     @Test
     public void starting_controller_displays_login_form() {
         UnoView viewMock = mock(UnoView.class);
@@ -44,20 +42,20 @@ public class GameClientControllerTest {
 
     @Test
     public void informs_game_client_to_draw_cards_as_per_draw2_run_when_clicked_on_draw_button() {
-        Card[] cards = {Card.createCard(Colour.Yellow,"_9"),Card.createCard(Colour.Blue,"Draw4")};
+        Card[] cards = {Card.createCard(Colour.Yellow, "_9"), Card.createCard(Colour.Blue, "Draw4")};
         GameClientController gameClientController = new GameClientController(gameClientMock);
         Snapshot snapshot = new Snapshot();
         snapshot.draw2Run = 1;
         snapshot.myCards = cards;
-        snapshot.openCard = Card.createCard(Colour.Blue,"Draw2");
+        snapshot.openCard = Card.createCard(Colour.Blue, "Draw2");
         snapshot.playerSummaries = new PlayerSummary[]{};
         gameClientController.start(mock(UnoView.class));
         gameClientController.update(snapshot);
 
         gameClientController.drawCard();
 
-        verify(gameClientMock,times(1)).drawTwo();
-        verify(gameClientMock,never()).draw();
+        verify(gameClientMock, times(1)).drawTwo();
+        verify(gameClientMock, never()).draw();
     }
 
     @Test
@@ -65,12 +63,12 @@ public class GameClientControllerTest {
         GameClientController gameClientController = new GameClientController(gameClientMock);
         UnoView unoViewMock = mock(UnoView.class);
         gameClientController.start(unoViewMock);
-        Card card = Card.createCard(Colour.Black,"Wild");
+        Card card = Card.createCard(Colour.Black, "Wild");
 
         gameClientController.cardPlayed(card);
 
-        verify(unoViewMock,times(1)).showChangeColorDialog();
-        verify(gameClientMock,never()).play(any(Card.class),any(Colour.class));
+        verify(unoViewMock, times(1)).showChangeColorDialog();
+        verify(gameClientMock, never()).play(any(Card.class), any(Colour.class));
     }
 
     @Test
@@ -78,13 +76,13 @@ public class GameClientControllerTest {
         GameClientController gameClientController = new GameClientController(gameClientMock);
         UnoView unoViewMock = mock(UnoView.class);
         gameClientController.start(unoViewMock);
-        Card card = Card.createCard(Colour.Black,"Wild");
+        Card card = Card.createCard(Colour.Black, "Wild");
         gameClientController.cardPlayed(card);
 
         gameClientController.setNewColor(Color.GREEN);
 
-        verify(unoViewMock,times(1)).hideChangeColorDialog();
-        verify(gameClientMock,times(1)).play(card,Colour.Green);
+        verify(unoViewMock, times(1)).hideChangeColorDialog();
+        verify(gameClientMock, times(1)).play(card, Colour.Green);
     }
 
     @Test
@@ -93,7 +91,7 @@ public class GameClientControllerTest {
         UnoView unoViewMock = mock(UnoView.class);
         controller.start(unoViewMock);
         Snapshot snapshot = new Snapshot();
-        snapshot.openCard = Card.createCard(Colour.Red,"_5");
+        snapshot.openCard = Card.createCard(Colour.Red, "_5");
         snapshot.runningColour = snapshot.openCard.colour;
         Card draw4 = Card.createCard(Colour.Black, "Draw4");
         Card green2 = Card.createCard(Colour.Green, "_2");
@@ -105,9 +103,9 @@ public class GameClientControllerTest {
 
         controller.update(snapshot);
 
-        verify(unoViewMock,times(1)).addCard(blue3,false);
-        verify(unoViewMock,times(1)).addCard(green2,false);
-        verify(unoViewMock, times(1)).addCard(draw4,true);
+        verify(unoViewMock, times(1)).addCard(blue3, false);
+        verify(unoViewMock, times(1)).addCard(green2, false);
+        verify(unoViewMock, times(1)).addCard(draw4, true);
     }
 
     @Test
@@ -116,7 +114,7 @@ public class GameClientControllerTest {
         UnoView unoViewMock = mock(UnoView.class);
         controller.start(unoViewMock);
         Snapshot snapshot = new Snapshot();
-        snapshot.openCard = Card.createCard(Colour.Green,"_5");
+        snapshot.openCard = Card.createCard(Colour.Green, "_5");
         snapshot.runningColour = snapshot.openCard.colour;
         Card draw4 = Card.createCard(Colour.Black, "Draw4");
         Card green2 = Card.createCard(Colour.Green, "_2");
@@ -128,9 +126,9 @@ public class GameClientControllerTest {
 
         controller.update(snapshot);
 
-        verify(unoViewMock,times(1)).addCard(blue3,false);
-        verify(unoViewMock,times(1)).addCard(green2,true);
-        verify(unoViewMock, times(1)).addCard(draw4,false);
+        verify(unoViewMock, times(1)).addCard(blue3, false);
+        verify(unoViewMock, times(1)).addCard(green2, true);
+        verify(unoViewMock, times(1)).addCard(draw4, false);
     }
 
     @Test
@@ -139,7 +137,7 @@ public class GameClientControllerTest {
         UnoView unoViewMock = mock(UnoView.class);
         controller.start(unoViewMock);
         Snapshot snapshot = new Snapshot();
-        snapshot.openCard = Card.createCard(Colour.Green,"_5");
+        snapshot.openCard = Card.createCard(Colour.Green, "_5");
         snapshot.runningColour = snapshot.openCard.colour;
         Card draw4 = Card.createCard(Colour.Black, "Draw4");
         Card green2 = Card.createCard(Colour.Green, "_2");
@@ -153,8 +151,8 @@ public class GameClientControllerTest {
 
         controller.update(snapshot);
 
-        verify(unoViewMock,times(1)).addCard(blue3,false);
-        verify(unoViewMock,times(1)).addCard(green2,false);
-        verify(unoViewMock, times(1)).addCard(draw4,false);
+        verify(unoViewMock, times(1)).addCard(blue3, false);
+        verify(unoViewMock, times(1)).addCard(green2, false);
+        verify(unoViewMock, times(1)).addCard(draw4, false);
     }
 }
