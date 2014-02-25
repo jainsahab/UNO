@@ -59,7 +59,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     }
 
     private void displayAllPlayers() {
-        String appendString;
+        String appendString = "";
         PlayerSummary playerSummary;
         String totalCards;
         String playerButtonText;
@@ -68,9 +68,10 @@ public class GameClientController implements GameClientObserver, UnoViewListener
             String name = playerSummary.name;
             totalCards = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
             ClientPlayer player = new ClientPlayer(name, totalCards, i);
-            appendString = snapshot.isInAscendingOrder ? "<br/><br/> <p>==>><p/> " : "<br/><br/> <p><<== <p/>";
+            boolean isMyTurn = snapshot.currentPlayerIndex == i;
+            appendString = snapshot.isInAscendingOrder ? "<br/><br/> <p>==>><p/> " : "<br/><br/> <p>&lt&lt== <p/>";
             playerButtonText = "<html> <i>" + name + ": " + totalCards + appendString + "</i></html>";
-            this.view.addPlayer(playerButtonText, snapshot.currentPlayerIndex == i, player);
+            this.view.addPlayer(playerButtonText, isMyTurn, player);
         }
     }
 
@@ -84,7 +85,6 @@ public class GameClientController implements GameClientObserver, UnoViewListener
             }
         }
     }
-
 
     private boolean isDrawFourPlayable(Colour runningColour) {
         for (Card myCard : snapshot.myCards) {
