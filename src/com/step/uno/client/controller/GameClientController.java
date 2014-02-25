@@ -82,7 +82,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
             ClientPlayer player = new ClientPlayer(name, totalCards, i, playerSummary.declaredUno);
             boolean isMyTurn = snapshot.currentPlayerIndex == i;
             if (isMyTurn) {
-                appendString = snapshot.isInAscendingOrder ? "<br/><br/> <b>=><b/> " : "<br/><br/> <b>&lt= <b/>";
+                appendString = snapshot.isInAscendingOrder ? "<br/><br/> <b>><b/> " : "<br/><br/> <b>&lt<b/>";
             }
             playerButtonText = "<html> <i>" + name + ": " + totalCards + appendString + "</i></html>";
             this.view.addPlayer(playerButtonText, isMyTurn, player);
