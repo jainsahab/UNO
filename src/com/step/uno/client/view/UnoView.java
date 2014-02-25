@@ -71,10 +71,9 @@ public class UnoView {
         String playerButtonText;
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
             playerSummary = snapshot.playerSummaries[i];
-            appendString = snapshot.isInAscendingOrder ? "->>" : "<<-";
+            appendString = snapshot.isInAscendingOrder ? "<br/><br/> <b> ==>> <b/>" : "<br/><br/><b> <<== <b/>";
             cardsField = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
-            System.out.println(cardsField);
-            playerButtonText = playerSummary.name + " " + cardsField + appendString;
+            playerButtonText = "<html>" + playerSummary.name + " " + cardsField + appendString + "</html>";
             playerScreen.updatePlayer(playerButtonText, snapshot.currentPlayerIndex == i);
         }
     }
@@ -95,7 +94,7 @@ public class UnoView {
     }
 
     public void showChangeColorDialog() {
-        changeColour  = new ChangeColour(playerScreen, Dialog.ModalityType.DOCUMENT_MODAL, listener);
+        changeColour = new ChangeColour(playerScreen, Dialog.ModalityType.DOCUMENT_MODAL, listener);
         changeColour.makeVisible();
     }
 
