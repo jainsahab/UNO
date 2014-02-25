@@ -4,8 +4,6 @@ import com.step.uno.client.ClientPlayer;
 import com.step.uno.model.Card;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

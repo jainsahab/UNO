@@ -67,7 +67,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
             playerSummary = snapshot.playerSummaries[i];
             String name = playerSummary.name;
             totalCards = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
-            ClientPlayer player = new ClientPlayer(name, totalCards, i);
+            ClientPlayer player = new ClientPlayer(name, totalCards, i, playerSummary.declaredUno);
             boolean isMyTurn = snapshot.currentPlayerIndex == i;
             appendString = snapshot.isInAscendingOrder ? "<br/><br/> <p>==>><p/> " : "<br/><br/> <p>&lt&lt== <p/>";
             playerButtonText = "<html> <i>" + name + ": " + totalCards + appendString + "</i></html>";
@@ -155,14 +155,14 @@ public class GameClientController implements GameClientObserver, UnoViewListener
 
     @Override
     public void declareUno() {
-        if (snapshot.myCards.length == 1) {
+        if (snapshot.myCards.length == 1 && snapshot.playerSummaries[snapshot.myPlayerIndex].declaredUno == false) {
             gameClient.declareUno();
         }
     }
 
     @Override
     public void CatchPlayer(ClientPlayer player) {
-        if (player.totalCards.equals("1")) {
+        if (player.totalCards.equals("1") && player.declaredUno == false) {
             gameClient.catchPlayer(player.name, player.playerIndex);
         }
     }
