@@ -3,8 +3,6 @@ package com.step.uno.client.view;
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
-import com.step.uno.model.PlayerSummary;
-import com.step.uno.rules.RuleEngine;
 
 import java.awt.*;
 
@@ -14,7 +12,6 @@ public class UnoView {
     private PlayerScreen playerScreen;
     private GameOverScreen gameOverScreen;
     private LoadingForm loadingForm;
-    private boolean isStartedNow = true;
     private ChangeColour changeColour;
 
     public UnoView(UnoViewListener listener) {
@@ -34,36 +31,21 @@ public class UnoView {
         loadingForm.setVisible(true);
     }
 
-    public void updatePlayerScreen(Snapshot snapshot) {
-        onStart(snapshot);
-        playerScreen.updateLog(snapshot.lastActivity);
-        playerScreen.setClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
-        playerScreen.clean();
-        displayAllCards(snapshot);
-        displayPlayers(snapshot);
-        updateOpenDeck(snapshot);
-        updateCloseDeck(snapshot);
-    }
 
-    private void updateCloseDeck(Snapshot snapshot) {
-        String message = "Draw 1";
-        if (snapshot.draw2Run > 0) message = "Draw " + snapshot.draw2Run;
+    public void updateCloseDeck(String message) {
         playerScreen.updateCloseDeck(message);
     }
 
-    private void onStart(Snapshot snapshot) {
-        if (isStartedNow) {
-            isStartedNow = false;
-            loadingForm.setVisible(false);
-            playerScreen.setVisible(true);
-            playerScreen.setTitle("UNO : " + snapshot.currentPlayerName);
-        }
+    public void hideLoadingForm() {
+        loadingForm.setVisible(false);
     }
 
-    private void updateOpenDeck(Snapshot snapshot) {
-        playerScreen.updateOpenCard(snapshot.openCard);
+    public void displayPlayerScreen(String title) {
+        playerScreen.setVisible(true);
+        playerScreen.setTitle(title);
     }
 
+<<<<<<< HEAD
     private void displayPlayers(Snapshot snapshot) {
         String appendString;
         PlayerSummary playerSummary;
@@ -77,12 +59,12 @@ public class UnoView {
             playerScreen.updatePlayer(playerButtonText, snapshot.currentPlayerIndex == i);
         }
     }
+=======
+>>>>>>> be5b737688d0177a7b16174bf109bd09a8ecbe3f
 
-    private void displayAllCards(Snapshot snapshot) {
-        RuleEngine ruleEngine = new RuleEngine();
-        for (Card myCard : snapshot.myCards) {
-            playerScreen.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && ruleEngine.isPlayableCard(snapshot, myCard));
-        }
+
+    public void addCard(Card card, boolean enable) {
+        playerScreen.addCard(card,enable);
     }
 
     public void showResult(GameResult result) {
@@ -98,7 +80,29 @@ public class UnoView {
         changeColour.makeVisible();
     }
 
+
     public void hideChangeColorDialog() {
         changeColour.makeInvisible();
+    }
+
+    public void updateLog(String currentLog) {
+        playerScreen.updateLog(currentLog);
+    }
+
+    public void enableClosedPile(boolean enable) {
+        playerScreen.enableClosedPile(enable);
+
+    }
+
+    public void clearPlayerScreen(){
+        playerScreen.clean();
+    }
+
+    public void addPlayer(String playerButtonText, boolean enable) {
+        playerScreen.addPlayer(playerButtonText, enable);
+    }
+
+    public void updateOpenDeck(Card openCard) {
+        playerScreen.updateOpenCard(openCard);
     }
 }
