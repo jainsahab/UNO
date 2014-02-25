@@ -39,7 +39,7 @@ public class Game {
     public void initialize() {
         Collections.shuffle(players);
         closedDeck.shuffle();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 1; i++) {
             for (Player player : players) {
                 player.take(draw());
             }
@@ -150,14 +150,6 @@ public class Game {
     public void updateLogOnPlayerPlayed(Player player, Card card) {
         String sign = card.sign.toString().replace("_", "");
         addToActivityLog(player.name + " played " + card.colour + " : " + sign);
-    }
-
-    public void updateLogOnPlayerDrewCard(Player player) {
-        addToActivityLog(player.name + " Drawn a card");
-    }
-
-    public void updateLogOnNewColorChosen(Player player, Colour newColour) {
-        addToActivityLog(player.name + " chose color " + newColour.toString());
     }
 
     private void addToActivityLog(String log) {

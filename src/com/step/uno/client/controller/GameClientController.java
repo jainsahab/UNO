@@ -173,7 +173,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
 
     @Override
     public void CatchPlayer(ClientPlayer player) {
-        if (player.totalCards.equals("1") && player.declaredUno == false) {
+        if (player.totalCards.equals("1") && player.declaredUno == false && player.playerIndex != snapshot.currentPlayerIndex) {
             gameClient.catchPlayer(player.name, player.playerIndex);
         }
     }
