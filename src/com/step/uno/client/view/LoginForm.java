@@ -10,6 +10,7 @@ public class LoginForm extends JFrame implements ActionListener {
     private JTextField nameField;
     public String playerName = "me";
     private UnoViewListener listener;
+    private final JButton join;
 
     public LoginForm(UnoViewListener listener) {
         this.listener = listener;
@@ -41,8 +42,8 @@ public class LoginForm extends JFrame implements ActionListener {
         nameField.setFont(new Font("Cambria", Font.BOLD, 25));
         loginPanel.add(nameField);
 
-        JButton join = new JButton("JOIN");
-        join.setBounds(110,200,170,35);
+        join = new JButton("JOIN");
+        join.setBounds(110, 200, 170, 35);
         join.setFont(new Font("Cambria", Font.BOLD, 20));
         loginPanel.add(join);
 
@@ -55,5 +56,7 @@ public class LoginForm extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.playerName =  nameField.getText();
         listener.onJoin(nameField.getText(), gameMasterField.getText());
+        join.setText("please wait");
+        join.setEnabled(false);
     }
 }

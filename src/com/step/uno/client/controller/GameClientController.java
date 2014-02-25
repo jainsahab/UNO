@@ -36,7 +36,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
         this.snapshot = snapshot;
         if (isStartedNow) {
             isStartedNow = false;
-            this.view.hideLoadingForm();
+            this.view.hideLoginForm();
             this.view.displayPlayerScreen("UNO : " + snapshot.currentPlayerName);
         }
         this.view.updateLog(snapshot.lastActivity);
@@ -107,7 +107,6 @@ public class GameClientController implements GameClientObserver, UnoViewListener
 
     @Override
     public void onJoin(String name, String serverAddress) {
-        this.view.hideLoginForm();
         gameClient.start(name, serverAddress, this);
     }
 

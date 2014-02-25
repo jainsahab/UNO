@@ -11,33 +11,25 @@ public class UnoView {
     private LoginForm loginForm;
     private PlayerScreen playerScreen;
     private GameOverScreen gameOverScreen;
-    private LoadingForm loadingForm;
     private ChangeColour changeColour;
 
     public UnoView(UnoViewListener listener) {
         this.listener = listener;
         playerScreen = new PlayerScreen(listener);
         gameOverScreen = new GameOverScreen();
-        loadingForm = new LoadingForm();
     }
 
     public void showLoginForm() {
         loginForm = new LoginForm(listener);
         loginForm.setVisible(true);
     }
-
-    public void hideLoginForm() {
-        loginForm.setVisible(false);
-        loadingForm.setVisible(true);
-    }
-
-
     public void updateCloseDeck(String message) {
         playerScreen.updateCloseDeck(message);
     }
 
-    public void hideLoadingForm() {
-        loadingForm.setVisible(false);
+    public void hideLoginForm() {
+        loginForm.setVisible(false);
+
     }
 
     public void displayPlayerScreen(String title) {
