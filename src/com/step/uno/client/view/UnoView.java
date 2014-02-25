@@ -78,4 +78,8 @@ public class UnoView {
     public void updateOpenDeck(Card openCard) {
         playerScreen.updateOpenCard(openCard);
     }
+
+    public void updateHint(String message){
+        playerScreen.updateStatusHint(message);
+    }
 }

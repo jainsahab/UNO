@@ -94,4 +94,8 @@ public class PlayerScreen extends JFrame implements ActionListener {
     public void updateCloseDeck(String text) {
         deck.closedPile.setText(text);
     }
+
+    public void updateStatusHint(String message){
+        deck.updateStatusHint(message);
+    }
 }

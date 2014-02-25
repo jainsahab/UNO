@@ -50,6 +50,8 @@ public class LoginForm extends JFrame implements ActionListener {
         join.addActionListener(this);
         this.setSize(400,400);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
+
     }
 
     @Override

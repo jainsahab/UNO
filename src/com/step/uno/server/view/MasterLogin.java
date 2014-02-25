@@ -48,6 +48,7 @@ public class MasterLogin extends JFrame implements ActionListener {
         start.addActionListener(this);
         this.setSize(400,400);
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     @Override
