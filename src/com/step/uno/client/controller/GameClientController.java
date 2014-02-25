@@ -1,5 +1,6 @@
 package com.step.uno.client.controller;
 
+import com.step.uno.client.ClientPlayer;
 import com.step.uno.client.GameClient;
 import com.step.uno.client.GameClientObserver;
 import com.step.uno.messages.GameResult;
@@ -60,14 +61,16 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     private void displayAllPlayers() {
         String appendString;
         PlayerSummary playerSummary;
-        String cardsField;
+        String totalCards;
         String playerButtonText;
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
             playerSummary = snapshot.playerSummaries[i];
-            appendString = snapshot.isInAscendingOrder ? "<br/> <br/> <b> ==>> </b> " : "<br/> <br/> <b> <<== </b>";
-            cardsField = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
-            playerButtonText = "<html> <i>" + playerSummary.name + ": " + cardsField + appendString + "</i></html>";
-            this.view.addPlayer(playerButtonText, snapshot.currentPlayerIndex == i);
+            String name = playerSummary.name;
+            totalCards = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
+            ClientPlayer player = new ClientPlayer(name, totalCards, i);
+            appendString = snapshot.isInAscendingOrder ? "<br/><br/> <p>==>><p/> " : "<br/><br/> <p><<== <p/>";
+            playerButtonText = "<html> <i>" + name + ": " + totalCards + appendString + "</i></html>";
+            this.view.addPlayer(playerButtonText, snapshot.currentPlayerIndex == i, player);
         }
     }
 
@@ -131,11 +134,6 @@ public class GameClientController implements GameClientObserver, UnoViewListener
         gameClient.play(lastPlayedCard, colourMap.get(newColor));
     }
 
-    private void declaredUno() {
-        if (snapshot.myCards.length == 1) {
-            gameClient.declareUno();
-        }
-    }
 
     @Override
     public void onAction(ActionEvent e) {
@@ -147,7 +145,25 @@ public class GameClientController implements GameClientObserver, UnoViewListener
             drawCard();
         }
         if (source.getClass().equals(UnoButton.class)) {
-            declaredUno();
+            declareUno();
+        }
+        if (source.getClass().equals(PlayerButton.class)) {
+            PlayerButton playerbutton = (PlayerButton) source;
+            CatchPlayer(playerbutton.getPlayer());
+        }
+    }
+
+    @Override
+    public void declareUno() {
+        if (snapshot.myCards.length == 1) {
+            gameClient.declareUno();
+        }
+    }
+
+    @Override
+    public void CatchPlayer(ClientPlayer player) {
+        if (player.totalCards.equals("1")) {
+            gameClient.catchPlayer(player.name, player.playerIndex);
         }
     }
 }

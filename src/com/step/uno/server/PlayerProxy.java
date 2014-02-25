@@ -50,6 +50,10 @@ public class PlayerProxy implements MessageChannelListener {
         observer.onPlayerDeclaredUno(player);
     }
 
+    private void onClientMessage(CatchPlayerAction caughtPlayer) {
+        observer.onPlayerCaught(caughtPlayer.name,caughtPlayer.playerIndex);
+    }
+
 
     @Override
     public void onMessage(MessageChannel client, Object message) {
