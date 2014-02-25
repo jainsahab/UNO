@@ -187,7 +187,7 @@ public class CardTest {
         Card openCard = Card.createCard(Colour.Green, "Draw2");
         Card card = Card.createCard(Colour.Black, "Wild");
 
-        boolean result = openCard.isPlayableCard(card, 2, openCard.colour);
+        boolean result = openCard.isPlayableCard(card, 1, openCard.colour);
 
         assertFalse(result);
     }
@@ -198,7 +198,7 @@ public class CardTest {
         Card openCard = Card.createCard(Colour.Green, "Draw2");
         Card card = Card.createCard(Colour.Black, "Draw4");
 
-        boolean result = openCard.isPlayableCard(card, 2, openCard.colour);
+        boolean result = openCard.isPlayableCard(card, 1, openCard.colour);
 
         assertFalse(result);
     }
