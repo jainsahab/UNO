@@ -2,9 +2,12 @@ package com.step.uno.model;
 
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
+import javafx.scene.input.DataFormat;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class Game {
@@ -16,6 +19,8 @@ public class Game {
     private Colour runningColour;
     private List<String> activityLog;
     private int draw2Run = 0;
+    private Time time;
+    private DataFormat format = new DataFormat("HH:mm:SS");
 
     public boolean getIsInAscendingOrder() {
         return isInAscendingOrder;
@@ -149,7 +154,8 @@ public class Game {
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
         String sign = card.sign.toString().replace("_", "");
-        addToActivityLog(player.name + " played " + card.colour + " : " + sign);
+        Time currentTime = new Time(new Date().getTime());
+        addToActivityLog(player.name + " played " + card.colour + " : " + sign+" at  "+currentTime);
     }
 
     private void addToActivityLog(String log) {
@@ -157,15 +163,18 @@ public class Game {
     }
 
     public void updateLogOnPlayerDrewCard(Player player, String totalCards) {
-        activityLog.add(player.name + " Drawn " + totalCards + " cards");
+        Time currentTime = new Time(new Date().getTime());
+        activityLog.add(player.name + " Drawn " + totalCards + " cards at :"+currentTime);
     }
 
     public void updateLogOnPlayerDeclaredUno(Player player) {
-        activityLog.add(player.name + " Declared UNO !!");
+        Time currentTime = new Time(new Date().getTime());
+        activityLog.add(player.name + " Declared UNO !! at "+currentTime);
     }
 
     public void updateLogOnPlayerCaught(String name) {
-        activityLog.add(name + " was caught on UNO !!");
+        Time currentTime = new Time(new Date().getTime());
+        activityLog.add(name + " was caught on UNO !! at "+currentTime);
     }
 
     public Colour getRunningColor() {
