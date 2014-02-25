@@ -23,16 +23,6 @@ public class GameClientControllerTest {
     }
 
     @Test
-    public void onJoin_hides_login_form_and_starts_game_client() {
-        UnoView viewMock = mock(UnoView.class);
-        GameClientController gameClientController = new GameClientController(gameClientMock);
-        gameClientController.start(viewMock);
-        gameClientController.onJoin("me", "serverAddress");
-        verify(viewMock, times(1)).hideLoginForm();
-        verify(gameClientMock, times(1)).start("me", "serverAddress", gameClientController);
-    }
-
-    @Test
     public void informs_game_client_when_player_plays_a_card() {
         GameClientController gameClientController = new GameClientController(gameClientMock);
         Card card = Card.createCard(Colour.Yellow, "_2");
