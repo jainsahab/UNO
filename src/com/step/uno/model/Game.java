@@ -81,8 +81,18 @@ public class Game {
         handleDrawTwo(card);
         handleSkip(card);
         handleReverse(card);
+        handleDrawFour(card);
         nextTurn();
-        System.out.println("new Color" +  getRunningColor());
+    }
+
+    private void handleDrawFour(Card card) {
+        if(card.sign.equals(Sign.Draw4)) {
+            nextTurn();
+            Player currentPlayer = players.get(currentPlayerIndex);
+            for(int i = 0 ; i < 4 ; i++){
+                currentPlayer.take(closedDeck.draw());
+            }
+        }
     }
 
     private void handleReverse(Card card) {

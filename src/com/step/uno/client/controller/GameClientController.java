@@ -9,7 +9,6 @@ import com.step.uno.model.Colour;
 import com.step.uno.client.view.*;
 import com.step.uno.model.PlayerSummary;
 import com.step.uno.model.Sign;
-import com.step.uno.rules.RuleEngine;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -76,7 +75,6 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     }
 
     private void displayAllCards() {
-        RuleEngine ruleEngine = new RuleEngine();
         for (Card myCard : snapshot.myCards) {
             if(myCard.sign.equals(Sign.Draw4)) {
                 boolean playable = isDrawFourPlayable(snapshot.runningColour);
