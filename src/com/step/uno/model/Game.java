@@ -2,9 +2,9 @@ package com.step.uno.model;
 
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
-import javafx.scene.input.DataFormat;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -19,8 +19,7 @@ public class Game {
     private Colour runningColour;
     private List<String> activityLog;
     private int draw2Run = 0;
-    private Time time;
-    private DataFormat format = new DataFormat("HH:mm:SS");
+    private SimpleDateFormat date = new SimpleDateFormat("HH:mm:ss");
 
     public boolean getIsInAscendingOrder() {
         return isInAscendingOrder;
@@ -154,8 +153,8 @@ public class Game {
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
         String sign = card.sign.toString().replace("_", "");
-        Time currentTime = new Time(new Date().getTime());
-        addToActivityLog(player.name + " played " + card.colour + " : " + sign+" at  "+currentTime);
+        String time = date.format(new Date());
+        addToActivityLog(player.name + " played " + card.colour + " : " + sign+" at  "+time);
     }
 
     private void addToActivityLog(String log) {
@@ -163,18 +162,18 @@ public class Game {
     }
 
     public void updateLogOnPlayerDrewCard(Player player, String totalCards) {
-        Time currentTime = new Time(new Date().getTime());
-        activityLog.add(player.name + " Drawn " + totalCards + " cards at :"+currentTime);
+        String time = date.format(new Date());
+        activityLog.add(player.name + " Drawn " + totalCards + " cards at :"+time);
     }
 
     public void updateLogOnPlayerDeclaredUno(Player player) {
-        Time currentTime = new Time(new Date().getTime());
-        activityLog.add(player.name + " Declared UNO !! at "+currentTime);
+        String time = date.format(new Date());
+        activityLog.add(player.name + " Declared UNO !! at "+time);
     }
 
     public void updateLogOnPlayerCaught(String name) {
-        Time currentTime = new Time(new Date().getTime());
-        activityLog.add(name + " was caught on UNO !! at "+currentTime);
+        String time = date.format(new Date());
+        activityLog.add(name + " was caught on UNO !! at "+time);
     }
 
     public Colour getRunningColor() {
