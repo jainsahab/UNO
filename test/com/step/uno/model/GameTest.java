@@ -20,6 +20,7 @@ public class GameTest {
     private Player player1;
     private Player player2;
     private Player player3;
+    private List<Player> players;
 
     @Before
     public void setup() {
@@ -27,12 +28,12 @@ public class GameTest {
         player1 = mock(Player.class);
         player2 = mock(Player.class);
         player3 = mock(Player.class);
-        List<Player> players = new ArrayList<>();
+        players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
         players.add(player3);
         players.add(playerMock);
-        game = new Game(1, players);
+        game = new Game(1, players,new Pack());
     }
 
     @Test
@@ -96,4 +97,111 @@ public class GameTest {
 
         assertEquals(Colour.Yellow,game.getRunningColor());
     }
+
+    @Test
+    public void on_draw_four_next_player_should_take_four_cards_and_turn_should_change() {
+        Card cardPlayed = Card.createCard(Colour.Black,"Draw4");
+        assertEquals(0,game.getCurrentPlayerIndex());
+        game.playCard(player1,cardPlayed,Colour.Yellow);
+
+        verify(player2,times(4)).take(any(Card.class));
+        assertEquals(2,game.getCurrentPlayerIndex());
+    }
+
+    @Test
+    public void when_first_card_of_openDeck_is_reverse_then_handle_reverse() {
+        class PackStub extends Pack {
+            @Override
+            public Card[] createNewPacks(int numberOfPacks) {
+                Card reverse = Card.createCard(Colour.Yellow, "Reverse");
+                ArrayList<Card> cards = new ArrayList<>();
+                for (int i = 0; i < 108; i++) {
+                    cards.add(reverse);
+                }
+                return  cards.toArray(new Card[]{});
+            }
+        }
+        game = new Game(2,players,new PackStub());
+        game.initialize();
+
+        assertEquals(false,game.getIsInAscendingOrder());
+    }
+
+    @Test
+    public void when_first_card_of_openDeck_is_skip_then_handle_skip() {
+        class PackStub extends Pack {
+            @Override
+            public Card[] createNewPacks(int numberOfPacks) {
+                Card skip = Card.createCard(Colour.Yellow, "Skip");
+                ArrayList<Card> cards = new ArrayList<>();
+                for (int i = 0; i < 108; i++) {
+                    cards.add(skip);
+                }
+                return  cards.toArray(new Card[]{});
+            }
+        }
+        game = new Game(2,players,new PackStub());
+        game.initialize();
+
+        assertEquals(1,game.getCurrentPlayerIndex());
+    }
+
+    @Test
+    public void when_first_card_of_openDeck_is_wild_then_handle_wild() {
+        class PackStub extends Pack {
+            @Override
+            public Card[] createNewPacks(int numberOfPacks) {
+                Card wild = Card.createCard(Colour.Black, "Wild");
+                ArrayList<Card> cards = new ArrayList<>();
+                for (int i = 0; i < 108; i++) {
+                    cards.add(wild);
+                }
+                return  cards.toArray(new Card[]{});
+            }
+        }
+        game = new Game(2,players,new PackStub());
+        game.initialize();
+
+        assertEquals(Colour.Green,game.getRunningColor());
+    }
+
+    @Test
+    public void when_first_card_of_openDeck_is_Draw4_then_handle_Draw4() {
+        class PackStub extends Pack {
+            @Override
+            public Card[] createNewPacks(int numberOfPacks) {
+                Card draw4 = Card.createCard(Colour.Black, "Draw4");
+                ArrayList<Card> cards = new ArrayList<>();
+                for (int i = 0; i < 108; i++) {
+                    cards.add(draw4);
+                }
+                return  cards.toArray(new Card[]{});
+            }
+        }
+        game = new Game(2,players,new PackStub());
+        game.initialize();
+
+        assertEquals(Colour.Green,game.getRunningColor());
+        assertEquals(1,game.getCurrentPlayerIndex());
+    }
+
+    @Test
+    public void when_first_card_of_openDeck_is_Draw2_then_handle_Draw2() {
+        class PackStub extends Pack {
+            @Override
+            public Card[] createNewPacks(int numberOfPacks) {
+                Card draw2 = Card.createCard(Colour.Yellow, "Draw2");
+                ArrayList<Card> cards = new ArrayList<>();
+                for (int i = 0; i < 108; i++) {
+                    cards.add(draw2);
+                }
+                return  cards.toArray(new Card[]{});
+            }
+        }
+        game = new Game(2,players,new PackStub());
+        game.initialize();
+
+        assertEquals(1,game.getDraw2Run());
+    }
+
 }

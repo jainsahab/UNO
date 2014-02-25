@@ -9,7 +9,6 @@ import com.step.uno.model.Colour;
 import com.step.uno.client.view.*;
 import com.step.uno.model.PlayerSummary;
 import com.step.uno.model.Sign;
-import com.step.uno.rules.RuleEngine;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,8 +33,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     @Override
     public void update(Snapshot snapshot) {
         this.snapshot = snapshot;
-//        view.updatePlayerScreen(snapshot);
-        if(isStartedNow) {
+        if (isStartedNow) {
             isStartedNow = false;
             this.view.hideLoadingForm();
             this.view.displayPlayerScreen("UNO : " + snapshot.currentPlayerName);
@@ -50,8 +48,8 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     }
 
     private void updateCloseDeck() {
-        String message = "Draw 1";
-        if (snapshot.draw2Run > 0) message = "Draw " + snapshot.draw2Run;
+        String message = "Draw (1)";
+        if (snapshot.draw2Run > 0) message = "Draw (" + snapshot.draw2Run + ")";
         this.view.updateCloseDeck(message);
     }
 
@@ -66,36 +64,31 @@ public class GameClientController implements GameClientObserver, UnoViewListener
         String playerButtonText;
         for (int i = 0; i < snapshot.playerSummaries.length; i++) {
             playerSummary = snapshot.playerSummaries[i];
-            appendString = snapshot.isInAscendingOrder ? "->>" : "<<-";
+            appendString = snapshot.isInAscendingOrder ? "<br/> <br/> <b> ==>> </b> " : "<br/> <br/> <b> <<== </b>";
             cardsField = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
-            System.out.println(cardsField);
-            playerButtonText = playerSummary.name + " " + cardsField + appendString;
-            this.view.addPlayer(playerButtonText, snapshot.currentPlayerIndex==i);
+            playerButtonText = "<html> <i>" + playerSummary.name + ": " + cardsField + appendString + "</i></html>";
+            this.view.addPlayer(playerButtonText, snapshot.currentPlayerIndex == i);
         }
-
     }
 
     private void displayAllCards() {
-        RuleEngine ruleEngine = new RuleEngine();
         for (Card myCard : snapshot.myCards) {
-            if(myCard.sign.equals(Sign.Draw4)) {
+            if (myCard.sign.equals(Sign.Draw4)) {
                 boolean playable = isDrawFourPlayable(snapshot.runningColour);
-                this.view.addCard(myCard, playable && snapshot.currentPlayerIndex == snapshot.myPlayerIndex && snapshot.openCard.isPlayableCard(myCard,snapshot.draw2Run,snapshot.runningColour));
-            }
-            else{
-                this.view.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && snapshot.openCard.isPlayableCard(myCard,snapshot.draw2Run,snapshot.runningColour));
+                this.view.addCard(myCard, playable && snapshot.currentPlayerIndex == snapshot.myPlayerIndex && snapshot.openCard.isPlayableCard(myCard, snapshot.draw2Run, snapshot.runningColour));
+            } else {
+                this.view.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && snapshot.openCard.isPlayableCard(myCard, snapshot.draw2Run, snapshot.runningColour));
             }
         }
     }
 
 
-    private boolean isDrawFourPlayable(Colour runningColour){
+    private boolean isDrawFourPlayable(Colour runningColour) {
         for (Card myCard : snapshot.myCards) {
-            if(myCard.colour.equals(runningColour))
+            if (myCard.colour.equals(runningColour))
                 return false;
         }
-
-        return  true;
+        return true;
     }
 
     @Override
@@ -138,22 +131,22 @@ public class GameClientController implements GameClientObserver, UnoViewListener
         gameClient.play(lastPlayedCard, colourMap.get(newColor));
     }
 
-    private void declaredUno(){
-        if(snapshot.myCards.length==1){
+    private void declaredUno() {
+        if (snapshot.myCards.length == 1) {
             gameClient.declareUno();
         }
     }
 
     @Override
-    public void onAction(ActionEvent e){
-        Object source=e.getSource();
-        if(source.getClass().equals(CardButton.class)){
-            cardPlayed(((CardButton)source).getCard());
+    public void onAction(ActionEvent e) {
+        Object source = e.getSource();
+        if (source.getClass().equals(CardButton.class)) {
+            cardPlayed(((CardButton) source).getCard());
         }
-        if(source.getClass().equals(ClosedPile.class)){
+        if (source.getClass().equals(ClosedPile.class)) {
             drawCard();
         }
-        if(source.getClass().equals(UnoButton.class)){
+        if (source.getClass().equals(UnoButton.class)) {
             declaredUno();
         }
     }

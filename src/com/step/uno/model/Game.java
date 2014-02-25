@@ -15,8 +15,11 @@ public class Game {
     private boolean isInAscendingOrder = true;
     private Colour runningColour;
     private List<String> activityLog;
-
     private int draw2Run = 0;
+
+    public boolean getIsInAscendingOrder() {
+        return isInAscendingOrder;
+    }
 
     public int getDraw2Run() {
         return draw2Run;
@@ -26,9 +29,9 @@ public class Game {
         return currentPlayerIndex;
     }
 
-    public Game(int packs, List<Player> givenPlayers) {
+    public Game(int numberOfPacks, List<Player> givenPlayers,Pack pack) {
         players = new ArrayList<>(givenPlayers);
-        closedDeck = new Deck(Card.createNewPacks(packs));
+        closedDeck = new Deck(pack.createNewPacks(numberOfPacks));
         openDeck = new Deck();
         activityLog = new ArrayList<>();
     }
@@ -42,11 +45,20 @@ public class Game {
             }
         }
         Card startingCard = draw();
+        handleSkip(startingCard);
+        handleReverse(startingCard);
+        handleDrawTwo(startingCard);
+        if(startingCard.sign.equals(Sign.Draw4)){
+            giveFourCardsTo(players.get(0));
+            nextTurn();
+        }
+        if(startingCard.colour.equals(Colour.Black))
+            this.runningColour = Colour.Green;
+        else
+            this.runningColour = startingCard.colour;
         openDeck.add(startingCard);
-
-        addToActivityLog("Game opened with : " + startingCard.colour + " " + startingCard.sign);
-        runningColour = startingCard.colour;
-        this.runningColour = startingCard.colour;
+        String sign = startingCard.sign.toString().replace("_", "");
+        addToActivityLog("Game opened with : " + startingCard.colour + " " + sign);
     }
 
     private Card draw() {
@@ -77,12 +89,26 @@ public class Game {
         player.play(card);
         openDeck.add(card);
         this.runningColour = card.colour;
-        if(newColour!=null) this.runningColour = newColour;
+        if (newColour != null) this.runningColour = newColour;
         handleDrawTwo(card);
         handleSkip(card);
         handleReverse(card);
+        handleDrawFour(card);
         nextTurn();
-        System.out.println("new Color" +  getRunningColor());
+    }
+
+    private void handleDrawFour(Card card) {
+        if (card.sign.equals(Sign.Draw4)) {
+            nextTurn();
+            Player currentPlayer = players.get(currentPlayerIndex);
+            giveFourCardsTo(currentPlayer);
+        }
+    }
+
+    private void giveFourCardsTo(Player currentPlayer) {
+        for (int i = 0; i < 4; i++) {
+            currentPlayer.take(draw());
+        }
     }
 
     private void handleReverse(Card card) {
@@ -122,14 +148,15 @@ public class Game {
     }
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
-        addToActivityLog(player.name + " played " + card.colour + " : " + card.sign);
+        String sign = card.sign.toString().replace("_", "");
+        addToActivityLog(player.name + " played " + card.colour + " : " + sign);
     }
 
     public void updateLogOnPlayerDrewCard(Player player) {
         addToActivityLog(player.name + " Drawn a card");
     }
 
-    public void updateLogOnNewColorChosen(Player player,Colour newColour) {
+    public void updateLogOnNewColorChosen(Player player, Colour newColour) {
         addToActivityLog(player.name + " chose color " + newColour.toString());
     }
 

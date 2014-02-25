@@ -1,7 +1,6 @@
 package com.step.uno.client.view;
 
 import com.step.uno.messages.GameResult;
-import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 
 import java.awt.*;
@@ -45,10 +44,8 @@ public class UnoView {
         playerScreen.setTitle(title);
     }
 
-
-
     public void addCard(Card card, boolean enable) {
-        playerScreen.addCard(card,enable);
+        playerScreen.addCard(card, enable);
     }
 
     public void showResult(GameResult result) {
@@ -60,7 +57,7 @@ public class UnoView {
     }
 
     public void showChangeColorDialog() {
-        changeColour  = new ChangeColour(playerScreen, Dialog.ModalityType.DOCUMENT_MODAL, listener);
+        changeColour = new ChangeColour(playerScreen, Dialog.ModalityType.DOCUMENT_MODAL, listener);
         changeColour.makeVisible();
     }
 
@@ -78,7 +75,7 @@ public class UnoView {
 
     }
 
-    public void clearPlayerScreen(){
+    public void clearPlayerScreen() {
         playerScreen.clean();
     }
 
