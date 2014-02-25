@@ -27,10 +27,10 @@ public class DeckView extends JPanel {
 
 
         unoButton = new UnoButton("UNO");
-        unoButton.setBounds(1100, 400, 200, 200);
+        unoButton.setBounds(900, 400, 200, 200);
 
         statusHint = new StatusHint();
-        statusHint.setBounds(500, 400, 400, 100);
+        statusHint.setBounds(300, 400, 400, 200);
 
         this.add(closedPile);
         this.add(openedPile);
@@ -39,7 +39,7 @@ public class DeckView extends JPanel {
     }
 
     public DeckView() {
-        this(new Dimension(500, 500));
+        this(new Dimension(300, 300));
     }
 
     public void updateOpenCard(Card card) {
