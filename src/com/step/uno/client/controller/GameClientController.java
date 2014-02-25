@@ -7,6 +7,9 @@ import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
 import com.step.uno.client.view.*;
+import com.step.uno.model.PlayerSummary;
+import com.step.uno.model.Sign;
+import com.step.uno.rules.RuleEngine;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +21,7 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     private Snapshot snapshot;
     private Card lastPlayedCard;
     HashMap<Color, Colour> colourMap = new HashMap<>();
+    private boolean isStartedNow = true;
 
     public GameClientController(GameClient gameClient) {
         this.gameClient = gameClient;
@@ -30,7 +34,68 @@ public class GameClientController implements GameClientObserver, UnoViewListener
     @Override
     public void update(Snapshot snapshot) {
         this.snapshot = snapshot;
-        view.updatePlayerScreen(snapshot);
+//        view.updatePlayerScreen(snapshot);
+        if(isStartedNow) {
+            isStartedNow = false;
+            this.view.hideLoadingForm();
+            this.view.displayPlayerScreen("UNO : " + snapshot.currentPlayerName);
+        }
+        this.view.updateLog(snapshot.lastActivity);
+        this.view.enableClosedPile(snapshot.myPlayerIndex == snapshot.currentPlayerIndex);
+        this.view.clearPlayerScreen();
+        displayAllCards();
+        displayAllPlayers();
+        updateOpenDeck();
+        updateCloseDeck();
+    }
+
+    private void updateCloseDeck() {
+        String message = "Draw 1";
+        if (snapshot.draw2Run > 0) message = "Draw " + snapshot.draw2Run;
+        this.view.updateCloseDeck(message);
+    }
+
+    private void updateOpenDeck() {
+        this.view.updateOpenDeck(snapshot.openCard);
+    }
+
+    private void displayAllPlayers() {
+        String appendString;
+        PlayerSummary playerSummary;
+        String cardsField;
+        String playerButtonText;
+        for (int i = 0; i < snapshot.playerSummaries.length; i++) {
+            playerSummary = snapshot.playerSummaries[i];
+            appendString = snapshot.isInAscendingOrder ? "->>" : "<<-";
+            cardsField = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
+            System.out.println(cardsField);
+            playerButtonText = playerSummary.name + " " + cardsField + appendString;
+            this.view.addPlayer(playerButtonText, snapshot.currentPlayerIndex==i);
+        }
+
+    }
+
+    private void displayAllCards() {
+        RuleEngine ruleEngine = new RuleEngine();
+        for (Card myCard : snapshot.myCards) {
+            if(myCard.sign.equals(Sign.Draw4)) {
+                boolean playable = isDrawFourPlayable(snapshot.runningColour);
+                this.view.addCard(myCard, playable && snapshot.currentPlayerIndex == snapshot.myPlayerIndex && snapshot.openCard.isPlayableCard(myCard,snapshot.draw2Run,snapshot.runningColour));
+            }
+            else{
+                this.view.addCard(myCard, snapshot.currentPlayerIndex == snapshot.myPlayerIndex && snapshot.openCard.isPlayableCard(myCard,snapshot.draw2Run,snapshot.runningColour));
+            }
+        }
+    }
+
+
+    private boolean isDrawFourPlayable(Colour runningColour){
+        for (Card myCard : snapshot.myCards) {
+            if(myCard.colour.equals(runningColour))
+                return false;
+        }
+
+        return  true;
     }
 
     @Override

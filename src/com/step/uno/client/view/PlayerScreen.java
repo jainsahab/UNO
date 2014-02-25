@@ -51,7 +51,7 @@ public class PlayerScreen extends JFrame implements ActionListener {
         cards.addButton(button);
     }
 
-    public void updatePlayer(String playerText, boolean turn) {
+    public void addPlayer(String playerText, boolean turn) {
         PlayerButton playerButton = new PlayerButton(playerText);
         if (turn) playerButton.setBackground(Color.decode("#317317"));
         playerButtons.addPlayerButton(playerButton);
@@ -79,8 +79,8 @@ public class PlayerScreen extends JFrame implements ActionListener {
         }
     }
 
-    public void setClosedPile(boolean closedPile) {
-        deck.setClosedPile(closedPile);
+    public void enableClosedPile(boolean closedPile) {
+        deck.enableClosedPile(closedPile);
     }
 
 
