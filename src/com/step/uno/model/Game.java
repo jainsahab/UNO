@@ -3,12 +3,8 @@ package com.step.uno.model;
 import com.step.uno.messages.GameResult;
 import com.step.uno.messages.Snapshot;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Game {
     private int currentPlayerIndex = 0;
@@ -19,7 +15,7 @@ public class Game {
     private Colour runningColour;
     private List<String> activityLog;
     private int draw2Run = 0;
-    private SimpleDateFormat date = new SimpleDateFormat("HH:mm:ss");
+    private SimpleDateFormat date = new SimpleDateFormat("hh:mm:ss aa");
 
     public boolean getIsInAscendingOrder() {
         return isInAscendingOrder;
@@ -154,7 +150,7 @@ public class Game {
     public void updateLogOnPlayerPlayed(Player player, Card card) {
         String sign = card.sign.toString().replace("_", "");
         String time = date.format(new Date());
-        addToActivityLog(player.name + " played " + card.colour + " : " + sign+" at  "+time);
+        addToActivityLog(player.name + " played " + card.colour + " : " + sign + " at  " + time);
     }
 
     private void addToActivityLog(String log) {
@@ -163,17 +159,17 @@ public class Game {
 
     public void updateLogOnPlayerDrewCard(Player player, String totalCards) {
         String time = date.format(new Date());
-        activityLog.add(player.name + " Drawn " + totalCards + " cards at :"+time);
+        activityLog.add(player.name + " Drawn " + totalCards + " cards at :" + time);
     }
 
     public void updateLogOnPlayerDeclaredUno(Player player) {
         String time = date.format(new Date());
-        activityLog.add(player.name + " Declared UNO !! at "+time);
+        activityLog.add(player.name + " Declared UNO !! at " + time);
     }
 
     public void updateLogOnPlayerCaught(String name) {
         String time = date.format(new Date());
-        activityLog.add(name + " was caught on UNO !! at "+time);
+        activityLog.add(name + " was caught on UNO !! at " + time);
     }
 
     public Colour getRunningColor() {
