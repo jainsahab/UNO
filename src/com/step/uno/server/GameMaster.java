@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameMaster implements MessageServerListener, PlayerProxyObserver {
-    private final int totalPlayers;
-    private final int totalPacks;
+    private int totalPlayers;
+    private int totalPacks;
     private final CommunicationFactory communicationFactory;
     private UnoFactory unoFactory;
     private MessageServer server;
@@ -24,15 +24,15 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     private List<Player> players = new ArrayList<>();
     private Game game;
 
-    public GameMaster(int totalPlayers, int packs, CommunicationFactory communicationFactory, UnoFactory unoFactory) {
-        this.totalPlayers = totalPlayers;
-        this.totalPacks = packs;
+    public GameMaster(CommunicationFactory communicationFactory, UnoFactory unoFactory) {
         this.communicationFactory = communicationFactory;
         this.unoFactory = unoFactory;
     }
 
-    public void start() {
+    public void start(int numberOfPlayers, int numberOfPacks) {
         System.out.println("Server started : ");
+        this.totalPlayers = numberOfPlayers;
+        this.totalPacks = numberOfPacks;
         server = communicationFactory.createMessageServer();
         server.startListeningForConnections(this);
     }

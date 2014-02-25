@@ -3,11 +3,14 @@ package com.step.programs;
 import com.step.communication.factory.CommunicationFactory;
 import com.step.uno.factory.UnoFactory;
 import com.step.uno.server.GameMaster;
+import com.step.uno.server.controller.GameMasterController;
+import com.step.uno.server.view.ServerUnoView;
 
 public class ServerApp {
     public static void main(String[] args) {
-        int noOfPlayers = Integer.parseInt(args[0]);
-        int noOfPacks = Integer.parseInt(args[1]);
-        new GameMaster(noOfPlayers, noOfPacks, new CommunicationFactory(), new UnoFactory()).start();
+        GameMaster gameMaster = new GameMaster(new CommunicationFactory(), new UnoFactory());
+        GameMasterController gameMasterController =new GameMasterController(gameMaster);
+        gameMasterController.onStart(new ServerUnoView(gameMasterController));
+
     }
 }
