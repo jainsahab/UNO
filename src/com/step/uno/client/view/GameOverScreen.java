@@ -4,11 +4,10 @@ import com.step.uno.messages.GameResult;
 import com.step.uno.model.PlayerResult;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GameOverScreen extends JFrame {
-
     private JTable table;
-    private Object[] columns = {"Name", "Cards Left", "Points"};
     private final JPanel panel;
 
     public GameOverScreen() {
@@ -23,7 +22,6 @@ public class GameOverScreen extends JFrame {
     public void showResult(GameResult result) {
         String[][] data = new String[result.playerResults.length][3];
         int index = 0;
-
         for (PlayerResult playerResult : result.playerResults) {
             int totalCards = playerResult.cards.length;
             String pointsToString = Integer.toString(playerResult.points);
@@ -31,7 +29,12 @@ public class GameOverScreen extends JFrame {
             data[index] = row;
             index++;
         }
-        table = new JTable(data, columns);
+        String[] headers = {"Name", "Cards Left", "Points"};
+        table = new JTable(data, headers);
+        table.setPreferredSize(new Dimension(400, 400));
+        table.setFont(new Font("ARIAL", Font.PLAIN, 30));
+        table.setBackground(new Color(133, 133, 136));
+        table.setRowHeight(40);
         panel.add(table);
         setVisible(true);
     }
