@@ -1,7 +1,6 @@
 package com.step.uno.client.view;
 
 import com.step.uno.messages.GameResult;
-import com.step.uno.messages.Snapshot;
 import com.step.uno.model.Card;
 
 import java.awt.*;
@@ -45,26 +44,8 @@ public class UnoView {
         playerScreen.setTitle(title);
     }
 
-<<<<<<< HEAD
-    private void displayPlayers(Snapshot snapshot) {
-        String appendString;
-        PlayerSummary playerSummary;
-        String cardsField;
-        String playerButtonText;
-        for (int i = 0; i < snapshot.playerSummaries.length; i++) {
-            playerSummary = snapshot.playerSummaries[i];
-            appendString = snapshot.isInAscendingOrder ? "<br/><br/> <b> ==>> <b/>" : "<br/><br/><b> <<== <b/>";
-            cardsField = playerSummary.declaredUno ? "UNO" : Integer.toString(playerSummary.cardsInHand);
-            playerButtonText = "<html>" + playerSummary.name + " " + cardsField + appendString + "</html>";
-            playerScreen.updatePlayer(playerButtonText, snapshot.currentPlayerIndex == i);
-        }
-    }
-=======
->>>>>>> be5b737688d0177a7b16174bf109bd09a8ecbe3f
-
-
     public void addCard(Card card, boolean enable) {
-        playerScreen.addCard(card,enable);
+        playerScreen.addCard(card, enable);
     }
 
     public void showResult(GameResult result) {
@@ -94,7 +75,7 @@ public class UnoView {
 
     }
 
-    public void clearPlayerScreen(){
+    public void clearPlayerScreen() {
         playerScreen.clean();
     }
 

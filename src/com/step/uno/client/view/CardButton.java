@@ -18,6 +18,7 @@ public class CardButton extends JButton {
         this.setBackground(card.colour.getColor());
         this.setFont(new Font("Arial", Font.ITALIC, 30));
         this.setPreferredSize(new Dimension(150, 200));
+
     }
 
     public Card getCard() {

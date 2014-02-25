@@ -44,7 +44,8 @@ public class Game {
         Card startingCard = draw();
         openDeck.add(startingCard);
 
-        addToActivityLog("Game opened with : " + startingCard.colour + " " + startingCard.sign);
+        String sign = startingCard.sign.toString().replace("_", "");
+        addToActivityLog("Game opened with : " + startingCard.colour + " " + sign);
         runningColour = startingCard.colour;
         this.runningColour = startingCard.colour;
     }
@@ -77,12 +78,11 @@ public class Game {
         player.play(card);
         openDeck.add(card);
         this.runningColour = card.colour;
-        if(newColour!=null) this.runningColour = newColour;
+        if (newColour != null) this.runningColour = newColour;
         handleDrawTwo(card);
         handleSkip(card);
         handleReverse(card);
         nextTurn();
-        System.out.println("new Color" +  getRunningColor());
     }
 
     private void handleReverse(Card card) {
@@ -122,14 +122,15 @@ public class Game {
     }
 
     public void updateLogOnPlayerPlayed(Player player, Card card) {
-        addToActivityLog(player.name + " played " + card.colour + " : " + card.sign);
+        String sign = card.sign.toString().replace("_", "");
+        addToActivityLog(player.name + " played " + card.colour + " : " + sign);
     }
 
     public void updateLogOnPlayerDrewCard(Player player) {
         addToActivityLog(player.name + " Drawn a card");
     }
 
-    public void updateLogOnNewColorChosen(Player player,Colour newColour) {
+    public void updateLogOnNewColorChosen(Player player, Colour newColour) {
         addToActivityLog(player.name + " chose color " + newColour.toString());
     }
 

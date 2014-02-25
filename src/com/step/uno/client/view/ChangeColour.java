@@ -38,7 +38,9 @@ public class ChangeColour implements ActionListener {
         blueButton.addActionListener(this);
         dialog.add(blueButton);
 
-        dialog.setSize(200, 200);
+        dialog.setSize(400, 400);
+        dialog.setTitle("Choose color");
+        dialog.setLocationRelativeTo(null);
     }
 
     public void makeVisible() {
