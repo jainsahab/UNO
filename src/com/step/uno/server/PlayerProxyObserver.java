@@ -14,4 +14,6 @@ public interface PlayerProxyObserver {
     void onPlayerDrewTwoCard(Player player);
 
     void onPlayerDeclaredUno(Player player);
+
+    void onPlayerCaught(String name, int playerIndex);
 }

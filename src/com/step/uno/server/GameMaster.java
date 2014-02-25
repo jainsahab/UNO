@@ -76,7 +76,7 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     @Override
     public void onPlayerPlayed(Player player, Card card, Colour newColour) {
         game.updateLogOnPlayerPlayed(player, card);
-        game.playCard(player, card,newColour);
+        game.playCard(player, card, newColour);
         sendGameSnapshot();
         if (player.hasWon()) sendResult();
     }
@@ -106,6 +106,14 @@ public class GameMaster implements MessageServerListener, PlayerProxyObserver {
     public void onPlayerDeclaredUno(Player player) {
         game.updateLogOnPlayerDeclaredUno(player);
         player.declaredUno();
+        sendGameSnapshot();
+    }
+
+    @Override
+    public void onPlayerCaught(String name, int playerIndex) {
+        game.updateLogOnPlayerCaught(name);
+        Player player = players.get(playerIndex);
+        game.onPlayerCaughtOnUno(player);
         sendGameSnapshot();
     }
 }

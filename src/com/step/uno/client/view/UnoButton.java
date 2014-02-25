@@ -10,7 +10,7 @@ public class UnoButton extends JButton {
         Dimension size = getPreferredSize();
         size.width = size.height = Math.max(size.width, size.height);
         setPreferredSize(size);
-        setFont(new Font("Arial", Font.BOLD, 20));
+        setFont(new Font("Arial", Font.BOLD, 23));
         setContentAreaFilled(false);
     }
 

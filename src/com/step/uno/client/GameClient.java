@@ -45,6 +45,14 @@ public class GameClient implements MessageChannelListener {
         channel.send(new DeclareUnoAction());
     }
 
+    public void play(Card card, Colour colour) {
+        channel.send(new PlayCardAction(card,colour));
+    }
+
+    public void catchPlayer(String name, int playerIndex) {
+        channel.send(new CatchPlayerAction(name,playerIndex));
+    }
+
     @Override
     public void onError(MessageChannel client, Exception e) {
 
@@ -63,9 +71,5 @@ public class GameClient implements MessageChannelListener {
     @Override
     public void onConnectionClosed(MessageChannel client) {
 
-    }
-
-    public void play(Card card, Colour colour) {
-        channel.send(new PlayCardAction(card,colour));
     }
 }
