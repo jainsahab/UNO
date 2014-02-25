@@ -11,6 +11,5 @@ public class ServerApp {
         GameMaster gameMaster = new GameMaster(new CommunicationFactory(), new UnoFactory());
         GameMasterController gameMasterController =new GameMasterController(gameMaster);
         gameMasterController.onStart(new ServerUnoView(gameMasterController));
-
     }
 }

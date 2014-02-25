@@ -29,7 +29,7 @@ public class Game {
         return currentPlayerIndex;
     }
 
-    public Game(int numberOfPacks, List<Player> givenPlayers,Pack pack) {
+    public Game(int numberOfPacks, List<Player> givenPlayers, Pack pack) {
         players = new ArrayList<>(givenPlayers);
         closedDeck = new Deck(pack.createNewPacks(numberOfPacks));
         openDeck = new Deck();
@@ -48,11 +48,11 @@ public class Game {
         handleSkip(startingCard);
         handleReverse(startingCard);
         handleDrawTwo(startingCard);
-        if(startingCard.sign.equals(Sign.Draw4)){
+        if (startingCard.sign.equals(Sign.Draw4)) {
             giveFourCardsTo(players.get(0));
             nextTurn();
         }
-        if(startingCard.colour.equals(Colour.Black))
+        if (startingCard.colour.equals(Colour.Black))
             this.runningColour = Colour.Green;
         else
             this.runningColour = startingCard.colour;
