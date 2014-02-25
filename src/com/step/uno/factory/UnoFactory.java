@@ -2,6 +2,7 @@ package com.step.uno.factory;
 
 import com.step.communication.channel.MessageChannel;
 import com.step.uno.model.Game;
+import com.step.uno.model.Pack;
 import com.step.uno.model.Player;
 import com.step.uno.server.PlayerProxy;
 import com.step.uno.server.PlayerProxyObserver;
@@ -14,6 +15,6 @@ public class UnoFactory {
     }
 
     public Game createGame(int totalPacks, List<Player> players) {
-        return new Game(totalPacks, players);
+        return new Game(totalPacks, players,new Pack());
     }
 }

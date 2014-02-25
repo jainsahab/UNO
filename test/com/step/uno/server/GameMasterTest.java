@@ -8,6 +8,7 @@ import com.step.uno.model.Card;
 import com.step.uno.model.Colour;
 import com.step.uno.model.Game;
 import com.step.uno.model.Player;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class GameMasterTest {
     private CommunicationFactoryStub communicationFactoryStub = new CommunicationFactoryStub();
     private UnoFactoryStub unoFactoryStub = new UnoFactoryStub();
     private MessageChannel messageChannelMock = mock(MessageChannel.class);
+    private GameMaster gameMaster;
 
     private class UnoFactoryStub extends UnoFactory {
         private PlayerProxy playerProxy = mock(PlayerProxy.class);
@@ -34,6 +36,11 @@ public class GameMasterTest {
             return game;
         }
     }
+    @Before
+    public void setup(){
+        gameMaster = new GameMaster(communicationFactoryStub, unoFactoryStub);
+
+    }
 
     private class CommunicationFactoryStub extends CommunicationFactory {
 
@@ -47,50 +54,45 @@ public class GameMasterTest {
 
     @Test
     public void starting_server_starts_accepting_connection() {
-        GameMaster gameMaster = new GameMaster(2, 1, communicationFactoryStub, unoFactoryStub);
-        gameMaster.start();
+        gameMaster.start(3,1);
         verify(communicationFactoryStub.messageServer, times(1)).startListeningForConnections(gameMaster);
     }
 
     @Test
     public void on_new_connection_player_proxy_is_created_and_started_and_added() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(3,1);
         gameMaster.onNewConnection(messageChannelMock);
-
         verify(unoFactoryStub.playerProxy, times(1)).start();
     }
 
     @Test
     public void after_specified_number_of_players_join_reject_connection() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         gameMaster.onNewConnection(messageChannelMock);
         gameMaster.onNewConnection(messageChannelMock);
-
         verify(unoFactoryStub.playerProxy, times(1)).start();
         verify(messageChannelMock, times(1)).stop();
     }
 
     @Test
     public void starts_a_game_when_all_players_are_registered() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         gameMaster.onNewConnection(messageChannelMock);
         gameMaster.onPlayerRegistered(mock(Player.class));
-
         verify(unoFactoryStub.game, times(1)).initialize();
     }
 
     @Test
     public void send_snapshot_to_all_players_when_game_started() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         gameMaster.onNewConnection(messageChannelMock);
         gameMaster.onPlayerRegistered(mock(Player.class));
-
         verify(unoFactoryStub.playerProxy, times(1)).sendSnapshot(unoFactoryStub.game);
     }
 
     @Test
     public void draws_a_card_from_closed_pile() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDrewCard(playerMock);
@@ -99,7 +101,7 @@ public class GameMasterTest {
 
     @Test
     public void gameMaster_sends_game_result_to_all_players_if_any_players_wins() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         when(playerMock.hasWon()).thenReturn(true);
         gameMaster.onPlayerRegistered(playerMock);
@@ -109,7 +111,7 @@ public class GameMasterTest {
 
     @Test
     public void game_master_updates_log_when_player_plays_any_card() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerPlayed(playerMock, mock(Card.class), Colour.Black);
@@ -118,7 +120,7 @@ public class GameMasterTest {
 
     @Test
     public void game_master_updates_log_when_player_draws_a_card() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDrewCard(playerMock);
@@ -127,7 +129,7 @@ public class GameMasterTest {
 
     @Test
     public void on_draw2_card_it_should_draw_two_cards_from_game_for_the_given_player() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDrewTwoCard(playerMock);
@@ -136,7 +138,7 @@ public class GameMasterTest {
 
     @Test
     public void on_player_declared_uno_update_status_of_player() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDeclaredUno(playerMock);
@@ -145,7 +147,7 @@ public class GameMasterTest {
 
     @Test
     public void on_player_declared_uno_update_log_of_game() {
-        GameMaster gameMaster = new GameMaster(1, 1, communicationFactoryStub, unoFactoryStub);
+        gameMaster.start(1,1);
         Player playerMock = mock(Player.class);
         gameMaster.onPlayerRegistered(playerMock);
         gameMaster.onPlayerDeclaredUno(playerMock);
