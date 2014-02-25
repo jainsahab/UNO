@@ -17,7 +17,6 @@ public class LogPanel extends JPanel {
         setBackground(Color.BLACK);
         setVisible(true);
         pane.setPreferredSize(dimension);
-        jList.setPreferredSize(new Dimension(dimension.width - 50, dimension.height));
     }
 
 
