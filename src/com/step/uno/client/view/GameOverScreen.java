@@ -31,6 +31,7 @@ public class GameOverScreen extends JFrame {
         }
         String[] headers = {"Name", "Cards Left", "Points"};
         table = new JTable(data, headers);
+        table.setEnabled(false);
         table.setPreferredSize(new Dimension(400, 400));
         table.setFont(new Font("ARIAL", Font.PLAIN, 30));
         table.setBackground(new Color(133, 133, 136));
